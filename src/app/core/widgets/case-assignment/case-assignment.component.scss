@@ -1,0 +1,26 @@
+.instance-group {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .instance-group {
+    justify-content: flex-start;
+    gap: var(--gap-5xl);
+    font-size: var(--m3-body-large-size);
+    font-family: var(--m3-body-large);
+  }
+  .radio-button {
+    text-decoration: none;
+    position: relative;
+    letter-spacing: 0.5px;
+    line-height: 24px;
+    color: inherit;
+    display: inline-block;
+    min-width: 27px;
+  }
+  .checked-radio-buttons-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }

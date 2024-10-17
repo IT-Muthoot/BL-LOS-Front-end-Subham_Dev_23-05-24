@@ -1,0 +1,441 @@
+<div class="main-content">
+  <div class="d-flex justify-content-between align-items-center">
+    <h5 class="page-name mt-2 mb-2">
+      <i class="bi bi-reply-fill" onclick="history.back()"></i> Business Rule
+      Configuration
+    </h5>
+    <div class="right-top-buttons">
+      <button type="button" class="btn btn-outline-secondary ml-2">
+        Cancel
+      </button>
+      <button type="button" class="btn btn-primary ml-1" (click)="submitForm()">
+        Submit
+      </button>
+    </div>
+  </div>
+  <div class="form">
+    <div class="filter-form">
+      <form [formGroup]="parentForm">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="input-group">
+              <div class="input-group">
+                <select
+                  class="form-control form-select"
+                  formControlName="productId"
+                >
+                  <option value="">--Select--</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+                <label>Product ID <span class="required">*</span></label>
+              </div>
+              @if ((tempSubmitButton || loanApplicationDedupetButton ||
+              parentForm.controls['productId'].touched) &&
+              parentForm.controls['productId'].invalid) {
+              <div class="text-danger">Please select ProductId</div>
+              }
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="input-group">
+              <div class="input-group">
+                <select
+                  class="form-control form-select"
+                  formControlName="product"
+                >
+                  <option value="">--Select--</option>
+                  @for (item of miscellaneousValue['Product']; track $index) {
+                  <option value="{{ item.id }}">{{ item.title }}</option>
+                  }
+                </select>
+
+                <label>Product <span class="required">*</span></label>
+              </div>
+              @if ((tempSubmitButton || loanApplicationDedupetButton ||
+              parentForm.controls['product'].touched) &&
+              parentForm.controls['product'].invalid) {
+              <div class="text-danger">Please select Product</div>
+              }
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <mat-tab-group>
+    <mat-tab label="Loan Eligibility Check">
+      <div class="below-line"></div>
+      <div class="card form">
+        <div class="form-field">
+          <form [formGroup]="tempForm">
+            <div class="row mb-3">
+              <div class="col-md-3">
+                <div class="input-group">
+                  <select
+                    class="form-control form-select"
+                    formControlName="checksType"
+                    (change)="checkTypeChanged($event)"
+                  >
+                    <option value="" disabled>--Select--</option>
+                    @for (item of ChecksTypeDropDown; track item) {
+                    <option value="{{ item.id }}">{{ item.title }}</option>
+                    }
+                  </select>
+                  <label>Check Types<span class="required">*</span></label>
+                </div>
+                @if((tempSubmitButton ||
+                tempForm.controls['checksType'].touched) &&
+                tempForm.controls['checksType'].invalid){
+                <div class="text-danger">Please select check types</div>
+                }
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="input-group">
+                  <select
+                    class="form-control form-select"
+                    formControlName="checkParameter"
+                  >
+                    <option value="" disabled>--Select--</option>
+                    @for (item of CheckParameterDropDown; track item) {
+                    <option value="{{ item.mid }}">
+                      {{ item.cdDescription }}
+                    </option>
+                    }
+                  </select>
+                  <label>Check Parameter <span class="required">*</span></label>
+                </div>
+                @if((tempSubmitButton ||
+                tempForm.controls['checkParameter'].touched) &&
+                tempForm.controls['checkParameter'].invalid){
+                <div class="text-danger">Please select check parameter</div>
+                }
+              </div>
+              <div class="col-md-3">
+                <div class="input-group">
+                  <select
+                    class="form-control form-select"
+                    formControlName="acceptanceCriteria"
+                  >
+                    <option value="" disabled>--Select--</option>
+                    @for (item of AcceptanceCriteriaDropDown; track item) {
+                    <option value="{{ item.id }}">{{ item.title }}</option>
+                    }
+                  </select>
+                  <label
+                    >Acceptance Creteria <span class="required">*</span></label
+                  >
+                </div>
+                @if((tempSubmitButton ||
+                tempForm.controls['acceptanceCriteria'].touched) &&
+                tempForm.controls['acceptanceCriteria'].invalid){
+                <div class="text-danger">Please select acceptance criteria</div>
+                }
+              </div>
+              <div class="col-md-3">
+                <div class="input-group">
+                  <input
+                    placeholder=">Max Tolerance"
+                    type="text"
+                    class="form-control"
+                    formControlName="maxToleranceAllowed"
+                  />
+                  <label
+                    >Max Tolerance Allowed<span class="required">*</span></label
+                  >
+                </div>
+                @if((tempSubmitButton ||
+                tempForm.controls['maxToleranceAllowed'].touched) &&
+                tempForm.controls['maxToleranceAllowed'].invalid){
+                <div class="text-danger">
+                  Please enter max tolerance allowed
+                </div>
+                }
+              </div>
+
+              <div class="col-md-3 add-button">
+                @if(!isDisabled){ @if(tempFormEdit){
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="tempGridUpdate()"
+                >
+                  Update
+                </button>
+                } @else {
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="tempSubmit()"
+                >
+                  Add
+                </button>
+                } }
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- <div class="pin-fill"><i class="bi bi-pin-angle-fill"></i></div> -->
+        @if(tempData.length > 0){
+        <span class="grid-class">Temp Grid</span>
+        <table class="temp-grid global-table">
+          <thead>
+            <tr>
+              <th>Sl.No</th>
+              <th>Check Type</th>
+              <th>Check Parameter</th>
+              <th>Acceptance Creteria</th>
+              <th>Max Tolerance</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of tempData; track item;let i=$index) {
+            <tr>
+              <td>{{ i + 1 }}</td>
+              <td>
+                {{
+                  item.checksType
+                   
+                }}
+              </td>
+              <td>
+                {{
+                  item.checkParameter
+                   
+                }}
+              </td>
+              <td>
+                {{
+                  item.acceptanceCriteria
+                   
+                }}
+              </td>
+              <td>{{ item.maxToleranceAllowed }}</td>
+              <td class="temp-grid-action">
+                @if(!isDisabled){
+                <!-- <i class="bi bi-pen-fill mr-1" (click)="editTempGrid(i)"></i> -->
+                <i
+                  class="bi bi-trash-fill"
+                  style="cursor: pointer"
+                  (click)="deleteItem(i)"
+                ></i>
+                }
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+        }
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Loan Application Dedupe">
+      <div class="below-line"></div>
+      <div class="card form">
+        <div class="form-field">
+          <form [formGroup]="loanApplicationDedupe">
+            <div class="row mb-3">
+              <div class="col-md-3">
+                <div class="input-group">
+                  <select
+                    class="form-control form-select"
+                    formControlName="checksType"
+                    (change)="checkTypeChanged($event)"
+                  >
+                    <option value="" disabled>--Select--</option>
+                    @for (item of ChecksTypeDropDown; track item) {
+                    <option value="{{ item.id }}">{{ item.title }}</option>
+                    }
+                  </select>
+                  <label>Check Types<span class="required">*</span></label>
+                </div>
+                @if((loanApplicationDedupetButton ||
+                loanApplicationDedupe.controls['checksType'].touched) &&
+                loanApplicationDedupe.controls['checksType'].invalid){
+                <div class="text-danger">Please select check types</div>
+                }
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="input-group">
+                  <select
+                    class="form-control form-select"
+                    formControlName="checkParameter"
+                  >
+                    <option value="" disabled>--Select--</option>
+                    @for (item of CheckParameterDropDown; track item) {
+                    <option value="{{ item.mid }}">
+                      {{ item.cdDescription }}
+                    </option>
+                    }
+                  </select>
+                  <label>Check Parameter <span class="required">*</span></label>
+                </div>
+                @if((loanApplicationDedupetButton ||
+                loanApplicationDedupe.controls['checkParameter'].touched) &&
+                loanApplicationDedupe.controls['checkParameter'].invalid){
+                <div class="text-danger">Please select check parameter</div>
+                }
+              </div>
+              <div class="col-md-3">
+                <div class="input-group">
+                  <select
+                    class="form-control form-select"
+                    formControlName="acceptanceCriteria"
+                  >
+                    <option value="" disabled>--Select--</option>
+                    @for (item of AcceptanceCriteriaDropDown; track item) {
+                    <option value="{{ item.id }}">{{ item.title }}</option>
+                    }
+                  </select>
+                  <label
+                    >Acceptance Creteria <span class="required">*</span></label
+                  >
+                </div>
+                @if((loanApplicationDedupetButton ||
+                loanApplicationDedupe.controls['acceptanceCriteria'].touched) &&
+                loanApplicationDedupe.controls['acceptanceCriteria'].invalid){
+                <div class="text-danger">Please select acceptance criteria</div>
+                }
+              </div>
+              <div class="col-md-3">
+                <div class="input-group">
+                  <input
+                    placeholder=">Max Tolerance"
+                    type="text"
+                    class="form-control"
+                    formControlName="maxToleranceAllowed"
+                  />
+                  <label
+                    >Max Tolerance Allowed<span class="required">*</span></label
+                  >
+                </div>
+                @if((loanApplicationDedupetButton ||
+                loanApplicationDedupe.controls['maxToleranceAllowed'].touched)
+                &&
+                loanApplicationDedupe.controls['maxToleranceAllowed'].invalid){
+                <div class="text-danger">
+                  Please enter max tolerance allowed
+                </div>
+                }
+              </div>
+
+              <div class="col-md-3 add-button">
+                @if(!isDisabled){ @if(tempFormEdit){
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="tempGridUpdate()"
+                >
+                  Update
+                </button>
+                } @else {
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="tempSubmitLoanApplicationDedupe()"
+                >
+                  Add
+                </button>
+                } }
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- <div class="pin-fill"><i class="bi bi-pin-angle-fill"></i></div> -->
+        @if(tempData.length > 0){
+        <span class="grid-class">Temp Grid</span>
+        <table class="temp-grid global-table">
+          <thead>
+            <tr>
+              <th>Sl.No</th>
+              <th>Check Type</th>
+              <th>Check Parameter</th>
+              <th>Acceptance Creteria</th>
+              <th>Max Tolerance</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of loanapplicationdedupe; track item;let i=$index) {
+            <tr>
+              <td>{{ i + 1 }}</td>
+              <td>{{ item.checksType }}</td>
+              <td>{{ item.checkParameter }}</td>
+              <td>{{ item.acceptanceCriteria }}</td>
+              <td>{{ item.maxToleranceAllowed }}</td>
+              <td class="temp-grid-action">
+                @if(!isDisabled){
+                <!-- <i class="bi bi-pen-fill mr-1" (click)="editTempGrid(i)"></i> -->
+                <i
+                  class="bi bi-trash-fill"
+                  style="cursor: pointer"
+                  (click)="deleteItem(i)"
+                ></i>
+                }
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+        }
+      </div>
+    </mat-tab>
+   
+    <mat-tab label="Blacklist Check">
+      <form [formGroup]="blacklistForm">
+        <div class="temp-grid-fields">
+          <div class="box">
+            <div class="header row">
+              <div class="col-md-4">Checks Types</div>
+              <div class="col-md-4">Acceptance Criteria</div>
+              <div class="col-md-4">Max. Tolerance Allowed</div>
+            </div>
+      
+            <div formArrayName="checks" *ngFor="let check of checks.controls; let i = index">
+              <div [formGroupName]="i" class="row">
+                <div class="col-md-4">
+                  <div style="margin-top: 27px">{{ i === 0 ? 'Company Blacklist' : 'Wilful Defaulter' }}</div>
+                </div>
+      
+                <div class="col-md-4">
+                  <select
+                    class="form-control form-select"
+                    formControlName="checksType"
+                  >
+                    <option value="" disabled>--Select--</option>
+                    <option value="665">Raise Deviation</option>
+                    <option value="666">Auto Reject</option>
+                  </select>
+                </div>
+      
+                <div class="col-md-4">
+                  <input
+                    type="text"
+                    placeholder="Max Tolerance"
+                    class="form-control"
+                    formControlName="maxToleranceAllowed"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      
+    </mat-tab>
+    
+    
+    
+  </mat-tab-group>
+</div>

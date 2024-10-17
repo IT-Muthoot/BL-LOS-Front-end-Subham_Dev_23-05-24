@@ -1,0 +1,59 @@
+.action .btn{
+    border: none;
+    background-color: inherit;
+    padding: 7px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-block;
+}
+.action .btn:hover {
+    background: #e8a658;
+    color: #454545;
+}
+
+.success {color: green;}
+.info {color: dodgerblue;}
+.warning {color: orange;}
+.danger {color: red;}
+.default {color: black;}
+.btn-primary{
+    margin-top: 6.5% !important;
+}
+.mat-accordion.active + .pin-fill{
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-left: 48%;
+    background-color: #f9f9f9;
+    font-size: 17px;
+    cursor: pointer;
+  }
+  .mat-accordion .mat-expansion-panel + .pin-fill{
+    display: block;
+  }
+  .below-line{
+    border-bottom: 2px solid #ececec;
+    width: 104%;
+    margin-left: -2%;
+  }
+  .form-field{
+    background-color: unset;
+}
+.filter-class{
+  font-size: 14px;
+}
+.global-table {
+  width: 96.9%;
+  border-collapse: collapse;
+  margin: 20px;
+}
+
+.global-table th, td {
+  text-align: left;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.global-table th {
+  background-color: #eee;
+}

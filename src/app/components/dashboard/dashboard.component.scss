@@ -1,0 +1,52 @@
+.content {
+    transition: margin-left 0.3s;
+  }
+  .side-box-dashboard{
+    width: 30%;
+    background-color: rgba(255, 252, 249, 1);
+    // height: 100vh;
+    box-shadow: 0px 0px 15px 0px rgba(1, 41, 112, 0.1);
+    .card{
+      margin: 15px;
+      padding: 10px;
+      border: unset;
+      box-shadow: 0px 0px 15px 0px rgba(1, 41, 112, 0.1);
+    }
+    .bg-secondary-custom{
+      background-color: rgba(214, 214, 214, 1) !important;
+      color: #000000;
+      font-weight: unset;
+    }
+    
+  }
+  .internal-box h4{
+    font-weight: 600;
+  }
+
+  .filter-box{
+    background-color: #fff;
+    left: 45%;
+    height: 22%;
+    width: 54%;
+    position: absolute;
+    box-shadow: 0px 0px 15px 0px rgba(1, 41, 112, 0.1);
+    margin-top: 6%;
+  }
+  .data-table{
+    background-color: #fff;
+    left: 45%;
+    height: 33%;
+    width: 54%;
+    position: absolute;
+    box-shadow: 0px 0px 15px 0px rgba(1, 41, 112, 0.1);
+    margin-top: 18%;
+  }
+  .graph-data{
+    background-color: #fff;
+    left: 45%;
+    height: 33%;
+    width: 54%;
+    position: absolute;
+    box-shadow: 0px 0px 15px 0px rgba(1, 41, 112, 0.1);
+    margin-top: 35%;
+  }

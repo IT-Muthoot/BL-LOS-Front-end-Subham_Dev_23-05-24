@@ -1,0 +1,140 @@
+<div class="login-container">
+    <div class="tv-3">
+      <div class="rectangle-parent">
+        <div class="frame-child"></div>
+        <div class="rectangle-group">
+          <div class="frame-item"></div>
+          <img
+            class="image-20-icon"
+            loading="lazy"
+            alt=""
+            src="assets/images/image-20@2x.png"
+          />
+        </div>
+        <div class="frame-parent">
+          <div class="business-loan-sme-parent">
+            <h1 class="business-loan-">Business Loan - SME</h1>
+            <i class="loan-origination-system-container">
+              <span>Loan Origination System - Next Gen </span>
+              <span class="v10">v.1.0</span>
+            </i>
+          </div>
+          <div class="solution">
+            <div class="los-next-gen">
+              LOS next gen v.1.0 is an end to end solution which envisages loan
+              origination with automated data collection, Verifying documents,
+              Underwriting Process & Workflows.
+            </div>
+          </div>
+          <img
+            class="secure-login-icon"
+            loading="lazy"
+            alt=""
+            src="assets/images/Secure login_1.png"
+          />
+        </div>
+   
+      </div>
+      <div class="tv-3-inner mt-5">
+        <form class="rectangle-container" [formGroup]="setForm">
+          <a class="welcome-back">Welcome!</a>
+          
+          <div class="login-button">
+            <h1 class="login">Set Security Questions</h1>
+          </div>
+          
+          <div class="password-input-parent">
+            <div class="password-input select-data-field">
+              <!-- <div class="enter-your-password">1st Questions</div> -->
+              <div class="group-div">
+
+                <select class="form-select">
+                        <option value="">--Select Question 1-- </option>
+                        @for(data of questions; track data){
+                          <option value="1">{{ data.question}}</option>
+                        }
+                </select>
+              </div>
+                @if (submitted && setForm.controls['defaultPassword'].invalid ) {
+                    <div  class="error-message">
+                      Password is required and must be at least 4 characters long.
+                    </div>
+                }
+            </div>
+          </div>
+          <div class="password-input-parent answer-field">
+            <div class="password-input">
+              <!-- <div class="enter-your-password">Answer</div> -->
+              <div class="group-div">
+                <!-- <input
+                  formControlName="confirmPassword"
+                  class="frame-input"
+                  placeholder="1st Question Answer"
+                  type="text"
+                /> -->
+                <input formControlName="confirmPassword" class="frame-input" placeholder="Answer" type="text"/>
+              </div>
+                @if (submitted && setForm.controls['defaultPassword'].invalid ) {
+                    <div  class="error-message">
+                      Password is required and must be at least 4 characters long.
+                    </div>
+                }
+            </div>
+          </div>
+          
+          <div class="password-input-parent">
+            <div class="password-input select-data-field">
+              <!-- <div class="enter-your-password">2nd Questions</div> -->
+              <div class="group-div">
+                <select class="form-select">
+                        <option value="">--Select Question 2-- </option>
+                        <option value="1">Option1</option>
+                        <option value="1">Option2</option>
+                        <option value="1">Option3</option>
+                        <option value="1">Option4</option>
+                </select>
+              </div>
+                @if (submitted && setForm.controls['defaultPassword'].invalid ) {
+                    <div  class="error-message">
+                      Password is required and must be at least 4 characters long.
+                    </div>
+                }
+            </div>
+          </div>
+
+          <div class="password-input-parent answer-field">
+            <div class="password-input">
+              <!-- <div class="enter-your-password">Answer</div> -->
+              <div class="group-div">
+                <input
+                  formControlName="confirmPassword"
+                  class="frame-input"
+                  placeholder="Answer"
+                  type="text"
+                />
+              </div>
+                @if (submitted && setForm.controls['defaultPassword'].invalid ) {
+                    <div  class="error-message">
+                      Password is required and must be at least 4 characters long.
+                    </div>
+                }
+            </div>
+          </div>
+          <button class="group-button" (click)="onSubmit()">
+            <a class="login1" style="color: black; margin-top: 6px;">Set</a>
+          </button>
+        </form>
+        
+        <div class="logo-btm1">
+          <span>
+            Version: BL-SME-LOS.V.1.1 | Year: 2024 | Best viewed in Google Chrome and Microsoft Edge
+          </span>
+          <div class="logo-btm">
+            <img src="assets/images/pwerByEmsyne.png" alt="Emsyne" />
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>

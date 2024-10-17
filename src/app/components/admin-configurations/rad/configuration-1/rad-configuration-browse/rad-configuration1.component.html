@@ -1,0 +1,111 @@
+<div class="main-content">
+    <h5 class="page-name mt-2 mb-2">Ratio Analysis Defination Configuration - 1</h5>
+    <div class="show-hide-pin">
+        <mat-accordion class="mt-1" (click)="toggleClass()" [class.active]="isActive">
+            <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title> <span class="filter-class">Filters</span></mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="below-line"></div>
+            <div class="form">
+                <div class="form-field">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                    <select class="form-control form-select" [(ngModel)]="filterRatioType">
+                                        <option value="" disabled>--Select-- </option>
+                                        <option value="1">Profitability Ratio</option>
+                                        <option value="2">Solvenance Ratio</option>
+                                        <option value="3">Option3</option>
+                                        <option value="4">Option4</option>
+                                    </select>
+                                <label>Ratio Type</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control form-select" [(ngModel)]="filterRatioSubType">
+                                    <option value="">--Select-- </option>
+                                    <option value="1">Option1</option>
+                                    <option value="1">Option2</option>
+                                    <option value="1">Option3</option>
+                                    <option value="1">Option4</option>
+                                </select>
+                                <label>Ratio Subtype</label>
+                            </div>
+                        </div>
+        
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-primary" (click)="filter()">Search</button>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            </mat-expansion-panel>
+        </mat-accordion>    
+        @if(isActive){
+            <div class="pin-fill"><i class="bi bi-pin-angle-fill"></i></div>
+        }
+    </div>
+    
+    <div class="action mt-1 mb-1">
+        @if(totalRecords > 0){
+            <button class="btn warning" (click)="exportData()">Export <i class="bi bi-download"></i></button>
+        }
+        <button class="btn warning" routerLink="rad-configuration-1-submit-form">Add <i class="bi bi-plus-lg bold-icon"></i></button>
+    </div>
+    <table class="global-table" id="ratio-analysis-table">
+        <thead>
+            <tr>
+                <th>Sl.No</th>
+                <th>Ratio Type</th>
+                <th>Ratio Subtype</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+           <tr  *ngFor="let d of browseList | paginate: { itemsPerPage: itemsPerPage, currentPage: p, totalItems: totalRecords }; let ndx = index">
+                <td style="width:20px">{{ ndx+1 }}</td>
+                <td>{{ d.ratioType }}</td>
+                <td>{{ d.ratioSubType }}</td>
+                <td>
+                    @if(d.status === 265){
+                        <button class="button" 
+                        (click)="onStatusChange(d.id, d.status)">Active</button>
+                    } @else {
+                        <button class="button-inactive" (click)="onStatusChange(d.id, d.status)">Inactive</button>
+                    }
+                </td>
+                <td>
+                    <div class="dropdown">
+                        <span class="action-button" type="button" id="actionButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </span>
+                        <ul class="dropdown-menu" aria-labelledby="actionButton">
+                            <!-- <li><a class="dropdown-item" href="#">Edit</a></li> -->
+                            <!-- <li><a class="dropdown-item" (click)="openStatusModal(d.id)">Status Update</a></li> -->
+                            <li><a class="dropdown-item" routerLink="rad-configuration-1-view-details/{{ d.id }}">View</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <div class="d-flex justify-content-center mt-3">
+            <pagination-controls (pageChange)="p = $event; getNextPageData($event)"></pagination-controls>
+        </div>
+        <div class="item-per-page">
+            <span for="">Results per page: </span>
+            <select id="itemsPerPage" (change)="onChangeItemsPerPage($event)">
+                <option *ngFor="let option of availableItemsPerPage" [value]="option">
+                {{ option }}
+                </option>
+            </select>
+        </div>
+    </table>
+</div>

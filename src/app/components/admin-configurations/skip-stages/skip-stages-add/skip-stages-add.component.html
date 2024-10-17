@@ -1,0 +1,185 @@
+<div class="main-content">
+    <div class="d-flex justify-content-between align-items-center">
+        <h5 class="page-name mt-2 mb-2">
+            <i class="bi bi-reply-fill"></i> Skip Stage Configuration
+        </h5>
+        <div class="mr-2">
+            <button type="button" class="btn btn-outline-secondary ml-2">Cancel</button>
+            <button type="button" class="btn btn-primary ml-1" (click)="finalSubmit()">Submit</button>
+        </div>
+    </div>
+    <div class="form">
+        <div class="filter-form">
+            <form [formGroup]="parentForm">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="customer_Category">
+                                <option value="">--Select-- </option>
+                                @for(data of CustomerCategoryDropDown; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Customer Category <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['customer_Category'].touched) && parentForm.controls['customer_Category'].invalid){
+                            <div class="text-danger">
+                              Please select customer category
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="customer_type">
+                                <option value="">--Select-- </option>
+                                @for(data of CustomerTypeDropDown; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Customer Type <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['customer_type'].touched) && parentForm.controls['customer_type'].invalid){
+                            <div class="text-danger">
+                              Please select customer type
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="loan_type">
+                                <option value="">--Select-- </option>
+                                @for(data of AllowedLoanTypeDropDown; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Loan Type <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['loan_type'].touched) && parentForm.controls['loan_type'].invalid){
+                            <div class="text-danger">
+                              Please select loan type
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="productId">
+                                <option value="">--Select-- </option>
+                                @for(data of ProductDropDown; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Product ID</label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['productId'].touched) && parentForm.controls['productId'].invalid){
+                            <div class="text-danger">
+                              Please select product Id
+                            </div>
+                        }
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card form mt-4">
+        <div class="form-field">
+            <form [formGroup]="tempForm">
+            <div class="row mb-3">
+                <!-- <form [formGroup]="tempForm"> -->
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <input placeholder="Amount Range From" type="text" class="form-control" formControlName="fromAmount">
+                        <label>Amount Range From <span class="required">*</span></label>
+                    </div>
+                    @if((tempSubmitButton || tempForm.controls['fromAmount'].touched) && tempForm.controls['fromAmount'].invalid){
+                        <div class="text-danger">
+                          Please enter form amount
+                        </div>
+                    }
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <input placeholder="Amount Range To" type="text" class="form-control" formControlName="toAmount">
+                        <label>Amount Range To</label>
+                    </div>
+                    @if((tempSubmitButton || tempForm.controls['toAmount'].touched) && tempForm.controls['toAmount'].invalid){
+                        <div class="text-danger">
+                          Please enter to amount
+                        </div>
+                    }
+                </div>
+                <!-- <div class="col-md-3">
+                    <div class="input-group">
+                        <select class="form-control form-select">
+                            <option value="">--Select-- </option>
+                            @for(data of StageNameDropDown; track data){
+                                <option value="{{ data.id }}">{{ data.title }}</option>
+                            }
+                        </select>
+                        <label>Skip Stages</label>
+                    </div>
+                </div> -->
+                <!-- </form> -->
+                <div class="col-md-5">
+                    <div class="dropdown-container">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Stages</mat-label>
+                            <div class="chips-container">
+                                <div *ngFor="let topping of displayedToppings" class="chip">
+                                    {{ topping.title }}
+                                    <button mat-icon-button (click)="onToppingRemoved(topping)">
+                                    <mat-icon>cancel</mat-icon>
+                                    </button>
+                                </div>
+                                <div *ngIf="remainingToppingsCount > 0" class="chip">
+                                    +{{ remainingToppingsCount }} more
+                                </div>
+                            </div>
+                            <mat-select [formControl]="toppingsControl" multiple (selectionChange)="onSelectionChange($event)">
+                                <mat-option *ngFor="let topping of StageNameDropDown" [value]="topping.id">
+                                    {{ topping.title }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    @if((tempSubmitButton || tempForm.controls['toppingsControl'].touched) && tempForm.controls['toppingsControl'].invalid){
+                        <div class="text-danger">
+                          Please select stages to skipped
+                        </div>
+                    }
+                </div>
+
+                <div class="col-md-3 add-button">
+                    <button type="button" class="btn btn-primary" (click)="tempSubmit()">Add</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    <div class="pin-fill"><i class="bi bi-pin-angle-fill"></i></div>
+    <span class="grid-class">Temp Grid</span>
+    <table class="temp-grid global-table">
+        <thead>
+            <tr>
+                <th>Sl.No</th>
+                <th>Amount Range From</th>
+                <th>Amount Range To</th>
+                <th>Skipped Stages</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(data of newData; track data; let i = $index){
+               <tr>
+                <td>{{ i+1 }}</td>
+                <td>{{ data.fromAmount }}</td>
+                <td>{{ data.toAmount }}</td>
+                <td>{{ data.toppingsControl }}</td>
+                <td class="temp-grid-action">
+                    <!-- <i class="bi bi-pen-fill mr-1"></i> -->
+                    <i class="bi bi-trash-fill" (click)="deleteItem(i)"></i>
+                </td>
+               </tr>
+            }   
+        </tbody>
+    </table>
+</div>

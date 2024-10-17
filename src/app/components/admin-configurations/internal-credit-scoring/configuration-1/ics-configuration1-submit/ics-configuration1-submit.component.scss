@@ -1,0 +1,43 @@
+.custom-head{
+    margin-left: 1.5%;
+}
+.add-button .btn-primary{
+    margin-top: 7.2% !important;
+    background-color: #5B5B5B;
+    color: #fff;
+    border-color: #5B5B5B;
+}
+.pin-fill{
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-left: 48%;
+    background-color: #ececec;
+    font-size: 17px;
+}
+.global-table {
+    width: 96.9%;
+    border-collapse: collapse;
+    margin: 20px;
+}
+
+.global-table th, td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.global-table th {
+    background-color: #C5C5C5;
+    border: 1px solid #F7F6F4 !important;
+}
+textarea{
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+}
+.float-right{
+    float: right;
+    margin-right: 14px;
+    color: grey;
+    font-size: 12px;
+}

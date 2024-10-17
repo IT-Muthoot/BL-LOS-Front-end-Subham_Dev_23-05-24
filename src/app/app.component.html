@@ -1,0 +1,11 @@
+@if(showHead){
+    <app-header></app-header>
+}
+@if(showSidebar){
+    <app-side-nav></app-side-nav>
+}
+
+<app-loader></app-loader>
+<main id="main" [ngClass]="{ shrink: isShrink }" appScrollUp>
+    <router-outlet></router-outlet>
+</main>

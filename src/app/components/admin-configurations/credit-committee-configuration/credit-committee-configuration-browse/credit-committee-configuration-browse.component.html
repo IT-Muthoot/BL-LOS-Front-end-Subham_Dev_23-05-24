@@ -1,0 +1,146 @@
+<div class="main-content">
+    <h5 class="page-name mt-2 mb-2">Credit Committee Configuration</h5>
+    <div class="show-hide-pin">
+        <mat-accordion class="mt-1" (click)="toggleClass()" [class.active]="isActive">
+            <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title> <span class="filter-class">Filters</span></mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="below-line"></div>
+            <div class="form">
+                <form [formGroup]="filterForm">
+                <div class="form-field">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control form-select" formControlName="customerCategory">
+                                    <option value="">--Select-- </option>
+                                    @for(data of CustomerCategory; track data){
+                                        <option value="{{ data.id}}">{{ data.title }}</option>
+                                    }
+                                </select>
+                                <label>Customer Category</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control form-select" formControlName="customerType">
+                                    <option value="">--Select-- </option>
+                                    @for(data of CustomerType; track data){
+                                        <option value="{{ data.id}}">{{ data.title }}</option>
+                                    }
+                                </select>
+                                <label>Customer Type</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control form-select" formControlName="loanType">
+                                    <option value="">--Select-- </option>
+                                    @for(data of loanType; track data){
+                                        <option value="{{ data.id}}">{{ data.title }}</option>
+                                    }
+                                </select>
+                                <label>Loan Type</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control form-select" formControlName="productId">
+                                    <option value="">--Select-- </option>
+                                    @for(data of Product; track data){
+                                        <option value="{{ data.id}}">{{ data.title }}</option>
+                                    }
+                                </select>
+                                <label>Product ID</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 search-btn">
+                            <button type="button" class="btn btn-primary" (click)="filter()">Search</button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </form>
+            </div>
+            
+            </mat-expansion-panel>
+        </mat-accordion>    
+        @if(isActive){
+            <div class="pin-fill"><i class="bi bi-pin-angle-fill"></i></div>
+        }
+    </div>
+    
+    <div class="action mt-1 mb-1">
+        <button class="btn warning" (click)="exportData()">Export <i class="bi bi-download"></i></button>
+        <button class="btn warning" routerLink="credit-committee-configuration-submit">Add <i class="bi bi-plus-lg bold-icon"></i></button>
+    </div>
+    <table class="global-table">
+        <thead>
+            <tr>
+                <th>Sl.No</th>
+                <th>Customer Category</th>
+                <th>Customer Type</th>
+                <th>Loan Type</th>
+                <th>Product ID</th>
+                <!-- <th>Loan Amount (From)</th>
+                <th>Loan Amount (To)</th>
+                <th>Credit Committee User Group</th> -->
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of browseList| paginate: { itemsPerPage: itemsPerPage,
+                currentPage: p, totalItems: totalRecords }; track $index) {
+                <tr>
+                    <td>{{$index+1}}</td>
+                    <td>{{ item.customerCategory | dropDown :1 :CustomerCategory}}</td>
+                    <td>{{ item.customerType | dropDown :1 :CustomerType}}</td>
+                    <td>{{ item.loanType | dropDown :1 :loanType}}</td>
+                    <td>{{ item.productId |dropDown :1 :Product }}</td>
+                    <!-- <td>{{ item.fromLoanAmount }}</td>
+                    <td>{{ item.toLoanAmount }}</td>
+                    <td>{{ item.creditCommitteId }}</td> -->
+                    <td>
+                        <!-- <p><mat-slide-toggle [checked]="item.status === 265"
+                        (change)="onToggleChange($event, item.id, item.status)"></mat-slide-toggle></p> -->
+                        @if(item.status === 265){
+                            <button class="button" 
+                            (click)="onStatusChange(item.id, item.status)">Active</button>
+                        } @else {
+                            <button class="button-inactive" (click)="onStatusChange(item.id, item.status)">Inactive</button>
+                        }
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <span class="action-button" type="button" id="actionButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </span>
+                            <ul class="dropdown-menu" aria-labelledby="actionButton">
+                                <li><a class="dropdown-item" routerLink="credit-committee-view-details/{{item.id}}">Edit</a></li>
+                                <li><a class="dropdown-item" href="#">View</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-between mt-2">
+        <div class="mt-2">
+            <pagination-controls (pageChange)="p = $event; getNextPageData($event)"></pagination-controls>
+        </div>
+        <div class="mt-2">
+            <span for="">Results per page: </span>
+            <select id="itemsPerPage" (change)="onChangeItemsPerPage($event)">
+                <option *ngFor="let option of availableItemsPerPage" [value]="option">
+                {{ option }}
+                </option>
+            </select>
+        </div>
+        
+    </div>
+</div>

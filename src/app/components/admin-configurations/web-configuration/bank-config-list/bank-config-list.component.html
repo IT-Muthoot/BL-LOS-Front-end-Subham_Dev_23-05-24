@@ -1,0 +1,151 @@
+<div class="main-content">
+    <h5 class="page-name mt-2 mb-2">Bank Configuration</h5>
+    <div class="show-hide-pin">
+        <mat-accordion class="mt-1" (click)="toggleClass()" [class.active]="isActive">
+            <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title><span class="filter-class">Filters</span></mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="below-line"></div>
+                <div class="form">
+                    <div class="form-field">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="bankId" type="text" class="form-control" formControlName="bankId">
+                                    <label>Bank Id</label>
+                                </div>
+                            </div>
+                      
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="localCurrency" type="text" class="form-control" formControlName="localCurrency">
+                                    <label>Local Currency</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="countryCode" type="text" class="form-control" formControlName="countryCode">
+                                    <label>Country Code</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="countryName" type="text" class="form-control" formControlName="countryName">
+                                    <label>Country Name</label>
+                                </div>
+                            </div>
+                          
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="city" type="text" class="form-control" formControlName="city">
+                                    <label>City</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="pincode" type="text" class="form-control" formControlName="pincode">
+                                    <label>Pincode</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <select class="form-control form-select">
+                                        <option value="">--Select-- </option>
+                                        @for(data of PreferredLanguag; track data){
+                                            <option value="{{ data.id }}">{{ data.title }}</option>
+                                        }
+                                    </select>
+                                    <label>Default Language</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-primary">Search</button>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>    
+        @if(isActive){
+            <div class="pin-fill"><i class="bi bi-pin-angle-fill"></i></div>
+        }
+    </div>
+    <div class="action mt-1 mb-1">
+        <button class="btn warning">Export <i class="bi bi-download"></i></button>
+        <button class="btn warning" routerLink="/bank-config-form">Add <i class="bi bi-plus-lg bold-icon"></i></button>
+    </div>
+    <table class="responsive global-table">
+        <thead>
+            <tr>
+                <th>Sl.No</th>
+                <th>Bank Id</th>
+                <th>Local Currency</th>
+                <th>Country Code</th>
+                <th>Country Name</th>
+                <th>City</th>
+                <th>Pincode</th>
+                <th>Default Language</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(data of browseList; track $index){
+                <tr>
+                    <td>{{ $index+1 }}</td> 
+                    <td>{{ data.bankId }}</td> <!-- Bank Id -->
+                    <td>{{ data.localCurrency }}</td> <!-- Local Currency -->
+                    <td>{{ data.countryCode }}</td> <!-- Country Code -->
+                    <td>{{ data.countryName }}</td> <!-- Country Name -->
+                    <td>{{ data.city  }}</td> <!-- City -->
+                    <td>{{ data.pincode }}</td> <!-- Pincode -->
+                    <td>{{ data.defaultLanguage}}</td> <!-- Default Language -->
+                    <td>@if(data.status === 265){
+                        <button class="button" 
+                        (click)="onStatusChange(data.id, data.status)">Active</button>
+                    } @else {
+                        <button class="button-inactive" (click)="onStatusChange(data.id, data.status)">Inactive</button>
+                    }
+                </td>
+                    <td>
+                        <div class="dropdown">
+                            <span class="action-button" type="button" id="actionButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </span>
+                            <!-- Dropdown Menu -->
+                            <ul class="dropdown-menu" aria-labelledby="actionButton">
+                                <li><a class="dropdown-item" href="#">View</a></li>
+                                <li><a class="dropdown-item" href="#">Edit</a></li>
+                                <li><a class="dropdown-item" href="#">Delete</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <!-- <div class="d-flex justify-content-center mt-3" >
+            <pagination-controls (pageChange)='p = $event'[maxSize]="9"
+            [directionLinks]="true"
+            [autoHide]="true"
+            [responsive]="true"
+            previousLabel="Previous"
+            nextLabel="Next"
+            screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page"
+            screenReaderCurrentLabel="You're on page"></pagination-controls>
+        </div>
+        <div class="item-per-page">
+            <span for="">Results per page: </span>
+            <select id="itemsPerPage" (change)="onChangeItemsPerPage($event)">
+                <option *ngFor="let option of availableItemsPerPage" [value]="option">
+                {{ option }}
+                </option>
+            </select>
+        </div> -->
+    </table>
+</div>

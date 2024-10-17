@@ -1,0 +1,449 @@
+<div class="main-content">
+    <div class="d-flex justify-content-between align-items-center">
+        <h5 class="page-name mt-2 mb-2">
+            <i class="bi bi-reply-fill" onclick="history.back()"></i> Loan Eligibility Check Configuration
+        </h5>
+        <div class="right-top-buttons">
+            <button type="button" class="btn btn-outline-secondary ml-2">Cancel</button>
+            <button type="button" class="btn btn-primary ml-1" (click)="finalSubmit()">Submit</button>
+        </div>
+    </div>
+    <div class="form">
+        <div class="filter-form">
+            <form [formGroup]="parentForm">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="customer_Category">
+                                <option value="">--Select-- </option>
+                                @for(data of CustomerCategory; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Customer Category <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['customer_Category'].touched) && parentForm.controls['customer_Category'].invalid){
+                            <div class="text-danger">
+                              Please select customer category
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="businessType">
+                                <option value="">--Select-- </option>
+                                @for(data of businessType; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Business Type <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['businessType'].touched) && parentForm.controls['businessType'].invalid){
+                            <div class="text-danger">
+                              Please select business type
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="loanType">
+                                <option value="">--Select-- </option>
+                                @for(data of loanType; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Loan Type <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['loanType'].touched) && parentForm.controls['loanType'].invalid){
+                            <div class="text-danger">
+                              Please select loan type
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="productId">
+                            <option value="" disabled>--Select-- </option>
+                            @for(data of Product; track data){
+                                <option value="{{ data.id }}">{{ data.title }}</option>
+                            }</select>
+                            <label>Product ID <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['productId'].touched) && parentForm.controls['productId'].invalid){
+                            <div class="text-danger">
+                              Please select product Id
+                            </div>
+                        }
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <mat-tab-group>
+        
+        <mat-tab label="Basic Details Check"> 
+            <div class="below-line"> </div>
+            <form [formGroup]="basicDetailCheckForm">
+                <div class="temp-grid-fields">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="div-17">Loan Applicant Age Required?</div>
+                            <div class="radio-group">
+                                <input type="radio" name="isAgeRequired" formControlName="isAgeRequired" value="1">
+                                <label>Yes</label>
+                                <input type="radio" name="isAgeRequired" formControlName="isAgeRequired" value="0" >
+                                <label>No</label>
+                            </div> 
+                        </div>    
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Placeholder" type="text" class="form-control" formControlName="minClientAge">
+                                <label>Min. Client Age<span class="required">*</span></label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Ex:20" type="text" class="form-control" formControlName="maxClientAge">
+                                <label>Max. Client Age<span class="required">*</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="div-17">Business Vintage Check Required?</div>
+                            <div class="radio-group">
+                                <input type="radio" name="isBusinessVintageCheck" formControlName="isBusinessVintageCheck" value="1">
+                                <label>Yes</label>
+                                <input type="radio" name="isBusinessVintageCheck" formControlName="isBusinessVintageCheck" value="0" >
+                                <label>No</label>
+                            </div>     
+                        </div>  
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Placeholder" type="text" class="form-control" formControlName="minBusinessVintage">
+                                <label>Min. Business Vintage(In a year)<span class="required">*</span></label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Ex:20" type="text" class="form-control" formControlName="maxBusinessVintage">
+                                <label>Max. Business Vintage(In a year)<span class="required">*</span></label>
+                            </div>
+                        </div>
+            
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                                <div class="div-17">MSME Registration (UDYAM) Check Required?</div>
+                                <div class="radio-group">
+                                    <input type="radio" name="isMSMEregistrationCheck" formControlName="isMSMEregistrationCheck" value="1">
+                                    <label>Yes</label>
+                                    <input type="radio" name="isMSMEregistrationCheck" formControlName="isMSMEregistrationCheck" value="0">
+                                    <label>No</label>
+                                </div> 
+                            </div>            
+                    </div>
+                </div>
+            </form>
+        </mat-tab>
+
+        <mat-tab label="Tax Filling Check">
+            <div class="below-line"> </div>
+            <form [formGroup]="taxFilingCheckForm">
+                <div class="temp-grid-fields">
+                    <div class="row">
+                
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Placeholder" type="text" class="form-control" formControlName="minLoanAmountAllowed">
+                                <label>Min. Loan Amonunt Allowed<span class="required">*</span></label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Ex:20" type="text" class="form-control" formControlName="maxLoanAmountAllowed">
+                                <label>Max. Loan Amonunt Allowed<span class="required">*</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="div-17">ITR Filling(Business) Compaliance Required?</div>
+                            <div class="radio-group">
+                                <input type="radio" name="isITRfilingBusinessCompliance" formControlName="isITRfilingBusinessCompliance" value="1">
+                                <label>Yes</label>
+                                <input type="radio" name="isITRfilingBusinessCompliance" formControlName="isITRfilingBusinessCompliance" value="0" >
+                                <label>No</label>
+                            </div>   
+                        </div>    
+                    
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="div-17">ITR Filling(Applicant) Compaliance Required?</div>
+                            <div class="radio-group">
+                                <input type="radio" name="isITRfilingApplicantCompliance" formControlName="isITRfilingApplicantCompliance" value="1">
+                                <label>Yes</label>
+                                <input type="radio" name="isITRfilingApplicantCompliance" formControlName="isITRfilingApplicantCompliance" value="0" >
+                                <label>No</label>
+                            </div>  
+                        </div>  
+            
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                                <div class="div-17">GST Check Required?</div>
+                                <div class="radio-group">
+                                    <input type="radio" name="isGSTcheck" formControlName="isGSTcheck" value="1">
+                                    <label>Yes</label>
+                                    <input type="radio" name="isGSTcheck" formControlName="isGSTcheck" value="0" >
+                                    <label>No</label>
+                                </div>   
+                            </div>    
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Ex:20" type="text" class="form-control" formControlName="minGSTReturn">
+                                    <label>Min. GST Return Compliance<span class="required">*</span></label>
+                                </div>
+                            </div>        
+                    </div>
+                </div>
+            </form>
+        </mat-tab>
+
+
+        <mat-tab label="Credit Bureau Check(Score)" >
+            <div class="below-line"> </div>
+            <form [formGroup]="creditBureauCheckForm">
+                <div class="temp-grid-fields">
+                    <div class="row">
+                        <div class="col-md-3">
+                                <div class="div-17">CIBIL Required?</div>
+                                <div class="radio-group">
+                                    <input type="radio" name="isCibilRequired" formControlName="isCibilRequired" value="1">
+                                    <label>Yes</label>
+                                    <input type="radio" name="isCibilRequired" formControlName="isCibilRequired" value="0">
+                                    <label>No</label>
+                                </div> 
+                            </div>    
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Ex:20" type="text" class="form-control" formControlName="cibilApplicantMinCreditScore">
+                                    <label>Applicant Min.Credit Score<span class="required">*</span></label>
+                                </div>
+                            </div>        
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Ex:20" type="text" class="form-control" formControlName="cibilDirectorMinCreditScore">
+                                    <label>Director Min.Credit Score<span class="required">*</span></label>
+                                </div>
+                            </div>        
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Ex:20" type="text" class="form-control" formControlName="cibilMaxCMRRankAllowed">
+                                    <label>Max. CMR Rank Allow<span class="required">*</span></label>
+                                </div>
+                            </div>        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                                <div class="div-17">EQUIFAX Required?</div>
+                                <div class="radio-group">
+                                    <input type="radio" name="isEquifaxRequired" formControlName="isEquifaxRequired" value="1">
+                                    <label>Yes</label>
+                                    <input type="radio" name="isEquifaxRequired" formControlName="isEquifaxRequired" value="0" >
+                                    <label>No</label>
+                                </div>   
+                            </div>    
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Ex:20" type="text" class="form-control" formControlName="equifaxApplicantMinCreditScore">
+                                    <label>Applicant Min.Credit Score<span class="required">*</span></label>
+                                </div>
+                            </div>        
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Ex:20" type="text" class="form-control" formControlName="equifaxDirectorMinCreditScore">
+                                    <label>Director Min.Credit Score<span class="required">*</span></label>
+                                </div>
+                            </div>        
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Ex:20" type="text" class="form-control" formControlName="equifaxMinBusinessCreditScore">
+                                    <label>Min. Business Credit Score<span class="required">*</span></label>
+                                </div>
+                            </div>        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                                <div class="div-17">HIGHMARK Required?</div>
+                                <div class="radio-group">
+                                    <input type="radio" name="isHighMarkRequired" formControlName="isHighMarkRequired" value="1">
+                                    <label>Yes</label>
+                                    <input type="radio" name="isHighMarkRequired" formControlName="isHighMarkRequired" value="0" >
+                                    <label>No</label>
+                                </div>   
+                            </div>    
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Ex:20" type="text" class="form-control" formControlName="highMarkApplicantMinCreditScore">
+                                    <label>Applicant Min.Credit Score<span class="required">*</span></label>
+                                </div>
+                            </div>        
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Ex:20" type="text" class="form-control" formControlName="highMarkDirectorMinCreditScore">
+                                    <label>Director Min.Credit Score<span class="required">*</span></label>
+                                </div>
+                            </div>        
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Ex:20" type="text" class="form-control" formControlName="highMarkMinBusinessCreditScore">
+                                    <label>Min. Business Credit Score<span class="required">*</span></label>
+                                </div>
+                            </div>        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                                <div class="div-17">EXPERIAN Required?</div>
+                                <div class="radio-group">
+                                    <input type="radio" name="isExperianRequired" formControlName="isExperianRequired" value="1">
+                                    <label>Yes</label>
+                                    <input type="radio" name="isExperianRequired" formControlName="isExperianRequired" value="0" >
+                                    <label>No</label>
+                                </div>  
+                            </div>    
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Ex:20" type="text" class="form-control" formControlName="experianApplicantMinCreditScore">
+                                    <label>Applicant Min.Credit Score<span class="required">*</span></label>
+                                </div>
+                            </div>        
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Ex:20" type="text" class="form-control" formControlName="experianDirectorMinCreditScore">
+                                    <label>Director Min.Credit Score<span class="required">*</span></label>
+                                </div>
+                            </div>        
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Ex:20" type="text" class="form-control" formControlName="experianMinBusinessCreditScore">
+                                    <label>Min. Business Credit Score<span class="required">*</span></label>
+                                </div>
+                            </div>        
+                    </div>
+                </div>
+            </form>
+      </mat-tab>
+        <mat-tab label="Credit Bureau Check(Report)"> 
+            <div class="below-line"> </div>
+            <form [formGroup]="creditBureauCheckReportForm">
+                <div class="temp-grid-fields">
+                    <div class="row">
+                        <div class="col-md-3">
+                                <div class="div-17">Overdue Account Check Required?</div>
+                                <div class="radio-group">
+                                    <input type="radio" name="isOverdueAccountCheck" formControlName="isOverdueAccountCheck" value="1">
+                                    <label>Yes</label>
+                                    <input type="radio" name="isOverdueAccountCheck" formControlName="isOverdueAccountCheck" value="0" >
+                                    <label>No</label>
+                                </div>   
+                            </div>           
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Ex:20" type="text" class="form-control" formControlName="maxOverdueAllowedAllow">
+                                    <label>Max. Overdue Account Allow<span class="required">*</span></label>
+                                </div>
+                            </div>        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                                <div class="div-17">Credit Inquery Check Required?</div>
+                                <div class="radio-group">
+                                    <input type="radio" name="isCreditInquiryCheck" formControlName="isCreditInquiryCheck" value="1">
+                                    <label>Yes</label>
+                                    <input type="radio" name="isCreditInquiryCheck" formControlName="isCreditInquiryCheck" value="0" >
+                                    <label>No</label>
+                                </div>   
+                            </div>    
+                        
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Ex:20" type="text" class="form-control" formControlName="statMaxAllowedCreditInquiryus">
+                                    <label>Max. Allow Credit Inquery<span class="required">*</span></label>
+                                </div>
+                            </div>        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                                <div class="div-17">Loan Status Check Required?</div>
+                                <div class="radio-group">
+                                    <input type="radio" name="isLoanStatusCheck" formControlName="isLoanStatusCheck" value="1">
+                                    <label>Yes</label>
+                                    <input type="radio" name="isLoanStatusCheck" formControlName="isLoanStatusCheck" value="0" >
+                                    <label>No</label>
+                                </div>     
+                            </div>    
+                        
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <select class="form-control form-select" formControlName="loanStatusCheck">
+                                        <option value="">--Select-- </option>
+                                        <option value="1">Option1</option>
+                                        <option value="1">Option2</option>
+                                        <option value="1">Option3</option>
+                                        <option value="1">Option4</option>
+                                    </select>
+                                    <label>Loan Staus Check</label>
+                                </div>
+                            </div>        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                                <div class="div-17">Other loan status check Required?</div>
+                                <div class="radio-group">
+                                    <input type="radio" name="isOtherLoanStatusCheck" formControlName="isOtherLoanStatusCheck" value="1">
+                                    <label>Yes</label>
+                                    <input type="radio" name="isOtherLoanStatusCheck" formControlName="isOtherLoanStatusCheck" value="0" >
+                                    <label>No</label>
+                                </div> 
+                            </div>    
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <select class="form-control form-select" formControlName="otherStatusCheck">
+                                        <option value="">--Select-- </option>
+                                        <option value="1">Option1</option>
+                                        <option value="1">Option2</option>
+                                        <option value="1">Option3</option>
+                                        <option value="1">Option4</option>
+                                    </select>
+                                    <label>Other Status Check</label>
+                                </div>
+                            </div>        
+                            
+                    </div>
+                </div> 
+            </form>
+        </mat-tab>
+        <mat-tab label="Pincode" >
+            <div class="below-line"> </div>
+            <div class="temp-grid-fields">
+                <div class="row">
+                    <form [formGroup]="negativePincodeForm">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <!-- <input placeholder="Upload" type="text" class="form-control"> -->
+                                <input type="file" id="myFile" #fileUploader name="filename" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" class="form-control" formControlName="negativePincode"/>
+                                <label>Upload <span class="required">*</span></label>
+                                <!-- <i class="bi bi-upload file-upload"></i> -->
+                            </div>
+                        </div>  
+                    </form>
+                </div>
+            </div> 
+         </mat-tab>
+        <mat-tab label="" disabled>  </mat-tab>
+     
+    </mat-tab-group>
+</div>

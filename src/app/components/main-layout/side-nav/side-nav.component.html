@@ -1,0 +1,261 @@
+<div class="responsive-sidebar-ham">
+  <i class="bi bi-list" (click)="showSidebar()"></i>
+</div>
+<aside id="sidebar" class="sidebar" (mouseenter)="shrinkMain()"
+(mouseleave)="expandMain()" [ngClass]="{showsidebar: isCollapsed}">
+
+    
+
+    <div class="side-nav-logo center">
+        <img src="assets/assets/img/logo_0.png" alt="">
+    </div>
+    <ul class="sidebar-nav mt-2" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link"><i class="bi bi-grid"></i>
+          <span class="menu-item">Dashboard</span>
+        </a>
+      </li>
+ 
+      
+
+      <li class="nav-item">
+        <a class="nav-link collapsed active" data-bs-target="#components-nav" data-bs-toggle="collapse">
+          <i class="bi bi-menu-button-wide"></i>
+          <span class="menu-item">Admin Configuration</span>
+          <i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+
+        <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          
+          <li (click)="closeSidebar()">
+            <a routerLink="bank-config-list" class="">
+               <span class="menu-item">Bank Config</span>
+            </a>
+          </li>
+          <li (click)="closeSidebar()">
+            <a routerLink="branch-config-list" class="">
+               <span class="menu-item">Branch Config</span>
+            </a>
+          </li>
+          <li (click)="closeSidebar()">
+            <a routerLink="bre-list" class="">
+               <span class="menu-item">Bre Config</span>
+            </a>
+          </li>
+          <li (click)="closeSidebar()">
+            <a routerLink="business-risk-list" class="">
+               <span class="menu-item">Bre Risk</span>
+            </a>
+          </li>
+        
+          <li (click)="closeSidebar()">
+            <a routerLink="credit-committee-configuration-browse" class="">
+               <span class="menu-item">Credit Committee</span>
+            </a>
+          </li>
+          <li (click)="closeSidebar()">
+            <a routerLink="digital-kyc-list" class="">
+               <span class="menu-item">Digital KYC check</span>
+            </a>
+          </li>
+          <li (click)="closeSidebar()">
+            <a routerLink="holiday-config-form" class="">
+               <span class="menu-item">Holiday Config</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav-link collapsed" data-bs-target="#sub-components-ics-nav" data-bs-toggle="collapse">
+              <!-- <i class="bi bi-menu-button-wide"></i> -->
+              <span class="menu-item">Field Agent Management</span>
+              <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="sub-components-ics-nav" class="nav-content collapse">
+              <li (click)="closeSidebar()">
+                <a routerLink="agency-management-browse" class="">
+                  <span class="menu-item">Agency Management</span>
+                </a>
+              </li>
+              <li (click)="closeSidebar()">
+                <a routerLink="agent-management-browse" class="">
+                  <span class="menu-item">Agent Management</span>
+                </a>
+              </li>
+              <li (click)="closeSidebar()">
+                <a routerLink="agent-commision-management-browse" class="">
+                  <span class="menu-item">Agent Commission Management</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a class="nav-link collapsed" data-bs-target="#sub-components-ics-nav" data-bs-toggle="collapse">
+              <!-- <i class="bi bi-menu-button-wide"></i> -->
+              <span class="menu-item">Internal Credit Scoring</span>
+              <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="sub-components-ics-nav" class="nav-content collapse">
+              <li (click)="closeSidebar()">
+                <a routerLink="ics-configurtion-1-browse" class="">
+                  <span class="menu-item">Configuration 1</span>
+                </a>
+              </li>
+              <li (click)="closeSidebar()">
+                <a routerLink="ics-configuration-2-browse" class="">
+                  <span class="menu-item">Configuration 2</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li (click)="closeSidebar()">
+            <a routerLink="lead-management-dashboard" class="">
+               <span class="menu-item">Lead Management</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav-link collapsed" data-bs-target="#sub-components-nav" data-bs-toggle="collapse">
+              <!-- <i class="bi bi-menu-button-wide"></i> -->
+              <span class="menu-item">Loan Blacklist Check</span>
+              <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="sub-components-nav" class="nav-content collapse">
+              <li (click)="closeSidebar()">
+                <a routerLink="company-blacklist" class="">
+                   <span class="menu-item">Company Blacklist Check</span>
+                </a>
+              </li>
+              <li (click)="closeSidebar()">
+                <a routerLink="wilful-defaulter-blacklist-browse" class="">
+                   <span class="menu-item">Wilful Blacklist Check</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li (click)="closeSidebar()">
+            <a routerLink="loan-eligibility-check-list" class="">
+               <span class="menu-item">Loan Eligibility Check</span>
+            </a>
+          </li>
+          <li (click)="closeSidebar()">
+            <a routerLink="miscellaneous-config-list" class="">
+               <span class="menu-item">Miscellaneous Config</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav-link collapsed" data-bs-target="#sub-components-rnd-nav" data-bs-toggle="collapse">
+              <!-- <i class="bi bi-menu-button-wide"></i> -->
+              <span class="menu-item">Ratio Analysis Defination</span>
+              <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="sub-components-rnd-nav" class="nav-content collapse">
+              <li (click)="closeSidebar()">
+                <a routerLink="rad-configuration-1-list" class="">
+                  <span class="menu-item">Configuration 1</span>
+                </a>
+              </li>
+              <li (click)="closeSidebar()">
+                <a routerLink="rad-configuration-2-list" class="">
+                  <span class="menu-item">Configuration 2</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li (click)="closeSidebar()">
+            <a routerLink="skip-stage-configuration-browse" class="">
+               <span class="menu-item">Skip Stages</span>
+            </a>
+          </li>
+          <li (click)="closeSidebar()">
+            <a routerLink="sla-defination-list" class="">
+               <span class="menu-item">SLA definition and Tracking</span>
+            </a>
+          </li>
+          
+          <li (click)="closeSidebar()">
+            <a routerLink="stagewise-documents-checklist" class="">
+               <span class="menu-item">Stagewise Document Checklist</span>
+            </a>
+          </li>
+          <li (click)="closeSidebar()">
+            <a routerLink="underWriting-Preference" class="">
+               <span class="menu-item">Underwriting Preference</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav-link collapsed" data-bs-target="#sub-components-roleuser-nav" data-bs-toggle="collapse">
+              <!-- <i class="bi bi-menu-button-wide"></i> -->
+              <span class="menu-item">User & Role Management</span>
+              <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="sub-components-roleuser-nav" class="nav-content collapse">
+              <li (click)="closeSidebar()">
+                <a routerLink="user-management-list" class="">
+                  <span class="menu-item">User Management</span>
+                </a>
+              </li>
+              <li (click)="closeSidebar()">
+                <a routerLink="role-management-list" class="">
+                  <span class="menu-item">Role Management</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a  routerLink="case-assignment" class="nav-link"><i class="bi-briefcase"></i>
+          <span class="menu-item">Case Assignment</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a  routerLink="loan-calculator" class="nav-link"><i class="bi bi-calculator"></i>
+          <span class="menu-item">Loan Calculator</span>
+        </a>
+      </li>
+
+      <!-- <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" routerLink="loan-workflow">
+          <i class="bi bi-journal-text"></i>
+            <span class="menu-item">Loan Flow</span>
+        </a>
+      </li> -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i>
+            <span class="menu-item">Notification</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-gear"></i>
+            <span class="menu-item">Setting</span>
+        </a>
+      </li>
+      <hr>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-bar-chart"></i>
+            <span class="menu-item">Reports</span>
+          <i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="icons-bootstrap.html">
+               <span class="menu-item">Payment Details</span>
+            </a>
+          </li>
+          <li>
+            <a href="icons-remix.html">
+               <span class="menu-item">Transaction</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+    </ul>
+
+</aside>
+

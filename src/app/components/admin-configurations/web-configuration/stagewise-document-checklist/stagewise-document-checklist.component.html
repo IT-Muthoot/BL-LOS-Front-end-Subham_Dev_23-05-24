@@ -1,0 +1,131 @@
+<div class="main-content">
+    <h5 class="page-name mt-2 mb-2">Workflow Stagewise Document Checklist Configuration</h5>
+    <div class="show-hide-pin">
+        <mat-accordion class="mt-1" (click)="toggleClass()" [class.active]="isActive">
+            <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title><span class="filter-class">Filters</span></mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="below-line"></div>
+                <div class="form">
+                    <form [formGroup]="filterForm">
+                        <div class="form-field">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <select class="form-control form-select">
+                                            <option value="">--Select-- </option>
+                                            @for(data of CustomerCategory; track data){
+                                                <option value="{{ data.id }}">{{ data.title }}</option>
+                                            }
+                                        </select>
+                                        <label>Customer Category</label>
+                                    </div>
+                                </div>
+                          
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <select class="form-control form-select">
+                                            <option value="">--Select-- </option>
+                                            @for(data of loanType; track data){
+                                                <option value="{{ data.id }}">{{ data.title }}</option>
+                                            }
+                                        </select>
+                                        <label>Loan Type</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <select class="form-control form-select">
+                                            <option value="">--Select-- </option>
+                                            <option value="1">Option1</option>
+                                            <option value="1">Option2</option>
+                                            <option value="1">Option3</option>
+                                            <option value="1">Option4</option>
+                                        </select>
+                                        <label>Product ID</label>
+                                    </div>
+                                </div>
+                      
+    
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-primary">Search</button>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>    
+        @if(isActive){
+            <div class="pin-fill"><i class="bi bi-pin-angle-fill"></i></div>
+        }
+    </div>
+    <div class="action mt-1 mb-1">
+        <button class="btn warning">Export <i class="bi bi-download"></i></button>
+        <button class="btn warning" routerLink="/stagewise-documents-checklist-form">Add <i class="bi bi-plus-lg bold-icon"></i></button>
+    </div>
+    <table class="responsive global-table">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Customer Category</th>
+                <th>Loan Type</th>
+                <th>Product Id</th>
+                <th>Max Size</th>
+                <th>Size Compression Req.</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr  *ngFor="let d of data | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let ndx = index">
+                <td style="width:20px">{{ ndx+1 }}</td>
+                <td>{{ d.CustomerCategory }}</td>
+               
+                <td>{{ d.LoanType}}</td>
+                <td>{{ d.ProductID }}</td>
+                <td>{{ d.size }}</td>
+                <td>{{ d.sizereq }}</td>
+                <td><button class="button">Active</button></td>
+                <td>
+                    <div class="dropdown">
+                        <span class="action-button" type="button" id="actionButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </span>
+                        <!-- Dropdown Menu -->
+                        <ul class="dropdown-menu" aria-labelledby="actionButton">
+                            <li><a class="dropdown-item" href="#">View</a></li>
+                            <li><a class="dropdown-item" href="#">Edit</a></li>
+                            <li><a class="dropdown-item" href="#">Delete</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+      
+        </tbody>
+        <div class="d-flex justify-content-center mt-3" >
+            <pagination-controls (pageChange)='p = $event'[maxSize]="9"
+            [directionLinks]="true"
+            [autoHide]="true"
+            [responsive]="true"
+            previousLabel="Previous"
+            nextLabel="Next"
+            screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page"
+            screenReaderCurrentLabel="You're on page"></pagination-controls>
+        </div>
+        <div class="item-per-page">
+            <span for="">Results per page: </span>
+            <select id="itemsPerPage" (change)="onChangeItemsPerPage($event)">
+                <option *ngFor="let option of availableItemsPerPage" [value]="option">
+                {{ option }}
+                </option>
+            </select>
+        </div>
+    </table>
+</div>

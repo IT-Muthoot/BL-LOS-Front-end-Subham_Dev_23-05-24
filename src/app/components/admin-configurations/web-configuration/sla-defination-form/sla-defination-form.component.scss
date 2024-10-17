@@ -1,0 +1,61 @@
+.custom-head {
+    margin-left: 1.5%;
+}
+
+.add-button .form-check {
+    display: flex;
+    align-items: center;
+    margin-top: 6.5%;
+}
+
+.form-check-input {
+    margin-right: 0.5rem;
+}
+
+.add-button .form-check-label {
+    margin-left: 0;
+    color: black;
+}
+
+.add-button .btn-primary {
+    margin-top: 6.5% !important;
+    background-color: #5B5B5B;
+    color: #fff;
+    border-color: #5B5B5B;
+}
+
+.pin-fill {
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-left: 48%;
+    background-color: #ececec;
+    font-size: 17px;
+}
+
+.global-table {
+    width: 96.9%;
+    border-collapse: collapse;
+    margin: 20px;
+}
+
+.global-table th, td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.global-table th {
+    background-color: #eee;
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    margin-left: -32px;
+}
+
+.form-check-label {
+    color: black;
+    margin-top: 3px;
+}

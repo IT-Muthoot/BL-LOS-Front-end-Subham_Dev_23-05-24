@@ -1,0 +1,326 @@
+<div class="main-content">
+    <div class="d-flex justify-content-between align-items-center">
+        <h5 class="page-name mt-2 mb-2">
+            <i class="bi bi-reply-fill"></i>Agency Management
+        </h5>
+        <div class="right-top-buttons">
+            @if(isEditMode){
+                @if(isDisabled){
+                  <button type="button" class="btn btn-outline-secondary ml-2" (click)="editClicked()">Edit</button>
+                } @else {
+                  <button type="button" class="btn btn-outline-secondary ml-2">Cancel</button>
+                <button type="button" class="btn btn-primary ml-1" (click)="finalSubmit()">Update</button>
+                }
+            } @else {
+                <button type="button" class="btn btn-outline-secondary ml-2">Cancel</button>
+                <button type="button" class="btn btn-primary ml-1" (click)="finalSubmit()">Submit</button>
+            }
+        </div>
+    </div>
+
+    <mat-tab-group>
+        <mat-tab label="Agency Details"> 
+        <div class="below-line">
+        </div>
+            <div class="temp-grid-fields">
+                <form [formGroup]="agencyDetailsForm">
+                   <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Agency Name" type="text" class="form-control" formControlName="agencyName">
+                            <label>Agency Name <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || agencyDetailsForm.controls['agencyName'].touched) && agencyDetailsForm.controls['agencyName'].invalid){
+                            <div class="text-danger">
+                              Please enter valid data
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Agency ID" type="text" class="form-control" formControlName="agencyId">
+                            <label>Agency ID <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || agencyDetailsForm.controls['agencyId'].touched) && agencyDetailsForm.controls['agencyId'].invalid){
+                            <div class="text-danger">
+                              Please enter valid data
+                            </div>
+                        }
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Address" type="text" class="form-control" formControlName="address">
+                                <label>Address <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || agencyDetailsForm.controls['address'].touched) && agencyDetailsForm.controls['address'].invalid){
+                                <div class="text-danger">
+                                  Please enter valid data
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Pincode" type="text" class="form-control" formControlName="pincode">
+                                <label>Pincode <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || agencyDetailsForm.controls['pincode'].touched) && agencyDetailsForm.controls['pincode'].invalid){
+                                <div class="text-danger">
+                                  Please enter valid data
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control form-select" formControlName="city">
+                                    <option value="">--Select-- </option>
+                                    <option value="1">Option1</option>
+                                    <option value="1">Option2</option>
+                                    <option value="1">Option3</option>
+                                    <option value="1">Option4</option>
+                                </select>
+                                <label>City <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || agencyDetailsForm.controls['city'].touched) && agencyDetailsForm.controls['city'].invalid){
+                                <div class="text-danger">
+                                  Please enter valid data
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control form-select" formControlName="state">
+                                    <option value="">--Select-- </option>
+                                    <option value="1">Option1</option>
+                                    <option value="1">Option2</option>
+                                    <option value="1">Option3</option>
+                                    <option value="1">Option4</option>
+                                </select>
+                                <label>State <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || agencyDetailsForm.controls['state'].touched) && agencyDetailsForm.controls['state'].invalid){
+                                <div class="text-danger">
+                                  Please enter valid data
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control form-select" formControlName="country">
+                                    <option value="">--Select-- </option>
+                                    <option value="1">Option1</option>
+                                    <option value="1">Option2</option>
+                                    <option value="1">Option3</option>
+                                    <option value="1">Option4</option>
+                                </select>
+                                <label>Country <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || agencyDetailsForm.controls['country'].touched) && agencyDetailsForm.controls['country'].invalid){
+                                <div class="text-danger">
+                                  Please enter valid data
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Contact Person" type="text" class="form-control" formControlName="contactPerson">
+                                <label>Contact Person <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || agencyDetailsForm.controls['contactPerson'].touched) && agencyDetailsForm.controls['contactPerson'].invalid){
+                                <div class="text-danger">
+                                  Please enter valid data
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Mobile Number" type="text" class="form-control" formControlName="mobileNumber">
+                                <label>Mobile Number <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || agencyDetailsForm.controls['mobileNumber'].touched) && agencyDetailsForm.controls['mobileNumber'].invalid){
+                                <div class="text-danger">
+                                  Please enter valid data
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Email Id" type="text" class="form-control" formControlName="emailId">
+                                <label>Email Id <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || agencyDetailsForm.controls['emailId'].touched) && agencyDetailsForm.controls['emailId'].invalid){
+                                <div class="text-danger">
+                                  Please enter valid data
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control form-select" formControlName="natureOfBusiness">
+                                    <option value="" disabled>--Select-- </option>
+                                    @for(data of natureOfBusinessDropDown; track data){
+                                        <option value="{{data.id}}">{{data.title}}</option>
+                                    }
+                                </select>
+                                <label>Nature of Bussiness <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || agencyDetailsForm.controls['natureOfBusiness'].touched) && agencyDetailsForm.controls['natureOfBusiness'].invalid){
+                                <div class="text-danger">
+                                  Please enter valid data
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Enter URL" type="text" class="form-control" formControlName="website">
+                                <label>Website <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || agencyDetailsForm.controls['website'].touched) && agencyDetailsForm.controls['website'].invalid){
+                                <div class="text-danger">
+                                  Please enter valid data
+                                </div>
+                            }
+                        </div>
+                        <h5 class="mt-2">Bank Details</h5>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <select class="form-control form-select" formControlName="accountType">
+                                        <option value="" disabled>--Select-- </option>
+                                        @for(data of AccountTypeDropDown; track data){
+                                            <option value="{{ data.id }}">{{ data.title }}</option>
+                                        }
+                                    </select>
+                                    <label>Account Type <span class="required">*</span></label>
+                                </div>
+                                @if((finalSubmitted || agencyDetailsForm.controls['accountType'].touched) && agencyDetailsForm.controls['accountType'].invalid){
+                                    <div class="text-danger">
+                                      Please enter valid data
+                                    </div>
+                                }
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="IFSC Code" type="text" class="form-control" formControlName="ifscCode">
+                                    <label>IFSC Code <span class="required">*</span></label>
+                                </div>
+                                @if((finalSubmitted || agencyDetailsForm.controls['ifscCode'].touched) && agencyDetailsForm.controls['ifscCode'].invalid){
+                                    <div class="text-danger">
+                                      Please enter valid data
+                                    </div>
+                                }
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Bank Name" type="text" class="form-control" formControlName="bankName">
+                                    <label>Bank Name <span class="required">*</span></label>
+                                </div>
+                                @if((finalSubmitted || agencyDetailsForm.controls['bankName'].touched) && agencyDetailsForm.controls['bankName'].invalid){
+                                    <div class="text-danger">
+                                      Please enter valid data
+                                    </div>
+                                }
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Branch Name" type="text" class="form-control" formControlName="branchName">
+                                    <label>Branch Name <span class="required">*</span></label>
+                                </div>
+                                @if((finalSubmitted || agencyDetailsForm.controls['branchName'].touched) && agencyDetailsForm.controls['branchName'].invalid){
+                                    <div class="text-danger">
+                                      Please enter valid data
+                                    </div>
+                                }
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Account Name" type="text" class="form-control" formControlName="accountName">
+                                    <label>Account Name <span class="required">*</span></label>
+                                </div>
+                                @if((finalSubmitted || agencyDetailsForm.controls['accountName'].touched) && agencyDetailsForm.controls['accountName'].invalid){
+                                    <div class="text-danger">
+                                      Please enter valid data
+                                    </div>
+                                }
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Account Number" type="text" class="form-control" formControlName="accountNumber">
+                                    <label>Account Number <span class="required">*</span></label>
+                                </div>
+                                @if((finalSubmitted || agencyDetailsForm.controls['accountNumber'].touched) && agencyDetailsForm.controls['accountNumber'].invalid){
+                                    <div class="text-danger">
+                                      Please enter valid data
+                                    </div>
+                                }
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Confirm Account Number" type="text" class="form-control" formControlName="confirmAccountNumber">
+                                    <label>Confirm Account Number <span class="required">*</span></label>
+                                </div>
+                                @if((finalSubmitted || agencyDetailsForm.controls['confirmAccountNumber'].touched) && agencyDetailsForm.controls['confirmAccountNumber'].invalid){
+                                    <div class="text-danger">
+                                      Please enter valid data
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                   </div>
+                </form>
+            </div>
+        </mat-tab>
+        <mat-tab label="Supporting Documents"> 
+            <div class="below-line">
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="page-name mt-2 mb-2">
+                    <i class="bi bi-reply-fill"></i> Upload Documents
+                </h5>
+                <div class="mr-2">
+                    <!-- <button type="button" class="btn btn-outline-secondary ml-2" (click)="openFileSelector()">Upload</button> -->
+                    <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*" />
+                </div>
+            </div>
+            <table class="temp-grid global-table">
+                <thead>
+                    <tr>
+                        <th>Sl.No</th>
+                        <th>Document Name</th>
+                        <th>Size</th>
+                        <!-- <th>Uploaded On</th> -->
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <tr>
+                        <td>1</td>
+                        <td>File1.png</td>
+                        <td>1.2Mb</td>
+                        <td>05-06-2023</td>
+                        <td class="temp-grid-action">
+                            <i class="bi bi-pen-fill mr-1"></i>
+                            <i class="bi bi-trash-fill"></i>
+                        </td>
+                    </tr> -->
+                    @for(data of uploadedFiles; track data){
+                    <tr>
+                        <td>1</td>
+                        <td>{{ data.Title }}</td>
+                        <td>{{ data.size }}</td>
+                        <!-- <td>05-06-2023</td> -->
+                        <td class="temp-grid-action">
+                            <!-- <i class="bi bi-pen-fill mr-1"></i> -->
+                            <i class="bi bi-trash-fill" (click)="deleteTemp()"></i>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </mat-tab>
+        <mat-tab disabled></mat-tab>
+        <mat-tab disabled></mat-tab>
+        <mat-tab disabled></mat-tab>
+    </mat-tab-group>
+</div>

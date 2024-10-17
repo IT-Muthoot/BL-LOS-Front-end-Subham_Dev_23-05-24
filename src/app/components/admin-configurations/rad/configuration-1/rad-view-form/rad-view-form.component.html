@@ -1,0 +1,149 @@
+<div class="main-content">
+    <div class="d-flex justify-content-between align-items-center">
+        <h5 class="page-name mt-2 mb-2">
+            <i class="bi bi-reply-fill" routerLink="/rad-configuration-1-list"></i> Ratio Analysis Definition Configuration - 1
+        </h5>
+        <div class="mr-2">
+            @if(isDisabled){
+                <button type="button" class="btn btn-primary ml-1" (click)="editClicked()">Edit</button>
+            } @else{
+                <button type="button" class="btn btn-outline-secondary ml-2">Cancel</button>
+                <button type="button" class="btn btn-primary ml-1" (click)="finalSubmitForm()">Update</button>
+            }
+        </div>
+    </div>
+    <div class="form">
+        <div class="filter-form">
+            <form [formGroup]="radSubmitForm">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <div class="input-group">
+                                <select class="form-control form-select" formControlName="ratioType">
+                                <option value="">--Select-- </option>
+                                <option value="" disabled>--Select-- </option>
+                                        <option value="1">Profitability Ratio</option>
+                                        <option value="2">Solvenance Ratio</option>
+                                        <option value="3">Option3</option>
+                                        <option value="4">Option4</option></select>
+                                <label>Ratio Type <span class="required">*</span></label>
+                            </div>
+                        </div>
+                        @if((finalSubmit || radSubmitForm.controls['ratioType'].touched) && radSubmitForm.controls['ratioType'].invalid){
+                            <div class="text-danger">
+                              Please enter ratio type
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <div class="input-group">
+                                <select class="form-control form-select" formControlName="ratioSubtype">
+                                <option value="">--Select-- </option>
+                                <option value="1">Option1</option>
+                                <option value="2">Option2</option>
+                                <option value="3">Option3</option>
+                                <option value="4">Option4</option></select>
+                                <label>Ratio Subtype <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmit || radSubmitForm.controls['ratioSubtype'].touched) && radSubmitForm.controls['ratioSubtype'].invalid){
+                                <div class="text-danger">
+                                  Please enter ratio type
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <h6 class="mt-3 mb-3 mr-3 custom-head">Industry Benchmark</h6>
+    <form [formGroup]="tempForm">
+        <div class="card form">
+            <div class="form-field">
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Ex:>7" type="text" class="form-control" formControlName="lowRisk">
+                            <label>Low Risk <span class="required">*</span></label>
+                        </div>
+                        @if((tempSubmitButton || tempForm.controls['lowRisk'].touched) && tempForm.controls['lowRisk'].invalid){
+                            <div class="text-danger">
+                              Please enter low risk
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Ex:>3" type="text" class="form-control" formControlName="highRisk">
+                            <label>High Risk <span class="required">*</span></label>
+                        </div>
+                        @if((tempSubmitButton || tempForm.controls['highRisk'].touched) && tempForm.controls['highRisk'].invalid){
+                            <div class="text-danger">
+                              Please enter low risk
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="industryType">
+                                <option value="">--Select-- </option>
+                                @for(data of IndustryDropDown; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                                <label>Indurstry Type <span class="required">*</span></label>
+                        </div>
+                        @if((tempSubmitButton || tempForm.controls['industryType'].touched) && tempForm.controls['industryType'].invalid){
+                            <div class="text-danger">
+                              Please enter low risk
+                            </div>
+                        }
+                    </div>
+
+                    <div class="col-md-3 add-button">
+                        @if(!isDisabled){
+                            @if(tempGridDataEditing){
+                                <button type="button" class="btn btn-primary" (click)="tempEditSubmit()">Update</button>
+                            } @else {
+                                <button type="button" class="btn btn-primary" (click)="tempSubmit()">Add</button>
+                            }
+                        }
+                    </div>
+                </div>
+                <span class=""><strong>Note:</strong> Anything in-between low and high risk is considered as medium risk and values will be reflected in the final table.</span>
+            </div>
+        </div>
+    </form>
+    <div class="pin-fill"><i class="bi bi-pin-angle-fill"></i></div>
+    @if(tempData.length >= 1){
+        <span class="grid-class">Temp Grid</span>
+        <table class="temp-grid global-table">
+            <thead>
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Low Risk</th>
+                    <th>High Risk</th>
+                    <th>Indurstry Type</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(item of tempData;track item; let ndx = $index){
+                    <tr>
+                        <td>{{ ndx+1 }}</td>
+                        <td>{{ item.lowRisk }}</td>
+                        <td>{{ item.highRisk }}</td>
+                        <td>{{ item.industryType | dropDown:1:IndustryDropDown }}</td>
+                        <td class="temp-grid-action">
+                            @if(!isDisabled){
+                                <i class="bi bi-pen-fill mr-1" (click)="editTempGridData(ndx)"></i>
+                                <i class="bi bi-trash-fill" (click)="deleteItem(ndx)"></i>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

@@ -1,0 +1,175 @@
+<div class="main-content">
+  <form [formGroup]="parentForm">
+    <div class="d-flex justify-content-between align-items-center">
+        <h5 class="page-name mt-2 mb-2">
+            <i class="bi bi-reply-fill" routerLink="/underWriting-Preference"></i> Underwriting Preference Configuration
+        </h5>
+        <div class="right-top-buttons">
+          @if(isEditMode){
+            @if(isDisabled){
+              <button type="button" class="btn btn-outline-secondary ml-2" (click)="editClicked()">Edit</button>
+            } @else {
+              <button type="button" class="btn btn-outline-secondary ml-2">Cancel</button>
+            <button type="button" class="btn btn-primary ml-1" (click)="finalSubmit()">Update</button>
+            }
+          } @else {
+            <button type="button" class="btn btn-outline-secondary ml-2">Cancel</button>
+            <button type="button" class="btn btn-primary ml-1" (click)="finalSubmit()">Submit</button>
+          }
+        </div>
+    </div>
+    <div class="form">
+      <div class="filter-form">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="input-group">
+                    <select class="form-control form-select" formControlName="customer_Category">
+                        <option value="">--Select-- </option>
+                        @for(data of CustomerCategoryDropDown; track data){
+                            <option value="{{ data.id }}">{{ data.title }}</option>
+                        }
+                    </select>
+                    <label>Customer Category <span class="required">*</span></label>
+                </div>
+                @if((finalSubmitted || parentForm.controls['customer_Category'].touched) && parentForm.controls['customer_Category'].invalid){
+                    <div class="text-danger">
+                      Please select customer category
+                    </div>
+                }
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <select class="form-control form-select" formControlName="customer_type">
+                        <option value="">--Select-- </option>
+                        @for(data of CustomerTypeDropDown; track data){
+                            <option value="{{ data.id }}">{{ data.title }}</option>
+                        }
+                    </select>
+                    <label>Customer Type <span class="required">*</span></label>
+                </div>
+                @if((finalSubmitted || parentForm.controls['customer_type'].touched) && parentForm.controls['customer_type'].invalid){
+                    <div class="text-danger">
+                      Please select customer type
+                    </div>
+                }
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <select class="form-control form-select" formControlName="loan_type">
+                        <option value="">--Select-- </option>
+                        @for(data of AllowedLoanTypeDropDown; track data){
+                            <option value="{{ data.id }}">{{ data.title }}</option>
+                        }
+                    </select>
+                    <label>Loan Type <span class="required">*</span></label>
+                </div>
+                @if((finalSubmitted || parentForm.controls['loan_type'].touched) && parentForm.controls['loan_type'].invalid){
+                    <div class="text-danger">
+                      Please select loan type
+                    </div>
+                }
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <input placeholder="Product ID" type="text" class="form-control" formControlName="productId">
+                    <label>Product ID</label>
+                </div>
+                @if((finalSubmitted || parentForm.controls['productId'].touched) && parentForm.controls['productId'].invalid){
+                    <div class="text-danger">
+                      Please select product Id
+                    </div>
+                }
+            </div>
+        </div>
+      </div>
+    </div>
+    <br><br>
+
+    <h5 style="margin-left: 20px;">Applicable Options for Underwriter</h5>
+    <br>
+    <div  style="width: 40%; margin-left: 20px;">
+        <div class="frame-parent">
+          <div class="internal-credit-score-wrapper">
+            <div class="">Internal Credit Score</div>
+          </div>
+          <div class="radio-group">
+            <input type="radio" name="isInternalCreditScore" formControlName="isInternalCreditScore" value="1">
+            <label>Yes</label>
+            <input type="radio" name="isInternalCreditScore" formControlName="isInternalCreditScore" value="0" >
+            <label>No</label>
+          </div>
+        </div>
+        <div class="frame-group">
+          <div class="external-credit-score-report-wrapper">
+            <div class="external-credit-score">
+              External Credit Score & Report
+            </div>
+          </div>
+          <div class="radio-group">
+            <input type="radio" name="isExternalCreditScoreAndReports" formControlName="isExternalCreditScoreAndReports" value="1">
+            <label>Yes</label>
+            <input type="radio" name="isExternalCreditScoreAndReports" formControlName="isExternalCreditScoreAndReports" value="0" >
+            <label>No</label>
+          </div>
+        </div>
+        <div class="frame-container">
+          <div class="covenant-selection-wrapper">
+            <div class="covenant-selection">Covenant Selection</div>
+          </div>
+          <div class="radio-group">
+            <input type="radio" name="isCovenantSelection" formControlName="isCovenantSelection" value="1">
+            <label>Yes</label>
+            <input type="radio" name="isCovenantSelection" formControlName="isCovenantSelection" value="0" >
+            <label>No</label>
+          </div>
+        </div>
+        <div class="group-div">
+          <div class="legal-risk-analysis-wrapper">
+            <div class="legal-risk">Legal & Risk Analysis</div>
+          </div>
+          <div class="radio-group">
+            <input type="radio" name="isLegalAndRiskAnalysis" formControlName="isLegalAndRiskAnalysis" value="1">
+            <label>Yes</label>
+            <input type="radio" name="isLegalAndRiskAnalysis" formControlName="isLegalAndRiskAnalysis" value="0" >
+            <label>No</label>
+          </div>
+        </div>
+        <div class="frame-parent1">
+          <div class="business-financial-analysis-wrapper">
+            <div class="business-financial">Business & Financial Analysis</div>
+          </div>
+          <div class="radio-group">
+            <input type="radio" name="isBusinessAndFinancialAnalysis" formControlName="isBusinessAndFinancialAnalysis" value="1">
+            <label>Yes</label>
+            <input type="radio" name="isBusinessAndFinancialAnalysis" formControlName="isBusinessAndFinancialAnalysis" value="0" >
+            <label>No</label>
+          </div>
+        </div>
+        @if((finalSubmitted || parentForm.controls['isInternalCreditScore'].touched) && parentForm.controls['isInternalCreditScore'].invalid){
+          <div class="text-danger">
+            Please select internal credit score
+          </div>
+        }
+        @if((finalSubmitted || parentForm.controls['isExternalCreditScoreAndReports'].touched) && parentForm.controls['isExternalCreditScoreAndReports'].invalid){
+          <div class="text-danger">
+            Please select external credit score
+          </div>
+        }
+        @if((finalSubmitted || parentForm.controls['isCovenantSelection'].touched) && parentForm.controls['isCovenantSelection'].invalid){
+          <div class="text-danger">
+            Please select internal convenant selection
+          </div>
+        }
+        @if((finalSubmitted || parentForm.controls['isLegalAndRiskAnalysis'].touched) && parentForm.controls['isLegalAndRiskAnalysis'].invalid){
+          <div class="text-danger">
+            Please select legal and risk analysis
+          </div>
+        }
+        @if((finalSubmitted || parentForm.controls['isBusinessAndFinancialAnalysis'].touched) && parentForm.controls['isBusinessAndFinancialAnalysis'].invalid){
+          <div class="text-danger">
+            Please select business and financial analysis
+          </div>
+        }
+    </div>
+  </form>
+</div>

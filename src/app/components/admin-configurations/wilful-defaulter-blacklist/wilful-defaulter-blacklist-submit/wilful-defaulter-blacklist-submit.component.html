@@ -1,0 +1,202 @@
+<div class="main-content">
+    <div class="d-flex justify-content-between align-items-center">
+        <h5 class="page-name mt-2 mb-2">
+            <i class="bi bi-reply-fill" routerLink="/wilful-defaulter-blacklist-browse"></i> Wilful Defaulter Blacklist
+        </h5>
+        <div class="mr-2">
+            <button type="button" class="btn btn-outline-secondary ml-2">Cancel</button>
+            <button type="button" class="btn btn-primary ml-1" (click)="finalSubmit()">Submit</button>
+        </div>
+    </div>
+    <div class="form">
+        <div class="filter-form">
+            <form [formGroup]="parentForm">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="internalExternalToBank">
+                            <option value="">--Select-- </option>
+                                @for(data of externalInternalToBankDropDown; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Internal/External to Bank <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['internalExternalToBank'].touched) && parentForm.controls['internalExternalToBank'].invalid){
+                            <div class="text-danger">
+                              Please enter internal external to bank
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="source">
+                                <option value="">--Select-- </option>
+                                @for(data of blacklistSourceDropDown; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Source <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['source'].touched) && parentForm.controls['source'].invalid){
+                            <div class="text-danger">
+                              Please enter source
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="searchCriteria">
+                                <option value="">--Select-- </option>
+                                @for(data of searchCriteriaDropDown; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Search Criteria <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['searchCriteria'].touched) && parentForm.controls['searchCriteria'].invalid){
+                            <div class="text-danger">
+                              Please enter search criteria
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="keyFields">
+                                <option value="">--Select-- </option>
+                                @for(data of keyFieldsDropDown; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Key Field <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['keyFields'].touched) && parentForm.controls['keyFields'].invalid){
+                            <div class="text-danger">
+                              Please enter key fields
+                            </div>
+                        }
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card form mt-4">
+        <div class="form-field">
+            <form [formGroup]="tempForm">
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Bank" type="text" class="form-control" formControlName="bankNumber">
+                            <label>Bank</label>
+                        </div>
+                        @if((tempSubmitButton || tempForm.controls['bankNumber'].touched) && tempForm.controls['bankNumber'].invalid){
+                            <div class="text-danger">
+                              Please enter bank
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Branch" type="text" class="form-control" formControlName="branchName">
+                            <label>Branch</label>
+                        </div>
+                        @if((tempSubmitButton || tempForm.controls['branchName'].touched) && tempForm.controls['branchName'].invalid){
+                            <div class="text-danger">
+                              Please enter branch
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Quarter- Year" type="text" class="form-control" formControlName="quater">
+                            <label>Quarter- Year</label>
+                        </div>
+                        @if((tempSubmitButton || tempForm.controls['quater'].touched) && tempForm.controls['quater'].invalid){
+                            <div class="text-danger">
+                              Please enter quater year
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Borrower (Company Name)" type="text" class="form-control" formControlName="borrower">
+                            <label>Borrower (Company Name)</label>
+                        </div>
+                        @if((tempSubmitButton || tempForm.controls['borrower'].touched) && tempForm.controls['borrower'].invalid){
+                            <div class="text-danger">
+                              Please enter borrower company name
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Director Name" type="text" class="form-control" formControlName="directorName">
+                            <label>Director Name</label>
+                        </div>
+                        @if((tempSubmitButton || tempForm.controls['directorName'].touched) && tempForm.controls['directorName'].invalid){
+                            <div class="text-danger">
+                              Please enter director name
+                            </div>
+                        }
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <textarea name="" id="" row="7" col="12" class="form-control" formControlName="registeredAddress"></textarea>
+                            <label>Registered Address<span class="required">*</span></label>
+                        </div>
+                        <span class="float-right">0/200</span>
+                        @if((tempSubmitButton || tempForm.controls['registeredAddress'].touched) && tempForm.controls['registeredAddress'].invalid){
+                            <div class="text-danger">
+                              Please enter registered address
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3 add-button">
+                        @if(tempFormEdit){
+                            <button type="button" class="btn btn-primary" (click)="tempGridUpdate()">Update</button>
+                        } @else {
+                            <button type="button" class="btn btn-primary" (click)="tempSubmit
+                        ()">Add</button>
+                        }
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="pin-fill"><i class="bi bi-pin-angle-fill"></i></div>
+    @if(tempData.length > 0){
+        <span class="grid-class">Temp Grid</span>
+        <table class="temp-grid global-table">
+            <thead>
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Bank</th>
+                    <th>Branch</th>
+                    <th>Quarter</th>
+                    <th>Borrower/Company Name</th>
+                    <th>Director Name</th>
+                    <th>Registered Address</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(data of tempData; track data; let i = $index){
+                    <tr>
+                        <td>{{ i+1 }}</td>
+                        <td>{{ data.bankNumber }}</td>
+                        <td>{{ data.branchName }}</td>
+                        <td>{{ data.quater }}</td>
+                        <td>{{ data.borrower }}</td>
+                        <td>{{ data.directorName    }}</td>
+                        <td>{{ data.registeredAddress }}</td>
+                        <td class="temp-grid-action">
+                            <i class="bi bi-pen-fill mr-1" (click)="editTempGrid(i)"></i>
+                            <i class="bi bi-trash-fill" (click)="deleteItem(i)"></i>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

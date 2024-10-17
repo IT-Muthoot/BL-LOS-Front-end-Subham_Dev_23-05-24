@@ -1,0 +1,919 @@
+<div class="main-content">
+  <h5 class="page-name mt-2 mb-2">Case Assignment</h5>
+
+  <div class="show-hide-pin">
+    <mat-accordion
+      class="mt-1"
+      (click)="toggleClass()"
+      [class.active]="isActive"
+    >
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title
+            ><span class="filter-class">Filters</span></mat-panel-title
+          >
+          <mat-panel-description> </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="below-line"></div>
+        <div class="form">
+          <form [formGroup]="searchFilters">
+            <div class="form-field">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="input-group">
+                    <select
+                      class="form-control form-select"
+                      formControlName="applicationStatus"
+                    >
+                      <option value="">--Select--</option>
+                      @for (item of miscellaneousValue['ApplicationStatus'];
+                      track $index) {
+                      <option value="{{ item.id }}">{{ item.title }}</option>
+                      }
+                    </select>
+                    <label>Application Status</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="input-group">
+                    <select
+                      class="form-control form-select"
+                      formControlName="productId"
+                    >
+                      <option value="">--Select--</option>
+                      @for (item of miscellaneousValue['Product']; track $index)
+                      {
+                      <option value="{{ item.id }}">{{ item.title }}</option>
+                      }
+                    </select>
+                    <label>Product </label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="input-group">
+                    <select
+                      class="form-control form-select"
+                      formControlName="productType"
+                    >
+                      <option value="">--Select--</option>
+                      @for (item of miscellaneousValue['ProductType']; track
+                      $index) {
+                      <option value="{{ item.id }}">{{ item.title }}</option>
+                      }
+                    </select>
+                    <label>Product Type</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="input-group">
+                    <select
+                      class="form-control form-select"
+                      formControlName="customerCategory"
+                    >
+                      <option value="">--Select--</option>
+                      @for (item of miscellaneousValue['CustomerCategory'];
+                      track $index) {
+                      <option value="{{ item.id }}">{{ item.title }}</option>
+                      }
+                    </select>
+                    <label>Customer Category</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="input-group">
+                    <select
+                      class="form-control form-select"
+                      formControlName="customerType"
+                    >
+                      <option value="">--Select--</option>
+                      @for (item of miscellaneousValue['CustomerType']; track
+                      $index) {
+                      <option value="{{ item.id }}">{{ item.title }}</option>
+                      }
+                    </select>
+                    <label>Customer Type</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="input-group">
+                    <select
+                      class="form-control form-select"
+                      formControlName="action"
+                    >
+                      <option value="">--Select--</option>
+                      @for (item of miscellaneousValue['Action']; track $index)
+                      {
+                      <option value="{{ item.id }}">{{ item.title }}</option>
+                      }
+                    </select>
+                    <label>Action</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="input-group">
+                    <input
+                      placeholder="Date From"
+                      type="text"
+                      class="form-control"
+                      matInput
+                      [matDatepicker]="picker"
+                      formControlName="todate"
+                    />
+                    <mat-datepicker-toggle
+                      matIconSuffix
+                      [for]="picker"
+                      class="date-picker-custom"
+                    >
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <label>Date From <span class="required">*</span></label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="input-group">
+                    <input
+                      placeholder="To Date"
+                      type="text"
+                      class="form-control"
+                      matInput
+                      [matDatepicker]="picker"
+                      formControlName="fromdate"
+                    />
+                    <mat-datepicker-toggle
+                      matIconSuffix
+                      [for]="picker"
+                      class="date-picker-custom"
+                    >
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <label>Date To <span class="required">*</span></label>
+                  </div>
+                </div>
+
+                <div class="col-md-3"></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3">
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary btn-primary"
+                    (click)="searchData('clear')"
+                  >
+                    clear
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="searchData('search')"
+                  >
+                    Search
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    @if(isActive){
+    <div class="pin-fill"><i class="bi bi-pin-angle-fill"></i></div>
+    }
+  </div>
+
+  <table class="responsive global-table">
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div (click)="onTabClick('Common-Pool');this.pageSize=5;this.pageIndex=1">Common-Pool</div>
+          <span
+            matBadge="1"
+            matBadgeSize="medium"
+            matBadgeColor="warn"
+            class="custom-badge"
+          ></span>
+        </ng-template>
+
+        <div class="below-line"></div>
+        <div class="table-scroll-container">
+          <table class="responsive global-table">
+            <thead>
+              <tr>
+                <th>
+                  <input
+                    type="checkbox"
+                    [checked]="allSelected"
+                    (change)="toggleAllSelections($event)"
+                  />
+                </th>
+                <th>S.No</th>
+                <th>View</th>
+                <th>Application Id</th>
+                <th>Customer Type</th>
+                <th>Customer Category</th>
+                <th>Customer Name</th>
+                <th>Mobile No</th>
+                <th>Product Id</th>
+                <th>Loan Amount</th>
+                <th>Created On</th>
+                <th>Stage</th>
+                <th>Status</th>
+                <th>Time TO SLA</th>
+                <th>Branch Id</th>
+                <th>Branch Name</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Region</th>
+                <th>Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of data; track $index;) {
+              <tr>
+                <td>
+                  <input
+                    type="checkbox"
+                    [checked]="item.selected"
+                    (change)="onCheckboxChange(item, $event)"
+                  />
+                </td>
+                <td>{{ $index + 1 }}</td>
+                <td (click)="navigateTostep(item)" style="cursor: pointer">
+                  <img src="assets/images/arrow-circle-right.svg" alt="" />
+                </td>
+                <td>{{ item.loanApplicationId }}</td>
+                <td>{{ item.customerType }}</td>
+                <td>{{ item.customerCategory }}</td>
+                <td>{{ item.customerName }}</td>
+                <td>{{ item.mobileNumber }}</td>
+                <td>
+                  {{
+                    item.productId | dropDown :1 : miscellaneousValue["Product"]
+                  }}
+                </td>
+                <td>{{ item.loanAmount }}</td>
+                <td>{{ item.sourceLUDT }}</td>
+                <td>
+                  {{ item.currentStage | dropDown :1 : miscellaneousValueStages }}
+                </td>
+                <td>
+                  {{
+                    item.applicationStatus
+                      | dropDown :1 : miscellaneousValue["ApplicationStatus"]
+                  }}
+                </td>
+                <td>{{ item.timeToSLA }}</td>
+                <td>{{ item.branchId }}</td>
+                <td>{{ item.branchName }}</td>
+                <td>{{ item.city }}</td>
+                <td>{{ item.state }}</td>
+                <td>{{ item.region }}</td>
+                <td>{{ item.source }}</td>
+              </tr>
+              }@empty {
+              <p>no data found</p>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <div class="pagination-container">
+            <mat-paginator
+              #paginator1
+              class="demo-paginator"
+              (page)="handlePageEvent($event)"
+              [length]="totalRecords"
+              [pageSize]="pageSize"
+              [disabled]="false"
+              [showFirstLastButtons]="true"
+              [hidePageSize]="true"
+              [pageIndex]="pageIndex - 1"
+              aria-label="Select page"
+            >
+            </mat-paginator>
+          </div>
+          <div class="ml-3">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              (click)="openMatDialogForCaseAssignmnet('Common-Pool')"
+            >
+              Case Assignment
+            </button>
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div (click)="onTabClick('My Cases');this.pageSize=5;this.pageIndex=1">My Cases</div>
+          <span
+            matBadge="1"
+            matBadgeSize="medium"
+            matBadgeColor="warn"
+            class="custom-badge"
+          ></span>
+        </ng-template>
+        <div class="below-line"></div>
+        <div class="below-line"></div>
+        <div class="table-scroll-container">
+          <table class="responsive global-table">
+            <thead>
+              <tr>
+                <!-- <th>
+                  <input
+                    type="checkbox"
+                    [checked]="allSelected"
+                    (change)="toggleAllSelections($event)"
+                  />
+                </th> -->
+                <th>S.No</th>
+                <th>View</th>
+                <th>Application Id</th>
+                <th>Customer Type</th>
+                <th>Customer Category</th>
+                <th>Customer Name</th>
+                <th>Mobile No</th>
+                <th>Product Id</th>
+                <th>Loan Amount</th>
+                <th>Created On</th>
+                <th>Stage</th>
+                <th>Status</th>
+                <th>Time TO SLA</th>
+                <th>Branch Id</th>
+                <th>Branch Name</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Region</th>
+                <th>Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of data; track $index;) {
+              <tr>
+                <!-- <td>
+                  <input
+                    type="checkbox"
+                    [checked]="item.selected"
+                    (change)="onCheckboxChange(item, $event)"
+                  />
+                </td> -->
+                <td>{{ $index + 1 }}</td>
+                <td (click)="navigateTostep(item)" style="cursor: pointer">
+                  <img src="assets/images/arrow-circle-right.svg" alt="" />
+                </td>
+                <td>{{ item.loanApplicationId }}</td>
+                <td>{{ item.customerType }}</td>
+                <td>{{ item.customerCategory }}</td>
+                <td>{{ item.customerName }}</td>
+                <td>{{ item.mobileNumber }}</td>
+                <td>
+                  {{
+                    item.productId | dropDown :1 : miscellaneousValue["Product"]
+                  }}
+                </td>
+                <td>{{ item.loanAmount }}</td>
+                <td>{{ item.sourceLUDT }}</td>
+                <td>
+                  {{ item.currentStage | dropDown :1 : miscellaneousValueStages }}
+                </td>
+                <td>
+                  {{
+                    item.applicationStatus
+                      | dropDown :1 : miscellaneousValue["ApplicationStatus"]
+                  }}
+                </td>
+                <td>{{ item.timeToSLA }}</td>
+                <td>{{ item.branchId }}</td>
+                <td>{{ item.branchName }}</td>
+                <td>{{ item.city }}</td>
+                <td>{{ item.state }}</td>
+                <td>{{ item.region }}</td>
+                <td>{{ item.source }}</td>
+              </tr>
+              }@empty {
+              <p>no data found</p>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <div class="pagination-container">
+            <mat-paginator
+              #paginator
+              class="demo-paginator"
+              (page)="handlePageEvent($event)"
+              [length]="totalRecords"
+              [pageSize]="pageSize"
+              [disabled]="disabled"
+              [showFirstLastButtons]="true"
+              [hidePageSize]="true"
+              [pageIndex]="pageIndex - 1"
+              aria-label="Select page"
+            >
+            </mat-paginator>
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div (click)="onTabClick('Common-Pool-Queries');this.pageSize=5;this.pageIndex=1">
+            Common-Pool-Queries
+          </div>
+          <span
+            matBadge="1"
+            matBadgeSize="medium"
+            matBadgeColor="warn"
+            class="custom-badge"
+          ></span>
+        </ng-template>
+        <div class="below-line"></div>
+
+        <div class="table-scroll-container">
+          <table class="responsive global-table">
+            <thead>
+              <tr>
+                <th>
+                  <input
+                    type="checkbox"
+                    [checked]="allSelected"
+                    (change)="toggleAllSelections($event)"
+                  />
+                </th>
+                <th>S.No</th>
+                <th>View</th>
+
+                <th>Application Id</th>
+                <th>Customer Type</th>
+                <th>Customer Category</th>
+                <th>Customer Name</th>
+                <th>Mobile No</th>
+                <!-- <th>Loan Type</th> -->
+                <th>Product Id</th>
+                <th>Total Queries</th>
+                <th>Open Queries</th>
+                <th>Closed Queries</th>
+                <th>Loan Amount</th>
+
+                <th>Created On</th>
+                <th>Stage</th>
+                <th>Status</th>
+                <th>Time TO SLA</th>
+                <!-- <th>Assign To</th> -->
+                <th>Branch Id</th>
+                <th>Branch Name</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Region</th>
+                <th>Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of data; track $index;) {
+              <tr>
+                <td>
+                  <input
+                    type="checkbox"
+                    [checked]="item.selected"
+                    (change)="onCheckboxChange(item, $event)"
+                  />
+                </td>
+                <td>{{ $index + 1 }}</td>
+                <td (click)="navigateTostep(item)" style="cursor: pointer">
+                  <img src="assets/images/arrow-circle-right.svg" alt="" />
+                </td>
+                <td>{{ item.loanApplicationId }}</td>
+                <td>{{ item.customerType }}</td>
+                <td>{{ item.customerCategory }}</td>
+                <td>{{ item.customerName }}</td>
+                <td>{{ item.mobileNumber }}</td>
+                <td>
+                  {{
+                    item.productId | dropDown :1 : miscellaneousValue["Product"]
+                  }}
+                </td>
+                <td>{{ item.totalQueries }}</td>
+                <td>{{ item.openQueries }}</td>
+                <td>{{ item.closedQueries }}</td>
+                <td>{{ item.loanAmount }}</td>
+                <td>{{ item.sourceLUDT }}</td>
+                <td>
+                  {{ item.currentStage | dropDown :1 : miscellaneousValueStages }}
+                </td>
+                <td>
+                  {{
+                    item.applicationStatus
+                      | dropDown :1 : miscellaneousValue["ApplicationStatus"]
+                  }}
+                </td>
+                <td>{{ item.timeToSLA }}</td>
+                <td>{{ item.branchId }}</td>
+                <td>{{ item.branchName }}</td>
+                <td>{{ item.city }}</td>
+                <td>{{ item.state }}</td>
+                <td>{{ item.region }}</td>
+                <td>{{ item.source }}</td>
+              </tr>
+              }@empty {
+              <p>no data found</p>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <div class="pagination-container">
+            <mat-paginator
+              #paginator
+              class="demo-paginator"
+              (page)="handlePageEvent($event)"
+              [length]="totalRecords"
+              [pageSize]="pageSize"
+              [disabled]="false"
+              [showFirstLastButtons]="true"
+              [hidePageSize]="false"
+              [pageIndex]="pageIndex - 1"
+              aria-label="Select page"
+            >
+            </mat-paginator>
+          </div>
+          <div class="ml-3">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              (click)="openMatDialogForCaseAssignmnet('Common-Pool-Queries')"
+            >
+              Case Assignment
+            </button>
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div (click)="onTabClick('My Case-Queries');this.pageSize=5;this.pageIndex=1">My Case-Queries</div>
+          <span
+            matBadge="1"
+            matBadgeSize="medium"
+            matBadgeColor="warn"
+            class="custom-badge"
+          ></span>
+        </ng-template>
+        <div class="below-line"></div>
+
+        <div class="table-scroll-container">
+          <table class="responsive global-table">
+            <thead>
+              <tr>
+                <!-- <th><input type="checkbox"  [checked]="allSelected"
+                    (change)="toggleAllSelections($event)"/></th> -->
+                <th>S.No</th>
+                <th>View</th>
+
+                <th>Application Id</th>
+                <th>Customer Type</th>
+                <th>Customer Category</th>
+                <th>Customer Name</th>
+                <th>Mobile No</th>
+                <!-- <th>Loan Type</th> -->
+                <th>Product Id</th>
+                <th>Total Queries</th>
+                <th>Open Queries</th>
+                <th>Closed Queries</th>
+                <th>Loan Amount</th>
+
+                <th>Created On</th>
+                <th>Stage</th>
+                <th>Status</th>
+                <th>Time TO SLA</th>
+                <!-- <th>Assign To</th> -->
+                <th>Branch Id</th>
+                <th>Branch Name</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Region</th>
+                <th>Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of data; track $index;) {
+              <tr>
+                <!-- <td><input type="checkbox" [checked]="item.selected"
+                        (change)="onCheckboxChange(item, $event)" /></td> -->
+                <td>{{ $index + 1 }}</td>
+                <td (click)="navigateTostep(item)" style="cursor: pointer">
+                  <img src="assets/images/arrow-circle-right.svg" alt="" />
+                </td>
+                <td>{{ item.loanApplicationId }}</td>
+                <td>{{ item.customerType }}</td>
+                <td>{{ item.customerCategory }}</td>
+                <td>{{ item.customerName }}</td>
+                <td>{{ item.mobileNumber }}</td>
+                <td>
+                  {{
+                    item.productId | dropDown :1 : miscellaneousValue["Product"]
+                  }}
+                </td>
+                <td>{{ item.totalQueries }}</td>
+                <td>{{ item.openQueries }}</td>
+                <td>{{ item.closedQueries }}</td>
+                <td>{{ item.loanAmount }}</td>
+                <td>{{ item.sourceLUDT }}</td>
+                <td>
+                  {{ item.currentStage | dropDown :1 : miscellaneousValueStages }}
+                </td>
+                <td>
+                  {{
+                    item.applicationStatus
+                      | dropDown :1 : miscellaneousValue["ApplicationStatus"]
+                  }}
+                </td>
+                <td>{{ item.timeToSLA }}</td>
+                <td>{{ item.branchId }}</td>
+                <td>{{ item.branchName }}</td>
+                <td>{{ item.city }}</td>
+                <td>{{ item.state }}</td>
+                <td>{{ item.region }}</td>
+                <td>{{ item.source }}</td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <div class="pagination-container">
+            <mat-paginator
+              #paginator
+              class="demo-paginator"
+              (page)="handlePageEvent($event)"
+              [length]="totalRecords"
+              [pageSize]="pageSize"
+              [disabled]="false"
+              [showFirstLastButtons]="true"
+              [hidePageSize]="true"
+              [pageIndex]="pageIndex - 1"
+              aria-label="Select page"
+            >
+            </mat-paginator>
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div (click)="onTabClick('Common-Pool-Daviation');this.pageSize=5;this.pageIndex=1">
+            Common-Pool-Daviation
+          </div>
+          <span
+            matBadge="1"
+            matBadgeSize="medium"
+            matBadgeColor="warn"
+            class="custom-badge"
+          ></span>
+        </ng-template>
+        <div class="below-line"></div>
+
+        <div class="table-scroll-container">
+          <table class="responsive global-table">
+            <thead>
+              <tr>
+                <th>
+                  <input
+                    type="checkbox"
+                    [checked]="allSelected"
+                    (change)="toggleAllSelections($event)"
+                  />
+                </th>
+                <th>S.No</th>
+                <th>View</th>
+
+                <th>Application Id</th>
+                <th>Customer Type</th>
+                <th>Customer Category</th>
+                <th>Customer Name</th>
+                <th>Mobile No</th>
+                <!-- <th>Loan Type</th> -->
+                <th>Product Id</th>
+                <th>Total Daviation</th>
+                <th>Open Daviation</th>
+                <th>Closed Daviation</th>
+                <th>Loan Amount</th>
+
+                <th>Created On</th>
+                <th>Stage</th>
+                <th>Status</th>
+                <th>Time TO SLA</th>
+                <!-- <th>Assign To</th> -->
+                <th>Branch Id</th>
+                <th>Branch Name</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Region</th>
+                <th>Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of data; track $index;) {
+              <tr>
+                <td>
+                  <input
+                    type="checkbox"
+                    [checked]="item.selected"
+                    (change)="onCheckboxChange(item, $event)"
+                  />
+                </td>
+                <td>{{ $index + 1 }}</td>
+                <td (click)="navigateTostep(item)" style="cursor: pointer">
+                  <img src="assets/images/arrow-circle-right.svg" alt="" />
+                </td>
+                <td>{{ item.loanApplicationId }}</td>
+                <td>{{ item.customerType }}</td>
+                <td>{{ item.customerCategory }}</td>
+                <!-- Customer Category -->
+                <td>{{ item.customerName }}</td>
+                <td>{{ item.mobileNumber }}</td>
+                <td>{{ item.productId }}</td>
+                <td>{{ item.totalDeviation }}</td>
+                <td>{{ item.openDeviation }}</td>
+                <td>{{ item.closedDeviation }}</td>
+                <td>{{ item.loanAmount }}</td>
+                <td>{{ item.sourceLUDT }}</td>
+                <td>
+                  {{ item.currentStage | dropDown :1 : miscellaneousValueStages }}
+                </td>
+                <td>
+                  {{
+                    item.applicationStatus
+                      | dropDown :1 : miscellaneousValue["ApplicationStatus"]
+                  }}
+                </td>
+                <td>{{ item.timeToSLA }}</td>
+                <td>{{ item.branchId }}</td>
+                <td>{{ item.branchName }}</td>
+                <td>{{ item.city }}</td>
+                <td>{{ item.state }}</td>
+                <td>{{ item.region }}</td>
+                <td>{{ item.source }}</td>
+              </tr>
+              }@empty {
+              <p>no data found</p>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <div class="pagination-container">
+            <mat-paginator
+              #paginator
+              class="demo-paginator"
+              (page)="handlePageEvent($event)"
+              [length]="totalRecords"
+              [pageSize]="pageSize"
+              [disabled]="false"
+              [showFirstLastButtons]="true"
+              [hidePageSize]="true"
+              [pageIndex]="pageIndex - 1"
+              aria-label="Select page"
+            >
+            </mat-paginator>
+          </div>
+
+          <!-- Cancel Button -->
+          <div class="ml-3">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              (click)="openMatDialogForCaseAssignmnet('Common-Pool-Daviation')"
+            >
+              Case Assignment
+            </button>
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div (click)="onTabClick('My Case-Daviation');this.pageSize=5;this.pageIndex=1">My Case-Daviation</div>
+          <span
+            matBadge="1"
+            matBadgeSize="medium"
+            matBadgeColor="warn"
+            class="custom-badge"
+          ></span>
+        </ng-template>
+        <div class="below-line"></div>
+
+        <div class="table-scroll-container">
+          <table class="responsive global-table">
+            <thead>
+              <tr>
+                <!-- <th><input type="checkbox" /></th> -->
+                <th>S.No</th>
+                <th>View</th>
+
+                <th>Application Id</th>
+                <th>Customer Type</th>
+                <th>Customer Category</th>
+                <th>Customer Name</th>
+                <!-- <th>Loan Type</th> -->
+                <th>Product Id</th>
+                <th>Loan Amount</th>
+
+                <th>Created On</th>
+                <th>Stage</th>
+                <th>Status</th>
+                <th>Time TO SLA</th>
+                <!-- <th>Assign To</th> -->
+                <th>Branch Id</th>
+                <th>Branch Name</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Region</th>
+                <th>Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of data; track $index;) {
+              <tr>
+                <!-- <td><input type="checkbox" /></td> -->
+                <!-- S.No -->
+                <td>{{ $index + 1 }}</td>
+                <!-- S.No -->
+                <td><img [src]="item.Arrow" alt="" /></td>
+                <!-- Arrow Image -->
+
+                <td>{{ item.ApplicationId }}</td>
+                <!-- Application Id -->
+                <td>{{ item.customerType }}</td>
+                <!-- Customer Type -->
+                <td>{{ item.customerCategory }}</td>
+                <!-- Customer Category -->
+                <td>{{ item.customerName }}</td>
+                <!-- Customer Name -->
+
+                <!-- <td>{{item.LoanType}}</td> -->
+                <!-- Loan Type (commented out) -->
+
+                <td>{{ item.ProductId }}</td>
+                <!-- Product Id -->
+                <td>{{ item.LoanAmount }}</td>
+                <!-- Loan Amount -->
+
+                <td>{{ item.CreatedOn }}</td>
+                <!-- Created On -->
+                <td>{{ item.Stage }}</td>
+                <!-- Stage -->
+                <td>{{ item.Status }}</td>
+                <!-- Status -->
+                <td>{{ item.TimeToSLA }}</td>
+                <!-- Time To SLA -->
+
+                <!-- <td>{{item.AssignTo}}</td> -->
+                <!-- Assign To (commented out) -->
+
+                <td>{{ item.BranchId }}</td>
+                <!-- Branch Id -->
+                <td>{{ item.BranchName }}</td>
+                <!-- Branch Name -->
+                <td>{{ item.City }}</td>
+                <!-- City -->
+                <td>{{ item.State }}</td>
+                <!-- State -->
+                <td>{{ item.Region }}</td>
+                <!-- Region -->
+                <td>{{ item.Source }}</td>
+                <!-- Source -->
+              </tr>
+              }@empty {
+              <p>no data found</p>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <div class="pagination-container">
+            <mat-paginator
+              #paginator
+              class="demo-paginator"
+              (page)="handlePageEvent($event)"
+              [length]="totalRecords"
+              [pageSize]="pageSize"
+              [disabled]="false"
+              [showFirstLastButtons]="true"
+              [hidePageSize]="true"
+              [pageIndex]="pageIndex - 1"
+              aria-label="Select page"
+            >
+            </mat-paginator>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </table>
+</div>

@@ -1,0 +1,571 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$BL-LOS-Front-End-primary: mat.define-palette(mat.$indigo-palette);
+$BL-LOS-Front-End-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$BL-LOS-Front-End-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$BL-LOS-Front-End-theme: mat.define-light-theme((
+  color: (
+    primary: $BL-LOS-Front-End-primary,
+    accent: $BL-LOS-Front-End-accent,
+    warn: $BL-LOS-Front-End-warn,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($BL-LOS-Front-End-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+// html, body { height: 100%; }
+
+:root {
+   /* fonts */
+  --font-roboto: Roboto;
+  --font-poppins: Poppins;
+
+  /* font sizes */
+  --font-size-base: 16px;
+  --font-size-smi: 13px;
+  --font-size-sm: 14px;
+  --font-size-lg: 18px;
+
+  /* Colors */
+  --color-white: #fff;
+  --color-sandybrown: #ffb661;
+  --color-darkslategray: #454545;
+  --color-darkgray: #adadad;
+  --color-gray: #808080;
+
+  /* Gaps */
+  --gap-base: 16px;
+  --gap-5xl: 24px;
+  --gap-xl: 20px;
+  --gap-5xs: 8px;
+
+  /* Paddings */
+  --padding-2xl: 21px;
+  --padding-mini: 15px;
+  --padding-xl: 20px;
+  --padding-5xl: 24px;
+  --padding-11xs: 2px;
+  --padding-mid: 17px;
+
+  /* Border radiuses */
+  --br-21xl: 40px;
+  --br-3xs: 10px;
+  --br-4xs: 9px;
+    scroll-behavior: smooth;
+    /* fonts */
+    --font-roboto: Roboto;
+    --font-poppins: Poppins;
+  
+    /* font sizes */
+    --font-size-base: 16px;
+    --font-size-smi: 13px;
+    --font-size-sm: 14px;
+    --font-size-lg: 18px;
+  
+    /* Colors */
+    --color-white: #fff;
+    --color-darkslategray: #454545;
+    --color-sandybrown: #ffb661;
+    --color-darkgray: #adadad;
+    --color-gray: #808080;
+  
+    /* Gaps */
+    --gap-5xl: 24px;
+    --gap-base: 16px;
+    --gap-5xs: 8px;
+  
+    /* Paddings */
+    --padding-49xl: 68px;
+    --padding-25xl: 44px;
+    --padding-xl: 20px;
+    --padding-21xl: 40px;
+    --padding-sm: 14px;
+    --padding-mini: 15px;
+    --padding-base: 16px;
+  
+    /* Border radiuses */
+    --br-21xl: 40px;
+    --br-3xs: 10px;
+    --br-4xs: 9px;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif !important;
+    background: #ffffff;
+    color: #343232 !important;
+    font-size: 14px !important;
+    margin: 0;
+    line-height: normal;
+    // overflow: hidden;
+    // height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  a {
+    color: #4154f1;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: #717ff5;
+    text-decoration: none;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Poppins", sans-serif;
+  }
+  .content {
+    margin-left: 10%;
+    transition: margin-left 0.3s;
+    // margin-top:10%;
+    
+  }
+
+  .ml-2{
+    margin-left: 2rem;
+  }
+  .mt-2{
+    margin-top: 2rem;
+  }
+  .mb-2{
+    margin-bottom: 2rem;
+  }
+
+  .mr-2{
+    margin-right: 2rem;
+  }
+
+  .ml-1{
+    margin-left: 1rem;
+  }
+  .mt-1{
+    margin-top: 1rem;
+  }
+
+  .mr-1{
+    margin-right: 1rem;
+  }
+
+  .mb-1{
+    margin-bottom: 1rem;
+  }
+
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  // .main-content{
+  //   margin-left: 6%;
+  //   margin-top: 5%;
+  //   box-shadow: 0 -4px 4px -2px rgb(199 194 194 / 30%);
+  // }
+
+  // @media (max-width: 767.98px) {
+  //   .main-content{
+  //     margin-left: 6%;
+  //     margin-top: 15%;
+  //     box-shadow: 0 -4px 4px -2px rgb(199 194 194 / 30%);
+  //   }
+  // }
+  // @media (min-width: 768px) and (max-width: 991.98px){
+  //   .main-content{
+  //     margin-left: 6%;
+  //     margin-top: 10%;
+  //     box-shadow: 0 -4px 4px -2px rgb(199 194 194 / 30%);
+  //   }
+  // }
+  // @media (max-width: 768px){
+  //   .main-content{
+  //     margin-left: unset;
+  //     margin-top: 10%;
+  //     box-shadow: 0 -4px 4px -2px rgb(199 194 194 / 30%);
+  //   }
+  // }
+  @media (min-width: 992px) and (max-width: 1199px){
+    .main-content{
+      margin-left: unset !important;
+      margin-top: 2%;
+      box-shadow: 0 -4px 4px -2px rgb(199 194 194 / 30%);
+    }
+  }
+
+  @media only screen and (min-width : 1224px) {
+    .main-content{
+      margin-left: 6% !important;
+      margin-top: 2%;
+      box-shadow: 0 -4px 4px -2px rgb(199 194 194 / 30%);
+    }
+  }
+
+  .page-name{
+    padding: 1% 1% 1% 1.6%;;
+}
+
+// table {
+//     width: 96.9%;
+//     border-collapse: collapse;
+//     margin: 20px;
+// }
+
+// th, td {
+//     text-align: left;
+//     padding: 10px;
+//     border: 1px solid #ccc;
+// }
+
+// th {
+//     background-color: #eee;
+// }
+
+.temp-grid {
+  th {
+    background-color: #C5C5C5;
+    border: 1px solid #F7F6F4;
+  }
+  td{
+    border: 1px solid #e4e4e4;
+  }
+}
+
+.button {
+    background-color: #009C19;
+    color: white;
+    padding: 4px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-weight: 500;
+}
+
+.button-inactive {
+    background-color: #CCCCCC;
+    color: #424242;
+    padding: 4px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-weight: 500;
+}
+
+.actions {
+    text-align: center;
+}
+
+.action-button {
+    // background-color: #f44336;
+    color: #000;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.material-textfield {
+    position: relative;  
+  }
+  
+  label {
+    position: absolute;
+    font-size: 12px;
+    left: 0;
+    // top: 50%;
+    transform: translateY(-50%);
+    background-color: #FFF8EF;
+    color: #000;;
+    padding: 0 0.3rem;
+    margin: 0 0.7rem !important;
+    transition: .1s ease-out;
+    transform-origin: left top;
+    pointer-events: none;
+  }
+  input {
+    font-size: 14px;
+    outline: none;
+    border: 1px solid #c2c0c0;
+    border-radius: 3px !important;
+    padding: 0.7rem 0.7rem;
+    color: gray;
+    transition: 0.1s ease-out;
+  }
+  select {
+    font-size: 12px !important;
+    outline: none;
+    border: 1px solid #c2c0c0;
+    border-radius: 3px !important;
+    padding: 0.7rem 0.7rem;
+    color: gray;
+    transition: 0.1s ease-out;
+  }
+  .form-control:focus {
+    box-shadow: unset;
+  }
+  .input-group > .form-control:focus{
+    z-index: unset;
+  }
+  input:focus {
+    border-color: #6200EE;  
+  }
+  input + label {
+    color: #000;
+    top: 0;
+    transform: translateY(-50%) scale(.9);
+  }
+  textarea + label {
+    color: #000;
+    top: 0;
+    transform: translateY(-50%) scale(.9);
+  }
+  select + label {
+    color: #000;
+    top: 0;
+    transform: translateY(-50%) scale(.9);
+  }
+  .form-field{
+    padding: 1.5%;
+    background-color: #ececec;
+  }
+  .filter-form{
+    padding: 0 1.5%;
+  }
+  .card{
+    --bs-card-border-width: unset;
+  }
+  .search{
+    // background-color: #FFB661;
+    // color: black;
+    padding: 4px 13px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-top:6.5%;
+  }
+  .temp-grid-action{
+    font-size: 14px;
+  }
+  .btn-outline-secondary{
+    --bs-btn-color: #ffb661;
+    --bs-btn-hover-color: #454545;
+    --bs-btn-hover-bg: #e8a658;
+    --bs-btn-border-color: #ffb661;
+    --bs-btn-hover-border-color: #e8a658;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #ffb661;
+    --bs-btn-active-border-color: #ffb661;
+  }
+  .btn-primary {
+    --bs-btn-color: #454545;
+    --bs-btn-hover-color: #454545;
+    --bs-btn-hover-bg: #e8a658;
+    --bs-btn-border-color: #ffb661;
+    --bs-btn-hover-border-color: #e8a658;
+    --bs-btn-bg: #ffb661;
+    --bs-btn-active-color: #454545;
+    --bs-btn-active-bg: #ffb661;
+    --bs-btn-active-border-color: #ffb661;
+  }
+  .input-group{
+    margin-top: 6%;
+  }
+ .mdc-tab-indicator--active .mat-mdc-tab-ripple{
+    background-color: #454545 !important;
+    border-radius: 10px 13px 0 0 !important;
+    color: white;
+  }
+  .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+    color: #ffffff !important;
+}
+.mat-mdc-tab-list .mat-mdc-tab-labels{
+  margin-top: 2%;
+  margin-left: 1.6%;
+}
+  .form-control {
+    font-size: 12px;
+    color:#454545
+  }
+.bold{
+  font-weight: 600 !important;
+}
+.grid-class{
+  font-weight: 600;
+  font-size: 13px;
+  color:#454545;
+  margin-left: 1.7%;
+}
+.right-top-buttons{
+  margin-right: 1.5%;
+}
+.required{
+  color: red;
+  font-size: 16px;
+}
+.mat-mdc-tab-body-content {
+  overflow: hidden !important;
+}
+.action{
+  float: right;
+  margin-right: 1.5%;
+}
+.bold-icon{
+  stroke: currentColor;
+  stroke-width: 2;
+}
+.mat-expansion-indicator::after {
+  border-style: unset !important;
+  // content: '';
+  padding: 14px !important;
+}
+.mat-expansion-indicator {
+  background-image: url('../src/assets/assets/svg/filter-icon.svg');
+  background-size: cover; /* Adjust as needed: cover, contain, etc. */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+}
+.mat-expansion-panel-content {
+  font-family: "Poppins", sans-serif !important;
+}
+.mat-expansion-panel {
+  background: #f9f9f9 !important;
+  width: 97%;
+  margin-left: 1.6% !important;
+  border:none !important;
+  box-shadow: unset !important;
+}
+.dropdown-menu {
+  --bs-dropdown-font-size: 14px;
+}
+.btn {
+  --bs-btn-padding-x: 16px !important;
+  --bs-btn-padding-y: 4px !important;
+  --bs-btn-font-size: 14px !important;
+}
+.filter-icon{
+  position: absolute;
+  right: 0;
+  top: -px;
+  margin-right: 1px;
+}
+
+
+.ngx-pagination{
+  width: 346%;
+}
+.ngx-pagination .current {
+  padding: 7px 13px !important;
+  background: #454545 !important;
+  color: #fff !important;
+  cursor: default;
+  border: 1px solid #CCCCCC !important;
+  border-radius: 3px !important;
+}
+.ngx-pagination a {
+  color: #0a0a0a;
+  padding: 7px 13px !important;
+  border-radius: 3px !important;
+  border: 1px solid #CCCCCC !important;
+}
+.ngx-pagination li {
+  padding-left: 1%;
+  padding-right: 1%;
+}
+.item-per-page{
+  margin-left: 477.5%;
+  margin-top: -26%;
+  width: 202px;
+}
+.form-select {
+  line-height: 24px;
+  border: 1px solid #79747E;
+}
+.form-control  {
+  line-height: 24px;
+  border: 1px solid #79747E;
+}
+.mat-mdc-tab-group {
+  --mdc-tab-indicator-active-indicator-color: #454545;
+}
+.input-group {
+  width: 94%;
+}
+.date-picker-custom button{
+  position: absolute;
+  right: -5px;
+  top: 49%;
+  transform: translateY(-50%);
+}
+.shrink {
+  width: 86%;
+  float: right;
+}
+.modal-custom-close{
+  margin-left: 69%;
+}
+.blue-snackbar .mdc-snackbar__surface{
+  background-color: #D51A1A !important;
+}
+.bi-reply-fill{
+  cursor: pointer;
+}
+
+.red-snackbar {
+  color: rgb(228, 26, 26) !important;
+}
+.mat-mdc-form-field{
+  width: 100% !important;
+}
+.mat-mdc-select-trigger{
+  display: none !important;
+}
+.ng-otp-input-wrapper{
+  margin-left: 45px !important;
+}
+.otp-input{
+  margin-right: 30px !important;
+}
+.mat-mdc-text-field-wrapper {
+  width: 50% !important;
+}
+.mdc-text-field--filled {
+  height: 40px !important;
+  top: 14px !important;
+}
+.chips-container {
+  margin-top: unset !important;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

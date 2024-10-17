@@ -1,0 +1,189 @@
+<div class="main-content">
+    <div class="d-flex justify-content-between align-items-center">
+        <h5 class="page-name mt-2 mb-2">
+            <i class="bi bi-reply-fill"></i> SLA Defination Configuration
+        </h5>
+        <div class="mr-2">
+            @if(isEditMode){
+                @if(isDisabled){
+                  <button type="button" class="btn btn-outline-secondary ml-2" (click)="editClicked()">Edit</button>
+                } @else {
+                  <button type="button" class="btn btn-outline-secondary ml-2">Cancel</button>
+                <button type="button" class="btn btn-primary ml-1" (click)="finalSubmit()">Update</button>
+                }
+            } @else {
+                <button type="button" class="btn btn-outline-secondary ml-2">Cancel</button>
+                <button type="button" class="btn btn-primary ml-1" (click)="finalSubmit()">Submit</button>
+            }
+        </div>
+    </div>
+    <div class="form">
+        <div class="filter-form">
+            <form [formGroup]="parentForm">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="customerCategory">
+                                <option value="" disabled>--Select--</option>
+                                @for (item of CustomerCategory; track $index) {
+                                    <option value="{{ item.id }}">{{ item.title }}</option>
+                                    }
+                            </select>
+                            <label>Customer Category <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['customerCategory'].touched) && parentForm.controls['customerCategory'].invalid){
+                            <div class="text-danger">
+                                Please enter customer category
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="customerType">
+                                <option value="" disabled>--Select--</option>
+                                @for (item of CustomerType; track $index) {
+                                    <option value="{{ item.id }}">{{ item.title }}</option>
+                                    }
+                            </select>
+                            <label>Customer Type <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['customerType'].touched) && parentForm.controls['customerType'].invalid){
+                            <div class="text-danger">
+                                Please enter customer type
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="loanType">
+                                <option value="" disabled>--Select--</option>
+                                @for (item of loanType; track $index) {
+                                    <option value="{{ item.id }}">{{ item.title }}</option>
+                                    }
+                            </select>
+                            <label>Loan Type <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['loanType'].touched) && parentForm.controls['loanType'].invalid){
+                            <div class="text-danger">
+                                Please enter loan type
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="productId">
+                                <option value="" disabled>--Select--</option>
+                                @for(data of Product; track data){
+                                    <option value={{data.id}}>{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Product Id <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['productId'].touched) && parentForm.controls['productId'].invalid){
+                            <div class="text-danger">
+                                Please enter product id
+                            </div>
+                        }
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <h6 class="mt-3 mb-3 mr-3 custom-head"></h6>
+    <div class="card form" >
+        <div class="form-field">
+            <form [formGroup]="tempForm">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="stage">
+                                <option value="" disabled>-- Select --</option>
+                                @for (item of StageName; track $index) {
+                                    <option value="{{ item.id }}">{{ item.title }}</option>
+                                }
+                            </select>
+                            <label>Stage Name<span class="required">*</span></label>
+                        </div>
+                        @if((tempSubmitButton || tempForm.controls['stage'].touched) && tempForm.controls['stage'].invalid){
+                            <div class="text-danger">
+                                Please select stage
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3 add-button">
+                        <div class="form-check">
+                            <p class="form-check-label" for="mandatoryCheck" style="color: rgb(8, 7, 7);" >SLA Tracking Req.?</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" style="margin-top: -10px;" class="form-check-input" id="mandatoryCheck" formControlName="isActualSLAtrackingRequired">
+                        </div>
+                        @if((tempSubmitButton || tempForm.controls['isActualSLAtrackingRequired'].touched) && tempForm.controls['isActualSLAtrackingRequired'].invalid){
+                            <div class="text-danger">
+                                Please select stage
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input type="time" id="duration" class="form-control" step="900" formControlName="slAtiming">
+                            <label>SLA Timing<span class="required">*</span></label>
+                        </div>
+                        @if((tempSubmitButton || tempForm.controls['slAtiming'].touched) && tempForm.controls['slAtiming'].invalid){
+                            <div class="text-danger">
+                                Please select SLA timing
+                            </div>
+                        }
+                    </div>
+                    
+                    <div class="col-md-3 add-button">
+                        @if(tempFormEdit){
+                            <button type="button" class="btn btn-primary" (click)="tempGridUpdate()">Update</button>
+                        } @else {
+                            <button type="button" class="btn btn-primary" (click)="tempSubmit()">Add</button>
+                        }
+                    </div>
+                </div>
+            </form>
+          
+        </div>
+    </div>
+    @if(tempData.length > 0){
+        <div class="pin-fill"><i class="bi bi-pin-angle-fill"></i></div>
+        <!-- <span class="grid-class">Temp Grid</span> -->
+        <table class="temp-grid global-table">
+            <thead>
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Stage</th>
+                    <th>SLA Timing</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(item of tempData; track item;let i=$index){    
+                    <tr>
+                        <td>{{ i+1}}</td>
+                        <td>{{ item.stage | dropDown :1 :StageName}}</td>
+                        <td>{{ item.slAtiming }}</td>
+                        <td class="temp-grid-action">
+                            @if(!isDisabled){
+                                <i class="bi bi-pen-fill mr-1"(click)="editTempGrid(i)"></i>
+                                <i class="bi bi-trash-fill" style="cursor: pointer;" (click)="deleteItem(i)"></i>
+                            }
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td></td>
+                    <td style="text-align: left; font-weight: bold;">Total</td>
+                
+                    <td style="text-align: left; font-weight: bold;">{{totalTiming}}</td>
+                    <td class="temp-grid-action">
+                        
+                    </td>
+                </tr>
+            </tbody>
+    
+        </table>
+    }
+</div>

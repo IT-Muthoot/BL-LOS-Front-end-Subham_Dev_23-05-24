@@ -1,0 +1,102 @@
+<div class="main-content">
+    <h5 class="page-name mt-2 mb-2">Agent Commissioning Management</h5>
+    <div class="show-hide-pin">
+        <mat-accordion class="mt-1" (click)="toggleClass()" [class.active]="isActive">
+            <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title> <span class="filter-class">Filters</span></mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="below-line"></div>
+            <div class="form">
+                <form [formGroup]="filterForm">
+                    <div class="form-field">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Agency ID" type="text" class="form-control" formControlName="agencyId">
+                                <label>Agency ID</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Agency Name" type="text" class="form-control" formControlName="agencyName">
+                                <label>Agency Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control form-select" formControlName="payoutFrequency">
+                                    <option value="" disabled>--Select-- </option>
+                                    @for(data of PayoutFrequency; track data){
+                                        <option value="{{ data.id }}">{{ data.title }}</option>
+                                    }
+                                </select>
+                                <label>Commission Basis</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 search-btn">
+                            <button type="button" class="btn btn-primary" (click)="filter()">Search</button>
+                        </div>
+                    </div>
+                    
+                    </div>
+                </form>
+            </div>
+            
+            </mat-expansion-panel>
+        </mat-accordion>    
+        @if(isActive){
+            <div class="pin-fill"><i class="bi bi-pin-angle-fill"></i></div>
+        }
+    </div>
+    
+    <div class="action mt-1 mb-1">
+        <button class="btn warning">Export <i class="bi bi-download"></i></button>
+        <button class="btn warning" routerLink="agent-commision-management-submit">Add <i class="bi bi-plus-lg bold-icon"></i></button>
+    </div>
+    <table class="global-table">
+        <thead>
+            <tr>
+                <th>Sl.No</th>
+                <th>Agency ID</th>
+                <th>Agency Name</th>
+                <th>Commission Basis</th>
+                <!-- <th>Last Modified By</th> -->
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (data of browseList| paginate: { itemsPerPage: itemsPerPage,
+                currentPage: p, totalItems: totalRecords }; track $index) {
+                <tr>
+                <td>{{ $index+1 }}</td>
+                <td>{{ data.agencyId }}</td>
+                <td>{{ data.agencyName }}</td>
+                <td>{{ data.payoutFrequency | dropDown :1 :PayoutFrequency }}</td>
+                <!-- <td>User123</td> -->
+                <td>
+                    @if(data.status === 265){
+                        <button class="button" 
+                        (click)="onStatusChange(data.id, data.status)">Active</button>
+                    } @else {
+                        <button class="button-inactive" (click)="onStatusChange(data.id, data.status)">Inactive</button>
+                    }
+                </td>
+                <td>
+                    <div class="dropdown">
+                        <span class="action-button" type="button" id="actionButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </span>
+                        <ul class="dropdown-menu" aria-labelledby="actionButton">
+                            <li><a class="dropdown-item" routerLink="agent-commision-management-submit/edit/4">View</a></li>
+                        </ul>
+                    </div>
+                </td>
+                </tr>
+            }
+        </tbody>                                                                                
+    </table>
+</div>

@@ -1,0 +1,179 @@
+<div class="main-content">
+    <div class="d-flex justify-content-between align-items-center">
+        <h5 class="page-name mt-2 mb-2">
+            <i class="bi bi-reply-fill"></i> Internal Credit Scoring Configuration-2
+        </h5>
+        <div class="mr-2">
+            @if(isDisabled){
+                <button type="button" class="btn btn-primary ml-1" (click)="editClicked()">Edit</button>
+            } @else {
+                <button type="button" class="btn btn-outline-secondary ml-2">Cancel</button>
+                <button type="button" class="btn btn-primary ml-1" (click)="finalSubmit()">Update</button>
+            }
+        </div>
+    </div>
+    <div class="form">
+        <div class="filter-form">
+            <form [formGroup]="parentForm">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="customer_Category">
+                                <option value="">--Select-- </option>
+                                @for(data of CustomerCategoryDropDown; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Customer Category <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['customer_Category'].touched) && parentForm.controls['customer_Category'].invalid){
+                            <div class="text-danger">
+                              Please select customer category
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="customer_type">
+                                <option value="">--Select-- </option>
+                                @for(data of CustomerTypeDropDown; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Customer Type <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['customer_type'].touched) && parentForm.controls['customer_type'].invalid){
+                            <div class="text-danger">
+                              Please select customer type
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="loan_type">
+                                <option value="">--Select-- </option>
+                                @for(data of AllowedLoanTypeDropDown; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Loan Type <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['loan_type'].touched) && parentForm.controls['loan_type'].invalid){
+                            <div class="text-danger">
+                              Please select loan type
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Product ID" type="text" class="form-control" formControlName="productId">
+                            <label>Product ID</label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['productId'].touched) && parentForm.controls['productId'].invalid){
+                            <div class="text-danger">
+                              Please select product Id
+                            </div>
+                        }
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card form mt-4">
+        <div class="form-field">
+            <form [formGroup]="tempForm">
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="criteria">
+                                <option value="">--Select-- </option>
+                                @for(data of criteriaDropDown; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Criteria <span class="required">*</span></label>
+                        </div>
+                        @if((tempSubmitButton || tempForm.controls['criteria'].touched) && tempForm.controls['criteria'].invalid){
+                            <div class="text-danger">
+                              Please select criteria
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Weightage" type="text" class="form-control" formControlName="weightage">
+                            <label>Weightage(%)</label>
+                        </div>
+                        @if((tempSubmitButton || tempForm.controls['weightage'].touched) && tempForm.controls['weightage'].invalid){
+                            <div class="text-danger">
+                              Please select weightage
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="sourceOfData">
+                                <option value="">--Select-- </option>
+                                @for(data of SourceOfDataDropDown; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Source of Data</label>
+                        </div>
+                        @if((tempSubmitButton || tempForm.controls['sourceOfData'].touched) && tempForm.controls['sourceOfData'].invalid){
+                            <div class="text-danger">
+                              Please select source of data
+                            </div>
+                        }
+                    </div>
+
+                    <div class="col-md-3 add-button">
+                        @if(!isDisabled){
+                            @if(tempFormEdit){
+                                <button type="button" class="btn btn-primary" (click)="tempGridUpdate()">Update</button>
+                            } @else {
+                                <button type="button" class="btn btn-primary" (click)="tempSubmit
+                            ()">Add</button>
+                            }
+                        }
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="pin-fill"><i class="bi bi-pin-angle-fill"></i></div>
+    @if(tempData.length > 0){
+        <span class="grid-class">Temp Grid</span>
+        <table class="temp-grid global-table">
+            <thead>
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Criteria</th>
+                    <th>Weightage(%)</th>
+                    <th>Source of Data</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(data of tempData; track data; let i = $index){
+
+                    <tr>
+                        <td>{{ i+1 }}</td>
+                        <td>{{ data.criteria|dropDown :1 :criteriaDropDown }}</td>
+                        <td>{{ data.weightageInPercentage }}</td>
+                        <td>{{ data.sourceOfData|dropDown :1 :SourceOfDataDropDown }}</td>
+                        <td class="temp-grid-action">
+                            <i class="bi bi-pen-fill mr-1" (click)="editTempGrid(i)"></i>
+                            <i class="bi bi-trash-fill" (click)="deleteItem(i)"></i>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    }
+    <div class="note-span">
+        <span><strong>Note:</strong> User has to ensure the total is always 100%, even if some of the criteria is not selected. Ex: if GST and ITR filing is not considered, User has to  adjust the remaining criteria weightage total to 100%.</span>
+    </div>
+    
+</div>

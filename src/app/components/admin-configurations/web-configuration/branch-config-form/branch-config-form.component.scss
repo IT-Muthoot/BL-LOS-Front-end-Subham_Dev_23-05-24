@@ -1,0 +1,25 @@
+.radio-group {
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .radio-group label {
+    margin: 0 10px;
+    cursor: pointer; /* Ensure cursor changes to pointer for better UX */
+  }
+  
+  .radio-group input {
+    margin-right: 5px; /* Adjust margin to separate the radio button and label */
+  }
+  
+  
+  .radio-group label {
+    position:unset !important;
+    background-color: unset !important; 
+    color: unset !important;
+    top: unset !important;
+    font-size: 14px !important;
+    display: unset;
+    padding: 0 0.3rem 0 0;
+    margin: 0 0.7rem 0 0 !important;
+  }

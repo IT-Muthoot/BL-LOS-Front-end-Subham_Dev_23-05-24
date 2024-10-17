@@ -1,0 +1,146 @@
+<div class="main-content">
+    <h5 class="page-name mt-2 mb-2">Ratio Analysis Defination Configuration - 2</h5>
+    <div class="show-hide-pin">
+        <mat-accordion class="mt-1" (click)="toggleClass()" [class.active]="isActive">
+            <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title><span class="filter-class">Filters</span></mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="below-line"></div>
+                <div class="form">
+                    <form [formGroup]="filterForm">
+                        <div class="form-field">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <select class="form-control form-select" formControlName="customerCategory">
+                                            <option value="">--Select-- </option>
+                                            @for(data of CustomerCategoryDropDown; track data){
+                                                <option value="{{ data.id }}">{{ data.title }}</option>
+                                            }
+                                        </select>
+                                        <label>Customer Category</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <select class="form-control form-select" formControlName="customerType">
+                                            <option value="">--Select-- </option>
+                                            @for(data of CustomerTypeDropDown; track data){
+                                                <option value="{{ data.id }}">{{ data.title }}</option>
+                                            }
+                                        </select>
+                                        <label>Customer Type</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <select class="form-control form-select" formControlName="loanType">
+                                            <option value="">--Select-- </option>
+                                            @for(data of AllowedLoanTypeDropDown; track data){
+                                                <option value="{{ data.id }}">{{ data.title }}</option>
+                                            }
+                                        </select>
+                                        <label>Loan Type</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <select class="form-control form-select" formControlName="productId">
+                                            <option value="">--Select-- </option>
+                                            <option value="1">Option1</option>
+                                            <option value="1">Option2</option>
+                                            <option value="1">Option3</option>
+                                            <option value="1">Option4</option>
+                                        </select>
+                                        <label>Product ID</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <select class="form-control form-select" formControlName="industryType">
+                                            <option value="">--Select-- </option>
+                                            <option value="1">Option1</option>
+                                            <option value="1">Option2</option>
+                                            <option value="1">Option3</option>
+                                            <option value="1">Option4</option>
+                                        </select>
+                                        <label>Industry Type</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-primary" (click)="filter()">Search</button>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>    
+        @if(isActive){
+            <div class="pin-fill"><i class="bi bi-pin-angle-fill"></i></div>
+        }
+    </div>
+    <div class="action mt-1 mb-1">
+        <button class="btn warning" (click)="exportTableData()">Export <i class="bi bi-download"></i></button>
+        <button class="btn warning" routerLink="rad-configuration-2-submit-form">Add <i class="bi bi-plus-lg bold-icon"></i></button>
+    </div>
+    <table class="responsive global-table">
+        <thead>
+            <tr>
+                <th>Sl.No</th>
+                <th>Customer Category</th>
+                <th>Customer Type</th>
+                <th>Loan Type</th>
+                <th>Product ID</th>
+                <th>Industry Type</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let d of browseList | paginate: { itemsPerPage: itemsPerPage, currentPage: p, totalItems: totalRecords }; let ndx = index">
+                <td style="width:20px">{{ ndx+1 }}</td>
+                <td>{{ d.customerCategory }}</td>
+                <td>{{d.customerType}}</td>
+                <td>{{ d.loanType}}</td>
+                <td>{{ d.productId }}</td>
+                <td>{{ d.industryType }}</td>
+                @if(d.Status == 'Active'){
+                    <td><button class="button">{{ d.status }}</button></td>
+                } @else {
+                    <td><button class="button-inactive">{{ d.status }}</button></td>
+                }
+                
+                <td>
+                    <div class="dropdown">
+                        <span class="action-button" type="button" id="actionButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </span>
+                        <ul class="dropdown-menu" aria-labelledby="actionButton">
+                            <li><a class="dropdown-item" href="#">Edit</a></li>
+                            <li><a class="dropdown-item">View</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+
+        <div class="d-flex justify-content-center mt-3">
+            <pagination-controls (pageChange)="p = $event; getNextPageData($event)"></pagination-controls>
+        </div>
+        <div class="item-per-page">
+            <span for="">Results per page: </span>
+            <select id="itemsPerPage" (change)="onChangeItemsPerPage($event)">
+                <option *ngFor="let option of availableItemsPerPage" [value]="option">
+                {{ option }}
+                </option>
+            </select>
+        </div>
+    </table>
+</div>

@@ -1,0 +1,541 @@
+<div class="main-content">
+  <div class="custom-card">
+    <div class="d-flex justify-content-between">
+      <div class="search-bar mt-2">
+        <h5 class="page-name mb-2">
+          <i class="bi bi-reply-fill" onclick="history.back()"></i>Application
+          ID: {{ appLicationId }}
+        </h5>
+      </div>
+
+      <div class="mt-3 mb-1 mr-1">
+        <!-- <i class="bi bi-question-square-fill action-icon"></i>&nbsp; -->
+        <i (click)="openModalBox('raiseQueries')"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <path
+              d="M4 2H20C20.5304 2 21.0391 2.21071 21.4142 2.58579C21.7893 2.96086 22 3.46957 22 4V16C22 16.5304 21.7893 17.0391 21.4142 17.4142C21.0391 17.7893 20.5304 18 20 18H13.9L10.2 21.71C10 21.9 9.75 22 9.5 22H9C8.73478 22 8.48043 21.8946 8.29289 21.7071C8.10536 21.5196 8 21.2652 8 21V18H4C3.46957 18 2.96086 17.7893 2.58579 17.4142C2.21071 17.0391 2 16.5304 2 16V4C2 3.46957 2.21071 2.96086 2.58579 2.58579C2.96086 2.21071 3.46957 2 4 2ZM12.19 5.5C11.3 5.5 10.59 5.68 10.05 6.04C9.5 6.4 9.22 7 9.27 7.69H11.24C11.24 7.41 11.34 7.2 11.5 7.06C11.7 6.92 11.92 6.85 12.19 6.85C12.5 6.85 12.77 6.93 12.95 7.11C13.13 7.28 13.22 7.5 13.22 7.8C13.22 8.08 13.14 8.33 13 8.54C12.83 8.76 12.62 8.94 12.36 9.08C11.84 9.4 11.5 9.68 11.29 9.92C11.1 10.16 11 10.5 11 11H13C13 10.72 13.05 10.5 13.14 10.32C13.23 10.15 13.4 10 13.66 9.85C14.12 9.64 14.5 9.36 14.79 9C15.08 8.63 15.23 8.24 15.23 7.8C15.23 7.1 14.96 6.54 14.42 6.12C13.88 5.71 13.13 5.5 12.19 5.5ZM11 12V14H13V12H11Z"
+              fill="#454545"
+            /></svg></i
+        >&nbsp;
+
+        <i (click)="openModalBox('comments')"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <path
+              d="M6.5 13.5H17.5V12.5H6.5V13.5ZM6.5 10.5H17.5V9.5H6.5V10.5ZM6.5 7.5H17.5V6.5H6.5V7.5ZM4.616 17C4.15533 17 3.771 16.846 3.463 16.538C3.155 16.23 3.00067 15.8457 3 15.385V4.615C3 4.155 3.15433 3.77067 3.463 3.462C3.77167 3.15334 4.15567 2.99934 4.615 3H19.385C19.845 3 20.229 3.154 20.537 3.462C20.845 3.77 20.9993 4.15434 21 4.615V20.077L17.923 17H4.616Z"
+              fill="#454545"
+            /></svg></i
+        >&nbsp;
+        <i (click)="openModalBox('holdStage')"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <g clip-path="url(#clip0_14125_7573)">
+              <path
+                d="M3.51697 20.485C2.37085 19.378 1.45667 18.0539 0.827757 16.5898C0.198849 15.1258 -0.132185 13.5511 -0.146031 11.9578C-0.159877 10.3644 0.143743 8.78428 0.747114 7.30953C1.35048 5.83477 2.24152 4.49495 3.36823 3.36823C4.49495 2.24152 5.83477 1.35048 7.30953 0.747114C8.78428 0.143743 10.3644 -0.159877 11.9578 -0.146031C13.5511 -0.132185 15.1258 0.198849 16.5898 0.827757C18.0539 1.45667 19.378 2.37085 20.485 3.51697C22.6709 5.7802 23.8804 8.81143 23.8531 11.9578C23.8257 15.1042 22.5637 18.1139 20.3388 20.3388C18.1139 22.5637 15.1042 23.8257 11.9578 23.8531C8.81143 23.8804 5.7802 22.6709 3.51697 20.485ZM18.793 18.793C20.5943 16.9916 21.6063 14.5485 21.6063 12.001C21.6063 9.45348 20.5943 7.01032 18.793 5.20897C16.9916 3.40762 14.5485 2.39564 12.001 2.39564C9.45348 2.39564 7.01032 3.40762 5.20897 5.20897C3.40762 7.01032 2.39564 9.45348 2.39564 12.001C2.39564 14.5485 3.40762 16.9916 5.20897 18.793C7.01032 20.5943 9.45348 21.6063 12.001 21.6063C14.5485 21.6063 16.9916 20.5943 18.793 18.793ZM8.40097 7.20097H10.801V16.801H8.40097V7.20097ZM13.201 7.20097H15.601V16.801H13.201V7.20097Z"
+                fill="#454545"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0_14125_7573">
+                <rect width="24" height="24" fill="white" />
+              </clipPath>
+            </defs></svg></i
+        >&nbsp;
+
+        <i (click)="openModalBox('raiseDeviation')">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <path
+              d="M20.646 10.3338H14.8329C13.4546 10.3338 12.333 9.2122 12.333 7.83392V2.02C12.1988 2.01083 12.0647 2 11.9288 2H8.16649C5.86909 2.00083 4 3.86992 4 6.16733V17.8335C4 20.1309 5.86909 22 8.16649 22H16.4995C18.7969 22 20.666 20.1309 20.666 17.8335V10.738C20.666 10.6021 20.6551 10.468 20.646 10.3338ZM11.4997 11.9879C11.4997 11.5279 11.873 11.1546 12.333 11.1546C12.793 11.1546 13.1663 11.5279 13.1663 11.9879V14.9045C13.1663 15.3644 12.793 15.7378 12.333 15.7378C11.873 15.7378 11.4997 15.3644 11.4997 14.9045V11.9879ZM12.333 19.4876C11.643 19.4876 11.083 18.9276 11.083 18.2377C11.083 17.5477 11.643 16.9877 12.333 16.9877C13.023 16.9877 13.5829 17.5477 13.5829 18.2377C13.5829 18.9276 13.023 19.4876 12.333 19.4876ZM13.9996 7.83392V2.38332C14.7604 2.67164 15.4604 3.11579 16.0537 3.70826L18.9569 6.61314C19.5502 7.20562 19.9943 7.90559 20.2827 8.66639H14.8329C14.3729 8.66639 13.9996 8.29307 13.9996 7.83392Z"
+              fill="#454545"
+            />
+          </svg> </i
+        >&nbsp;
+        <i (click)="openModalBox('sendBackStage')"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <path
+              d="M11 18H14.75C16.1424 18 17.4777 17.4469 18.4623 16.4623C19.4469 15.4777 20 14.1424 20 12.75C20 11.3576 19.4469 10.0223 18.4623 9.03769C17.4777 8.05312 16.1424 7.5 14.75 7.5H5M7.5 4L4 7.5L7.5 11"
+              stroke="#454545"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            /></svg></i
+        >&nbsp;
+
+        <i
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <path
+              d="M3 17.2498V20.9998H6.75L17.81 9.93984L14.06 6.18984L3 17.2498ZM21.41 6.33984L17.66 2.58984L15.13 5.12984L18.88 8.87984L21.41 6.33984Z"
+              fill="#454545"
+            /></svg></i
+        >&nbsp;
+
+        <button type="button" class="btn btn-outline-secondary ml-2">
+          Reject
+        </button>
+        <button type="button" class="btn btn-primary ml-1">Approve</button>
+      </div>
+    </div>
+    <!-- <br /> -->
+    <div class="mt-3 mb-1 mr-1">
+      <div style="margin-left: 85px">
+        <h6>Customer Type</h6>
+        &nbsp;: <span>New</span>&nbsp;&nbsp;
+        <h6>Customer Name</h6>
+        &nbsp;: <span>Subham</span>&nbsp;&nbsp;
+        <h6>Customer Category</h6>
+        &nbsp;: <span>Business</span>&nbsp;&nbsp;
+        <h6>Product ID</h6>
+        &nbsp;: <span>PD101</span>&nbsp;&nbsp;
+        <h6>Loan Type</h6>
+        &nbsp;: <span>Secured</span>&nbsp;&nbsp;
+        <h6>Loan Amount</h6>
+        &nbsp;: <span>10,00,000</span>&nbsp;&nbsp;
+      </div>
+      <!-- </div> -->
+      <div class="stepper">
+        <div
+          *ngFor="let step of steps; let i = index"
+          [ngClass]="getStepClass(i)"
+          (click)="goToStep(i)"
+          class="step st-step"
+        >
+          <div class="step-square">
+            <img [src]="getStepImage(i)" alt="step icon" />
+          </div>
+          <div class="step-square">
+            <div class="step-icon">{{ i + 1 }}</div>
+            <div class="step-number">{{ step.title }}</div>
+          </div>
+          <div class="step-bar" *ngIf="i < steps.length - 1"></div>
+        </div>
+      </div>
+    </div>
+  
+    
+    @if(actualStage=='621'){
+      <div>
+        <h5>Data Enrichment</h5>
+      </div>
+      <hr />
+    <!-- finacial details -->
+    <div>
+      <div class="below-line"></div>
+      <div class="col-md-3">
+        <div class="input-group">
+          <select class="form-control form-select" [(ngModel)]="dropDownSelectedVal">
+            <option value="" disabled>--Select--</option>
+            <option value="Monthly" >Monthly</option>
+            <option value="Yearly">Yearly</option>
+          </select>
+          <label>Frequency<span class="required">*</span></label>
+        </div>
+      </div>
+        @if (dropDownSelectedVal=='Monthly') {
+        <div class="card form">
+          <div class="form-field mt-3">
+            <form>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="input-group">
+                    <select class="form-control form-select">
+                      <option value="" disabled>--Select--</option>
+                      <option value="Branch Number">Param</option>
+                    </select>
+                    <label>Finacial Parametr<span class="required">*</span></label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="input-group">
+                    <select class="form-control form-select">
+                      <option value="" disabled>--Select--</option>
+                      <option value="Branch Number">Year</option>
+                    </select>
+                    <label>Year<span class="required">*</span></label>
+                  </div>
+                </div>
+             
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="input-group">
+                
+                    <input placeholder="Jan" type="textarea" class="form-control" >
+                    <label>Jan<span class="required">*</span></label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="input-group">
+                
+                    <input placeholder="Feb" type="textarea" class="form-control" >
+                    <label>Feb<span class="required">*</span></label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="input-group">
+                
+                    <input placeholder="March" type="textarea" class="form-control" >
+                    <label>March<span class="required">*</span></label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="input-group">
+                
+                    <input placeholder="April" type="textarea" class="form-control" >
+                    <label>April<span class="required">*</span></label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="input-group">
+                
+                    <input placeholder="May" type="textarea" class="form-control" >
+                    <label>May<span class="required">*</span></label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="input-group">
+                
+                    <input placeholder="June" type="textarea" class="form-control" >
+                    <label>June<span class="required">*</span></label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="input-group">
+                
+                    <input placeholder="July" type="textarea" class="form-control" >
+                    <label>July<span class="required">*</span></label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="input-group">
+                
+                    <input placeholder="Aug" type="textarea" class="form-control" >
+                    <label>Aug<span class="required">*</span></label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="input-group">
+                
+                    <input placeholder="Sep" type="textarea" class="form-control" >
+                    <label>Sep<span class="required">*</span></label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="input-group">
+                
+                    <input placeholder="Oct" type="textarea" class="form-control" >
+                    <label>Oct<span class="required">*</span></label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="input-group">
+                
+                    <input placeholder="Nov" type="textarea" class="form-control" >
+                    <label>Nov<span class="required">*</span></label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="input-group">
+                    
+                    <input placeholder="Dec" type="textarea" class="form-control" >
+                    <label>Dec<span class="required">*</span></label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                <div class="col-md-3 add-button">
+                  <button type="button" class="btn btn-primary pull-right" >Add</button>
+              </div>
+              </div>
+             
+            </form>
+          </div>
+        </div>
+  
+        <table class="temp-grid global-table">
+          <thead>
+            <tr>
+              <th>Sl.No</th>
+              <th>Parmeter</th>
+              <th>Jan</th>
+              <th>Feb</th>
+              <th>March</th>
+              <th>April</th>
+              <th>May</th>
+              <th>June</th>
+              <th>July</th>
+              <!-- <th>Aug</th>
+              <th>Sept</th> -->
+              <!-- <th>Oct</th>
+              <th>Nov</th>
+              <th>Dec</th> -->
+              <!-- <th>Action</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>item.fieldName</td>
+              <td>item.fieldName</td>
+              <td>item.generatedString</td>
+              <td>item.fieldName</td>
+              <td>item.fieldName</td>
+              <td>item.fieldName</td>
+              <td>item.fieldName</td>
+              <td>item.fieldName</td>
+              <!-- <td>item.fieldName</td>
+              <td>item.fieldName</td> -->
+              <!-- <td>item.fieldName</td>
+              <td>item.fieldName</td>
+              <td>item.fieldName</td> -->
+              <!-- <td class="temp-grid-action">
+                                  <i class="bi bi-trash-fill" ></i>
+                              </td> -->
+            </tr>
+          </tbody>
+        </table>}
+        @if (dropDownSelectedVal=='Yearly') {
+          <div class="card form">
+            <div class="form-field mt-3">
+              <form>
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="input-group">
+                      <select class="form-control form-select">
+                        <option value="" disabled>--Select--</option>
+                        <option value="Branch Number">Param</option>
+                      </select>
+                      <label>Finacial Parametr<span class="required">*</span></label>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="input-group">
+                      <select class="form-control form-select">
+                        <option value="" disabled>--Select--</option>
+                        <option value="Branch Number">Year</option>
+                      </select>
+                      <label>Year<span class="required">*</span></label>
+                    </div>
+                  </div>
+               
+                </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="input-group">
+                  
+                      <input placeholder="Previous Year" type="textarea" class="form-control" >
+                      <label>Previous Year<span class="required">*</span></label>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="input-group">
+                  
+                      <input placeholder="Current Year" type="textarea" class="form-control" >
+                      <label>Current Year<span class="required">*</span></label>
+                    </div>
+                  </div>
+                  <div class="col-md-3 add-button">
+                    <button type="button" class="btn btn-primary pull-right" >Add</button>
+                </div>
+                </div>
+              
+         
+               
+              </form>
+            </div>
+          </div>
+    
+          <table class="temp-grid global-table">
+            <thead>
+              <tr>
+                <th>Sl.No</th>
+                <th>Parmeter</th>
+                <th>Previous Year</th>
+                <th>Current Year</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>item.fieldName</td>
+                <td>item.fieldName</td>
+                <td>item.fieldName</td>
+              </tr>
+            </tbody>
+          </table>}
+
+    </div>
+     
+    <!-- Bank Details -->
+    <div></div>
+
+    <!-- finacial Doc -->
+    <div>
+      <div class="card form">
+        <div class="form-field mt-3">
+          <form>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="input-group">
+                  <select class="form-control form-select">
+                    <option value="" disabled>--Select--</option>
+                    <option value="Branch Number">Param</option>
+                  </select>
+                  <label>Document Type<span class="required">*</span></label>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="input-group">
+                  <input placeholder="Documnet Discription" type="textarea" class="form-control" >
+                  <label>Documnet Discription<span class="required">*</span></label>
+                </div>
+              </div>
+           
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="input-group">
+              
+                  <input placeholder="Previous Year" type="file" class="form-control" >
+                  <label>Documnet<span class="required">*</span></label>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="input-group">
+              
+                  <button type="button" class="btn btn-primary pull-right" >Upload</button>
+                </div>
+              </div>
+              <div class="col-md-3 add-button">
+                <button type="button" class="btn btn-primary pull-right" >Add</button>
+            </div>
+            </div>
+          
+     
+           
+          </form>
+        </div>
+      </div>
+
+      <table class="temp-grid global-table">
+        <thead>
+          <tr>
+            <th>Sl.No</th>
+            <th>Document Type</th>
+            <th>Document</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>item.fieldName</td>
+            <td>item.fieldName</td>
+            <td class="actions">
+              <button class="view-icon">👁️</button>
+              <button class="download-icon">⬇️</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    }@else if (actualStage=='622') {
+      <div>
+        <h5>Documnet verification</h5>
+      </div>
+    <!-- <div class="sidebar">
+    <ul>
+      <li><a >Dashboard</a></li>
+
+    </ul>
+  </div> -->
+    <div class="document-section">
+      <div class="accordion" *ngFor="let section of accordionSections">
+        <div class="accordion-header" (click)="toggleAccordion(section)">
+          <h3>
+            {{ section.title }}
+            <span class="arrow">{{ section.isOpen ? "▲" : "▼" }}</span>
+          </h3>
+        </div>
+        <div class="accordion-content" *ngIf="section.isOpen">
+          <ng-container *ngIf="section.contentType === 'table'">
+            <table class="document-table">
+              <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th>Document Type</th>
+                  <th>Status</th>
+                  <th>Remarks</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let doc of documents; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ doc.type }}</td>
+                  <td>
+                    <select>
+                      <option>Verified</option>
+                      <option>Pending</option>
+                    </select>
+                  </td>
+                  <td><input type="text" value="All Doc ok" /></td>
+                  <td class="actions">
+                    <button class="view-icon">👁️</button>
+                    <button class="download-icon">⬇️</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </ng-container>
+          <ng-container *ngIf="section.contentType !== 'table'">
+            <!-- Other content based on section -->
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    } @else if (actualStage=='623') { }@else if (actualStage=='624') { }@else if
+    (actualStage=='625') { }@else if(actualStage=='626') { }
+  </div>
+</div>

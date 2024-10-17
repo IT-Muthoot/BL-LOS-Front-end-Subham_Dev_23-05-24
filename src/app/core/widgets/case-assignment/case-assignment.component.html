@@ -1,0 +1,77 @@
+<h2 mat-dialog-title><Data>{{data.bucket}}</Data></h2>
+<hr />
+<mat-dialog-content class="mat-typography">
+  <!-- Radio Selection -->
+
+  <div class="row">
+    <div class="instance-group">
+      <div class="checked-radio-buttons-group">
+        <div class="checked-radio-buttons1">
+          <div class="container">
+            <div class="state-layer">
+              <input type="radio" name="new-customer-loan2" value="acknowledge" (change)="onRadioChange('acknowledge')" checked />
+            </div>
+          </div>
+        </div>
+        <a class="radio-button">Acknowledge</a>
+      </div>
+  
+      <div class="checked-radio-buttons-group">
+        <div class="unchecked-radio-buttons1">
+          <div class="container">
+            <div class="state-layer">
+              <input type="radio" name="new-customer-loan2" value="assign" (change)="onRadioChange('assign')" />
+            </div>
+          </div>
+        </div>
+        <a class="radio-button">Assign</a>
+      </div>
+    </div>
+  
+    <div class="input-group">
+      <div class="col-md-6">
+        <div class="input-group">
+          <div class="input-group">
+            <!-- If Acknowledge is selected, show disabled input, else show dropdown -->
+            <input *ngIf="isAcknowledge" type="text" class="form-control" [value]="branchId" disabled />
+            <select *ngIf="!isAcknowledge" class="form-control form-select" [(ngModel)]="branchId">
+              <option value="">--Select--</option>
+              @for (item of branchDetails; track $index) {
+
+                <option value={{item.branchCode}}>{{item.branchCode}}</option>
+              }
+            </select>
+            <label>Branch ID <span class="required">*</span></label>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-6">
+        <div class="input-group">
+          <div class="input-group">
+            <!-- If Acknowledge is selected, show disabled input, else show dropdown -->
+            <input *ngIf="isAcknowledge" type="text" class="form-control" [value]="employeeCode" disabled />
+            <select *ngIf="!isAcknowledge" class="form-control form-select" [(ngModel)]="employeeCode">
+              <option value="">--Select--</option>
+              @for (item of userDetails; track $index) {
+
+                <option value={{item.employeeId}}>{{item.employeeId}}</option>
+              }
+            </select>
+            <label>Employee Code <span class="required">*</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</mat-dialog-content>
+<hr />
+<mat-dialog-actions align="end">
+  <button type="button" class="btn btn-outline-secondary" mat-dialog-close>
+    Cancel</button
+  >&nbsp;
+  <button type="button" class="btn btn-outline-secondary" (click)="updateApplicationStatus()" cdkFocusInitial>
+    Submit
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,173 @@
+<div class="main-content">
+    <div class="d-flex justify-content-between align-items-center">
+        <h5 class="page-name mt-2 mb-2">
+            <i class="bi bi-reply-fill" routerLink="/ics-configurtion-1-browse"></i> Internal Credit Scoring Configuration-1
+        </h5>
+        <div class="mr-2">
+            @if(isDisabled){
+                <button type="button" class="btn btn-primary ml-1" (click)="editClicked()">Edit</button>
+            } @else {
+                <button type="button" class="btn btn-outline-secondary ml-2">Cancel</button>
+                <button type="button" class="btn btn-primary ml-1" (click)="finalSubmit()">Update</button>
+            }
+        </div>
+    </div>
+    <div class="form">
+        <div class="filter-form">
+            <form [formGroup]="parentForm">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="customer_Category">
+                                <option value="">--Select-- </option>
+                                @for(data of CustomerCategory; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Customer Category <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['customer_Category'].touched) && parentForm.controls['customer_Category'].invalid){
+                            <div class="text-danger">
+                              Please select customer category
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="criteria">
+                                <option value="">--Select-- </option>
+                                @for(data of criteria; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>criteria <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['criteria'].touched) && parentForm.controls['criteria'].invalid){
+                            <div class="text-danger">
+                              Please enter criteria
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Min Score" type="text" class="form-control" formControlName="min_score">
+                            <label>Min_Score</label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['min_score'].touched) && parentForm.controls['min_score'].invalid){
+                            <div class="text-danger">
+                              Please enter min score
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Max Score" type="text" class="form-control" formControlName="max_score">
+                            <label>Max_Score</label>
+                        </div>
+                        @if((finalSubmitted || parentForm.controls['max_score'].touched) && parentForm.controls['max_score'].invalid){
+                            <div class="text-danger">
+                              Please enter max score
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <textarea name="" id="" row="7" col="12" class="form-control" formControlName="description"></textarea>
+                            <label>Description<span class="required">*</span></label>
+                        </div>
+                        <span class="float-right">0/200</span>
+                        @if((finalSubmitted || parentForm.controls['description'].touched) && parentForm.controls['description'].invalid){
+                            <div class="text-danger">
+                              Please enter description
+                            </div>
+                        }
+                    </div>
+                </div>
+            </form>    
+        </div>
+    </div>
+    <div class="card form mt-4">
+        <div class="form-field">
+            <form [formGroup]="tempForm">
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Score" type="text" class="form-control" formControlName="score">
+                            <label>Score</label>
+                        </div>
+                        @if((tempSubmitButton || tempForm.controls['score'].touched) && tempForm.controls['score'].invalid){
+                            <div class="text-danger">
+                              Please enter score
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="industry_type">
+                                <option value="">--Select-- </option>
+                                @for(data of industryCategory; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Industry Category</label>
+                        </div>
+                        @if((tempSubmitButton || tempForm.controls['industry_type'].touched) && tempForm.controls['industry_type'].invalid){
+                            <div class="text-danger">
+                              Please select industry type
+                            </div>
+                        }
+                    </div>
+
+                    <div class="col-md-3 add-button">
+                        @if(!isDisabled){
+                            @if(tempFormEdit){
+                                <button type="button" class="btn btn-primary" (click)="tempGridUpdate()">Update</button>
+                            } @else {
+                                <button type="button" class="btn btn-primary" (click)="tempSubmit
+                            ()">Add</button>
+                            }
+                        }
+                        
+                    </div>
+                    @if(warningMessage){
+                        <div class="text-danger">
+                            total score should not exceed 300.
+                        </div>
+                    }
+                    
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="pin-fill"><i class="bi bi-pin-angle-fill"></i></div>
+    @if(tempData.length > 0){
+        <span class="grid-class">Temp Grid</span>
+        <table class="temp-grid global-table">
+            <thead>
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Score</th>
+                    <th>Industry Category</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(data of tempData; track data; let i = $index){
+                    <tr>
+                        <td>{{ i+1 }}</td>
+                        <td>{{ data.score }}</td>
+                        <td>{{ data.industryCategory | dropDown :1 :industryCategory }}</td>
+                        <td class="temp-grid-action">
+                            @if(!isDisabled){
+                                <i class="bi bi-pen-fill mr-1" (click)="editTempGrid(i)"></i>
+                                <i class="bi bi-trash-fill" (click)="deleteItem(i)"></i>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    <div></div>
+    <div></div>
+</div>

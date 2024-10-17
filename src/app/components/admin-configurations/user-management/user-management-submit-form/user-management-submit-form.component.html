@@ -1,0 +1,526 @@
+<div class="main-content">
+    <div class="d-flex justify-content-between align-items-center">
+        <h5 class="page-name mt-2 mb-2">
+            <i class="bi bi-reply-fill"></i>User Management
+        </h5>
+        <div class="right-top-buttons">
+            @if(isEditMode){
+                @if(isDisabled){
+                  <button type="button" class="btn btn-outline-secondary ml-2" (click)="editClicked()">Edit</button>
+                } @else {
+                  <button type="button" class="btn btn-outline-secondary ml-2">Cancel</button>
+                <button type="button" class="btn btn-primary ml-1" (click)="finalSubmit()">Update</button>
+                }
+            } @else {
+                <button type="button" class="btn btn-outline-secondary ml-2">Cancel</button>
+                <button type="button" class="btn btn-primary ml-1" (click)="finalSubmit()">Submit</button>
+            }
+        </div>
+    </div>
+
+    <mat-tab-group>
+        <form [formGroup]="userForm">
+            <mat-tab label="Login Details"> 
+        <div class="below-line">
+        </div>
+            <div class="temp-grid-fields">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Placeholder" type="text" class="form-control" formControlName="employeeId">
+                            <label>Employee ID <span class="required">*</span><i class="bi bi-info-circle-fill"></i></label>
+                        </div>
+                        @if((finalSubmitted || userForm.controls['employeeId'].touched) && userForm.controls['employeeId'].invalid){
+                            <div class="text-danger">
+                              Please enter employee id
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Ex:20" type="text" class="form-control" formControlName="branchId">
+                            <label>Home Branch ID <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || userForm.controls['branchId'].touched) && userForm.controls['branchId'].invalid){
+                            <div class="text-danger">
+                              Please enter branch id
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            </mat-tab>
+
+            <mat-tab label="Personal Details"> 
+            <div class="below-line">
+            </div>
+                <div class="temp-grid-fields">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Placeholder" type="text" class="form-control" formControlName="employeeId">
+                                <label>Employee ID <span class="required">*</span></label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Placeholder" type="text" class="form-control" formControlName="companyId">
+                                <label>Company ID <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['companyId'].touched) && userForm.controls['companyId'].invalid){
+                                <div class="text-danger">
+                                  Please enter company id
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Placeholder" type="text" class="form-control" formControlName="companyName">
+                                <label>Company Name <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['companyName'].touched) && userForm.controls['companyName'].invalid){
+                                <div class="text-danger">
+                                  Please enter company name
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control form-select" formControlName="title"> 
+                                    <option value="" disabled>--Select-- </option>
+                                    @for(data of titleDropDown; track data){
+                                        <option value="{{ data.id }}">{{ data.title }}</option>
+                                    }
+                                </select>
+                                <label>Title <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['title'].touched) && userForm.controls['title'].invalid){
+                                <div class="text-danger">
+                                  Please select title
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="First Name" type="text" class="form-control" formControlName="firstName">
+                                <label>First Name <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['firstName'].touched) && userForm.controls['firstName'].invalid){
+                                <div class="text-danger">
+                                  Please enter first name
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Middle Name" type="text" class="form-control" formControlName="middleName">
+                                <label>Middle Name <span class="required">*</span></label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Last Name" type="text" class="form-control" formControlName="lastName">
+                                <label>Last Name <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['lastName'].touched) && userForm.controls['lastName'].invalid){
+                                <div class="text-danger">
+                                  Please enter last name
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control form-select" formControlName="gender"> 
+                                    <option value="" disabled>--Select-- </option>
+                                    @for(data of genderDropDown; track data){
+                                        <option value="{{ data.id }}">{{ data.title }}</option>
+                                    }
+                                </select>
+                                <label>Gender (Optional)</label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['gender'].touched) && userForm.controls['gender'].invalid){
+                                <div class="text-danger">
+                                  Please select gender
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="" type="text" class="form-control" formControlName="dob" matInput [matDatepicker]="picker">
+                                <mat-datepicker-toggle matIconSuffix [for]="picker" class="date-picker-custom">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                                <label>Date of Birth <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['dob'].touched) && userForm.controls['dob'].invalid){
+                                <div class="text-danger">
+                                  Please enter dob
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Email ID" type="text" class="form-control" formControlName="emailId">
+                                <label>Email ID <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['emailId'].touched) && userForm.controls['emailId'].invalid){
+                                <div class="text-danger">
+                                  Please enter email id
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Mobile Number" type="text" class="form-control" formControlName="mobileNumber">
+                                <label>Mobile Number <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['mobileNumber'].touched) && userForm.controls['mobileNumber'].invalid){
+                                <div class="text-danger">
+                                  Please enter mobile number
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Landline Number" type="text" class="form-control" formControlName="landlineNumber">
+                                <label>Landline Number <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['landlineNumber'].touched) && userForm.controls['landlineNumber'].invalid){
+                                <div class="text-danger">
+                                  Please enter landline number
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Address" type="text" class="form-control" formControlName="address">
+                                <label>Address <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['address'].touched) && userForm.controls['address'].invalid){
+                                <div class="text-danger">
+                                  Please enter address
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control form-select" formControlName="city"> 
+                                    <option value="">--Select-- </option>
+                                    <option value="1">Option1</option>
+                                    <option value="1">Option1</option>
+                                    <option value="1">Option1</option>
+                                </select>
+                                <label>City <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['city'].touched) && userForm.controls['city'].invalid){
+                                <div class="text-danger">
+                                  Please select city
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control form-select" formControlName="state"> 
+                                    <option value="">--Select-- </option>
+                                    <option value="1">Option1</option>
+                                    <option value="1">Option2</option>
+                                    <option value="1">Option3</option>
+                                    <option value="1">Option4</option>
+                                </select>
+                                <label>State <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['state'].touched) && userForm.controls['state'].invalid){
+                                <div class="text-danger">
+                                  Please select state
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control form-select" formControlName="country"> 
+                                    <option value="">--Select-- </option>
+                                    <option value="1">Option1</option>
+                                    <option value="1">Option2</option>
+                                    <option value="1">Option3</option>
+                                    <option value="1">Option4</option>
+                                </select>
+                                <label>Country <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['country'].touched) && userForm.controls['country'].invalid){
+                                <div class="text-danger">
+                                  Please select country
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Pincode" type="text" class="form-control" formControlName="pincode">
+                                <label>Pincode <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['pincode'].touched) && userForm.controls['pincode'].invalid){
+                                <div class="text-danger">
+                                  Please select pincode
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control form-select" formControlName="identityType1"> 
+                                    <option value="" disabled>--Select-- </option>
+                                    @for(data of identityDropDown; track data){
+                                        <option value="{{ data.id }}">{{ data.title }}</option>
+                                    }
+                                </select>
+                                <label>Identity Type-1 <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['identityType1'].touched) && userForm.controls['identityType1'].invalid){
+                                <div class="text-danger">
+                                  Please select identityType1
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control form-select" formControlName="identityType2"> 
+                                    <option value="" disabled>--Select-- </option>
+                                    @for(data of identityDropDown; track data){
+                                        <option value="{{ data.id }}">{{ data.title }}</option>
+                                    }
+                                </select>
+                                <label>Identity Type-2 (Optional)</label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['identityType2'].touched) && userForm.controls['identityType2'].invalid){
+                                <div class="text-danger">
+                                  Please select identityType2
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control form-select" formControlName="identityType3"> 
+                                    <option value="" disabled>--Select-- </option>
+                                    @for(data of identityDropDown; track data){
+                                        <option value="{{ data.id }}">{{ data.title }}</option>
+                                    }
+                                </select>
+                                <label>Identity Type-3 (Optional)</label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['identityType3'].touched) && userForm.controls['identityType3'].invalid){
+                                <div class="text-danger">
+                                  Please select identityType3
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Upload" type="file" class="form-control" formControlName="documentId1"  (change)="onFileSelected($event, 'documentId1')" accept="image/*" />
+                                <label>Upload <span class="required">*</span></label>
+                                <i class="bi bi-upload file-upload"></i>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['documentId1'].touched) && userForm.controls['documentId1'].invalid){
+                                <div class="text-danger">
+                                  Please select documentId1
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Upload" type="file" class="form-control" formControlName="documentId2">
+                                <label>Upload </label>
+                                <i class="bi bi-upload file-upload"></i>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['documentId2'].touched) && userForm.controls['documentId2'].invalid){
+                                <div class="text-danger">
+                                  Please select documentId2
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Upload" type="file" class="form-control" formControlName="documentId3">
+                                <label>Upload </label>
+                                <i class="bi bi-upload file-upload"></i>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['documentId3'].touched) && userForm.controls['documentId3'].invalid){
+                                <div class="text-danger">
+                                  Please select documentId3
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="Additional Settings"> 
+            <div class="below-line">
+            </div>
+                <div class="temp-grid-fields">
+                    <!-- <div class="row"> -->
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Placeholder" type="text" class="form-control" formControlName="employeeId" >
+                                <label>Employee ID <span class="required">*</span></label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control form-select" formControlName="preferredLanguage"> 
+                                    <option value="" disabled>--Select-- </option>
+                                    @for(data of preferredLanguageDropDown; track data){
+                                        <option value="{{ data.id }}">{{ data.title }}</option>
+                                    }
+                                </select>
+                                <label>Preferred Language <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['preferredLanguage'].touched) && userForm.controls['preferredLanguage'].invalid){
+                                <div class="text-danger">
+                                  Please select preferredLanguage
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <textarea name="" id="" row="7" col="12" class="form-control" formControlName="remarks"></textarea>
+                                <label>Remarks<span class="required">*</span></label>
+                            </div>
+                            <span class="float-right">0/200</span>
+                            @if((finalSubmitted || userForm.controls['remarks'].touched) && userForm.controls['remarks'].invalid){
+                                <div class="text-danger">
+                                  Please select remarks
+                                </div>
+                            }
+                        </div>
+                    <!-- </div> -->
+                </div>
+            </mat-tab>
+
+            <mat-tab label="User Role Linkage"> 
+            <div class="below-line">
+            </div>
+                <div class="temp-grid-fields">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Placeholder" type="text" class="form-control" formControlName="employeeId" >
+                                <label>Employee ID <span class="required">*</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Branch ID" type="text" class="form-control" formControlName="branchId">
+                                <label>Branch ID <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['branchId'].touched) && userForm.controls['branchId'].invalid){
+                                <div class="text-danger">
+                                  Please select branch id
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control form-select" formControlName="userRole"> 
+                                    <option value="" disabled>--Select-- </option>
+                                    @for(data of roleData; track data){
+                                        <option value="{{ data.id }}">{{ data.roleName }}</option>
+                                    }
+                                </select>
+                                <label>User Role <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['userRole'].touched) && userForm.controls['userRole'].invalid){
+                                <div class="text-danger">
+                                  Please select userRole
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Supervisor ID" type="text" class="form-control" formControlName="supervisorId">
+                                <label>Supervisor ID <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['supervisorId'].touched) && userForm.controls['supervisorId'].invalid){
+                                <div class="text-danger">
+                                  Please select supervisor id
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input placeholder="Supervisor Role" type="text" class="form-control" formControlName="supervisorRoleId" >
+                                <label>Supervisor Role <span class="required">*</span></label>
+                            </div>
+                            @if((finalSubmitted || userForm.controls['supervisorRoleId'].touched) && userForm.controls['supervisorRoleId'].invalid){
+                                <div class="text-danger">
+                                  Please select supervisor role id
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="Disable or Close User"> 
+            <div class="below-line">
+            </div>
+                <div class="temp-grid-fields">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Placeholder" type="text" class="form-control" formControlName="employeeId" >
+                            <label>Employee ID <span class="required">*</span></label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="activityType"> 
+                                <option value="" disabled>--Select-- </option>
+                                @for(data of activityTypeDropDown; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Activity Type <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || userForm.controls['activityType'].touched) && userForm.controls['activityType'].invalid){
+                            <div class="text-danger">
+                              Please select activityType
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <textarea name="" id="" row="7" col="12" class="form-control" formControlName="remarks"></textarea>
+                            <label>Remarks<span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || userForm.controls['remarks'].touched) && userForm.controls['remarks'].invalid){
+                            <div class="text-danger">
+                              Please select remarks
+                            </div>
+                        }
+                        <span class="float-right">0/200</span>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab></mat-tab>
+            <mat-tab></mat-tab>
+            <mat-tab></mat-tab>
+        </form>
+    </mat-tab-group>
+</div>

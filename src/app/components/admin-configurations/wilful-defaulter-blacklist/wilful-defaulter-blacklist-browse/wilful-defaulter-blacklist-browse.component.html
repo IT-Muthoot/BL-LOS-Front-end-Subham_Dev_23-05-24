@@ -1,0 +1,131 @@
+<div class="main-content">
+    <h5 class="page-name mt-2 mb-2">Wilful Defaulter Blacklist</h5>
+    <div class="show-hide-pin">
+        <mat-accordion class="mt-1" (click)="toggleClass()" [class.active]="isActive">
+            <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title> <span class="filter-class">Filters</span></mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="below-line"></div>
+            <div class="form">
+                <div class="form-field">
+                    <form [formGroup]="filterForm">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <select class="form-control form-select" formContrlName="internalExternalToBank">
+                                        <option value="">--Select-- </option>
+                                        @for(data of externalInternalToBankDropDown; track data){
+                                            <option value="{{ data.id }}">{{ data.title }}</option>
+                                        }
+                                    </select>
+                                    <label>Internal or External To Bank</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <select class="form-control form-select" formContrlName="keyFields">
+                                        <option value="">--Select-- </option>
+                                        @for(data of keyFieldsDropDown; track data){
+                                            <option value="{{ data.id }}">{{ data.title }}</option>
+                                        }
+                                    </select>
+                                    <label>Key Fields</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <select class="form-control form-select" formContrlName="searchCriteria">
+                                        <option value="">--Select-- </option>
+                                        @for(data of searchCriteriaDropDown; track data){
+                                            <option value="{{ data.id }}">{{ data.title }}</option>
+                                        }
+                                    </select>
+                                    <label>Search Criteria</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Min Score" type="text" class="form-control" formControlName="source">
+                                    <label>Source</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 search-btn">
+                                <button type="button" class="btn btn-primary" (click)="filter()">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            </mat-expansion-panel>
+        </mat-accordion>    
+        @if(isActive){
+            <div class="pin-fill"><i class="bi bi-pin-angle-fill"></i></div>
+        }
+    </div>
+    
+    <div class="action mt-1 mb-1">
+        <button class="btn warning">Export <i class="bi bi-download"></i></button>
+        <button class="btn warning" routerLink="wilful-defaulter-blacklist-submit">Add <i class="bi bi-plus-lg bold-icon"></i></button>
+    </div>
+    <table class="global-table">
+        <thead>
+            <tr>
+                <th>Sl.No</th>
+                <th>Internal Or External To Bank</th>
+                <th>Source</th>
+                <th>Search Criteria</th>
+                <th>Key Fields</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of browseList| paginate: { itemsPerPage: itemsPerPage,
+                currentPage: p, totalItems: totalRecords }; track $index) {
+                <tr>
+                    <td>{{ $index+1 }}</td>
+                    <td>{{ item.internalOrExternalToBank | dropDown :1 :externalInternalToBankDropDown}}</td>
+                    <td>{{ item.source | dropDown :1 :sourceDropDown }}</td>
+                    <td>{{ item.searchCriteria | dropDown :1 :searchCriteriaDropDown }}</td>
+                    <td>{{ item.keyField | dropDown :1 :keyFieldsDropDown }}</td>
+                    <td>@if(item.status === 265){
+                            <button class="button" 
+                            (click)="onStatusChange(item.id, item.status)">Active</button>
+                        } @else {
+                            <button class="button-inactive" (click)="onStatusChange(item.id, item.status)">Inactive</button>
+                        }
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <span class="action-button" type="button" id="actionButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </span>
+                            <ul class="dropdown-menu" aria-labelledby="actionButton">
+                                <li><a class="dropdown-item" href="#">Edit</a></li>
+                                <li><a class="dropdown-item" routerLink="edit/4">View</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>                                                                             
+    </table>
+    <div class="d-flex justify-content-between mt-2">
+        <div class="mt-2">
+            <pagination-controls (pageChange)="p = $event; getNextPageData($event)"></pagination-controls>
+        </div>
+        <div class="mt-2">
+            <span for="">Results per page: </span>
+            <select id="itemsPerPage" (change)="onChangeItemsPerPage($event)">
+                <option *ngFor="let option of availableItemsPerPage" [value]="option">
+                {{ option }}
+                </option>
+            </select>
+        </div>
+        
+    </div>
+</div>

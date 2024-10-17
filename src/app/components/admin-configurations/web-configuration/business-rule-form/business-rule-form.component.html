@@ -1,0 +1,262 @@
+<div class="main-content">
+  <div class="d-flex justify-content-between align-items-center">
+    <h5 class="page-name mt-2 mb-2">
+      <i class="bi bi-reply-fill" onclick="history.back()"></i> BRE Risk
+      Configuration
+    </h5>
+    <div class="right-top-buttons">
+      <button type="button" class="btn btn-outline-secondary ml-2">
+        Cancel
+      </button>
+      <button type="button" class="btn btn-primary ml-1" (click)="submit()">Submit</button>
+    </div>
+  </div>
+  <div class="form">
+    <div class="filter-form">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="input-group">
+            <div class="input-group">
+              <select class="form-control form-select">
+                <option value="">--Select--</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+              <label>Product ID <span class="required">*</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="input-group">
+            <div class="input-group">
+              <select class="form-control form-select" [(ngModel)]="productName">
+                <option value="">--Select--</option>
+                @for (item of miscellaneousValue['Product']; track $index) {
+
+                <option value="{{ item.id }}">{{ item.title }}</option>
+                }
+              </select>
+              <label>Product <span class="required">*</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <mat-tab-group>
+    <!-- External Credit Score Risk Tab -->
+    <mat-tab label="External Credit Score Risk">
+      <div class="below-line"></div>
+      <div class="temp-grid-fields">
+        <div class="row">
+          <div class="col-md-2 header">
+            <div>Risk Level</div>
+          </div>
+          <div class="col-md-3 header">
+            <div>Avg. CB Score Applicant(Bus/Ind)</div>
+          </div>
+          <div class="col-md-3 header">
+            <div>Avg. CB Score Business(Cibil/Equifax)</div>
+          </div>
+          <div class="col-md-3 header">
+            <div>Avg. CB Score Co-Applicant(Bus/Ind)</div>
+          </div>
+        </div>
+        @for (risk of riskLevels; track $index) {
+        <div class="row">
+          <div class="col-md-2">
+            <div style="margin-top: 27px">{{ risk.level }}</div>
+          </div>
+          <div class="col-md-3">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="risk.cbScoreApplicant"
+              />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="risk.cbScoreBusiness"
+              />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="risk.cbScoreCoApplicant"
+              />
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </mat-tab>
+
+    <!-- Bank Statement Analysis Tab -->
+    <mat-tab label="Bank Statement Analysis">
+      <div class="below-line"></div>
+      <div class="temp-grid-fields">
+        <div class="row">
+          <div class="col-md-2 header">
+            <div>Risk Level</div>
+          </div>
+          <div class="col-md-3 header">
+            <div>Bank Statement Analysis</div>
+          </div>
+        </div>
+        @for (risk of riskLevels; track $index) {
+        <div class="row">
+          <div class="col-md-2">
+            <div style="margin-top: 27px">{{ risk.level }}</div>
+          </div>
+          <div class="col-md-3">
+            <div class="input-group">
+              <select
+                class="form-control form-select"
+                [(ngModel)]="risk.bankStatementAnalysis"
+              >
+                <option value="">--Select--</option>
+                @for (option of bankStatementOptions; track $index) {
+                <option [value]="option">
+                  {{ option }}
+                </option>
+                }
+              </select>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </mat-tab>
+
+    <!-- Financial Trend Analysis Tab -->
+    <mat-tab label="Financial Trend Analysis">
+      <div class="below-line"></div>
+      <div class="temp-grid-fields">
+        <div class="row">
+          <div class="col-md-2 header">
+            <div>Risk Level</div>
+          </div>
+          <div class="col-md-3 header">
+            <div>Financial Trend Analysis Score</div>
+          </div>
+        </div>
+        @for (risk of riskLevels; track $index) {
+        <div class="row">
+          <div class="col-md-2">
+            <div style="margin-top: 27px">{{ risk.level }}</div>
+          </div>
+          <div class="col-md-3">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="risk.financialTrendScore"
+              />
+            </div>
+          </div>
+        </div>
+        }
+        <hr />
+        <h6 class="mt-3 mb-3 mr-3 custom-head"></h6>
+        <div class="card form">
+          <div class="form-field">
+            Document Parameter
+            <br /><br />
+            <div class="row mb-3">
+              <div class="col-md-3">
+                <div class="input-group">
+                  <input
+                    placeholder="Ex:>7"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="documentParameter"
+                  />
+                  <label>Parameter<span class="required">*</span></label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-3">
+                <div class="input-group">
+                  <select
+                    class="form-control form-select"
+                    [(ngModel)]="selectedTrendNature"
+                  >
+                    <option value="">--Select--</option>
+                    @for (item of trendNatureOptions; track $index) {
+                    <option [value]="item.id">
+                      {{ item.title }}
+                    </option>
+                    }
+                  </select>
+                  <label>Trend Nature<span class="required">*</span></label>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="input-group">
+                  <input
+                    placeholder="Ex:>3"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="score"
+                  />
+                  <label>Score <span class="required">*</span></label>
+                </div>
+              </div>
+              <div class="col-md-3 add-button">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="addDocumentParameter()"
+                >
+                  Add
+                </button>
+              </div>
+            </div>
+          </div>
+          <table class="temp-grid global-table">
+            <thead>
+              <tr>
+                <th>Sl.No</th>
+                <th>Parameter</th>
+                <th>Trend Nature</th>
+                <th>Score</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of documentParameters; track $index) {
+              <tr>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ item.parameter }}</td>
+                <td>{{ item.trendNature }}</td>
+                <td>{{ item.score }}</td>
+                <td>
+                  <button
+                    class="btn btn-danger"
+                    (click)="removeDocumentParameter($index)"
+                  >
+                    Remove
+                  </button>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

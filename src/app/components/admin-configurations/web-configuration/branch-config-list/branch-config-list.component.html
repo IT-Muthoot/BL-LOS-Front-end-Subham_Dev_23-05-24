@@ -1,0 +1,142 @@
+<div class="main-content">
+    <h5 class="page-name mt-2 mb-2">Branch Configuration</h5>
+    <div class="show-hide-pin">
+        <mat-accordion class="mt-1" (click)="toggleClass()" [class.active]="isActive">
+            <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title> <span class="filter-class">Filters</span></mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="below-line"></div>
+            <div class="form">
+                <div class="form-field">
+                    <form [formGroup]="filterForm">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Branch Code" type="text" class="form-control" formControlName="BranchCode">
+                                    <label>Branch Code</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Branch Name" type="text" class="form-control" formControlName="BranchName">
+                                    <label>Branch Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Region Code" type="text" class="form-control" formControlName="RegionCode">
+                                    <label>Region Code</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input placeholder="Min Score" type="text" class="form-control" formControlName="workingHours">
+                                    <label>Working Hours</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <select class="form-control form-select" formControlName="loanTypeAllowed">
+                                        <option value="">--Select-- </option>
+                                        @for(data of AllowedLoanTypeDropDown; track data){
+                                            <option value="{{ data.id }}">{{ data.title }}</option>
+                                        }
+                                    </select>
+                                    <label>Loan Type Allowed <span class="required">*</span></label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <select class="form-control form-select" formControlName="customerCategoryAllowed">
+                                        <option value="">--Select-- </option>
+                                        @for(data of CustomerCategoryDropDown; track data){
+                                            <option value="{{ data.id }}">{{ data.title }}</option>
+                                        }
+                                    </select>
+                                    <label>Customer Category Allowed <span class="required">*</span></label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 search-btn">
+                                <button type="button" class="btn btn-primary" (click)="filter()">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            </mat-expansion-panel>
+        </mat-accordion>    
+        @if(isActive){
+            <div class="pin-fill"><i class="bi bi-pin-angle-fill"></i></div>
+        }
+    </div>
+    
+    <div class="action mt-1 mb-1">
+        <button class="btn warning">Export <i class="bi bi-download"></i></button>
+        <button class="btn warning" routerLink="branch-config-form">Add <i class="bi bi-plus-lg bold-icon"></i></button>
+    </div>
+    <table class="global-table">
+        <thead>
+            <tr>
+                <th>Sl.No</th>
+                <th>Branch Code</th>
+                <th>Branch Name</th>
+                <th>Region Code</th>
+                <th>Working Hours</th>
+                <th>Loan Type Allowed</th>
+                <th>Customer Category Allowed</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of browseList| paginate: { itemsPerPage: itemsPerPage,
+                currentPage: p, totalItems: totalRecords }; track $index) {
+                <tr>
+                    <td>1</td>
+                    <td>{{ item.branchCode }}</td>
+                    <td>{{ item.branchName }}</td>
+                    <td>{{ item.regionCode }}</td>
+                    <td>{{ item.workingHoursStart }}</td>
+                    <td>{{ item.loanType| dropDown:1 :AllowedLoanTypeDropDown }}</td>
+                    <td>{{ item.customerCategory | dropDown:1 :CustomerCategoryDropDown }}</td>
+                    <td>@if(item.status === 265){
+                            <button class="button" 
+                            (click)="onStatusChange(item.id, item.status)">Active</button>
+                        } @else {
+                            <button class="button-inactive" (click)="onStatusChange(item.id, item.status)">Inactive</button>
+                        }
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <span class="action-button" type="button" id="actionButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </span>
+                            <ul class="dropdown-menu" aria-labelledby="actionButton">
+                                <li><a class="dropdown-item" >Edit</a></li>
+                                <li><a class="dropdown-item" href="#">View</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>                                                                                
+    </table>
+    <div class="d-flex justify-content-between mt-2">
+        <div class="mt-2">
+            <pagination-controls (pageChange)="p = $event; getNextPageData($event)"></pagination-controls>
+        </div>
+        <div class="mt-2">
+            <span for="">Results per page: </span>
+            <select id="itemsPerPage" (change)="onChangeItemsPerPage($event)">
+                <option *ngFor="let option of availableItemsPerPage" [value]="option">
+                {{ option }}
+                </option>
+            </select>
+        </div>
+        
+    </div>
+</div>

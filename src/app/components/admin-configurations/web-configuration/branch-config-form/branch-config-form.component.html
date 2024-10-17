@@ -1,0 +1,213 @@
+<div class="main-content">
+    <div class="d-flex justify-content-between align-items-center">
+        <h5 class="page-name mt-2 mb-2">
+            <i class="bi bi-reply-fill"></i> Branch Configuration
+        </h5>
+        <div class="mr-2">
+            <button type="button" class="btn btn-outline-secondary ml-2">Cancel</button>
+            <button type="button" class="btn btn-primary ml-1" (click)="finalSubmit()">Submit</button>
+        </div>
+    </div>
+    <div class="form">
+        <div class="filter-form">
+            <form [formGroup]="branchConfigForm">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Branch Code" type="text" class="form-control" formControlName="branchCode">
+                            <label>Branch Code</label>
+                        </div>
+                        @if((finalSubmitted || branchConfigForm.controls['branchCode'].touched) && branchConfigForm.controls['branchCode'].invalid){
+                            <div class="text-danger">
+                              Please enter branch code
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Branch Name" type="text" class="form-control" formControlName="branchName">
+                            <label>Branch Name</label>
+                        </div>
+                        @if((finalSubmitted || branchConfigForm.controls['branchName'].touched) && branchConfigForm.controls['branchName'].invalid){
+                            <div class="text-danger">
+                              Please enter branch name
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Branch Address" type="text" class="form-control" formControlName="branchAddress">
+                            <label>Branch Address</label>
+                        </div>
+                        @if((finalSubmitted || branchConfigForm.controls['branchAddress'].touched) && branchConfigForm.controls['branchAddress'].invalid){
+                            <div class="text-danger">
+                                Please enter branch address
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Region Code" type="text" class="form-control" formControlName="regionCode">
+                            <label>Region Code</label>
+                        </div>
+                        @if((finalSubmitted || branchConfigForm.controls['regionCode'].touched) && branchConfigForm.controls['regionCode'].invalid){
+                            <div class="text-danger">
+                              Please enter region code
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Country Code" type="text" class="form-control" formControlName="countryCode">
+                            <label>Country Code</label>
+                        </div>
+                        @if((finalSubmitted || branchConfigForm.controls['countryCode'].touched) && branchConfigForm.controls['countryCode'].invalid){
+                            <div class="text-danger">
+                              Please enter country code
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Country Name" type="text" class="form-control" formControlName="countryName">
+                            <label>Country Name</label>
+                        </div>
+                        @if((finalSubmitted || branchConfigForm.controls['countryName'].touched) && branchConfigForm.controls['countryName'].invalid){
+                            <div class="text-danger">
+                              Please enter country name
+                            </div>
+                        }
+                    </div>
+
+                </div>
+                <div class="row mt-3">
+                    <h6>Is a sub branch?</h6>
+                    <div class="radio-group">
+                        <input type="radio" name="isItSubBranch" formControlName="isItSubBranch" value="true">
+                        <label>Yes</label>
+                        <input type="radio" name="isItSubBranch" formControlName="isItSubBranch" value="false" >
+                        <label>No</label>
+                    </div> 
+                    @if((finalSubmitted || branchConfigForm.controls['isItSubBranch'].touched) && branchConfigForm.controls['isItSubBranch'].invalid){
+                        <div class="text-danger">
+                          Please enter data 
+                        </div>
+                    }
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Parent Branch Code" type="text" class="form-control" formControlName="parentBranchCode">
+                            <label>Parent Branch Code</label>
+                        </div>
+                        @if((finalSubmitted || branchConfigForm.controls['parentBranchCode'].touched) && branchConfigForm.controls['parentBranchCode'].invalid){
+                            <div class="text-danger">
+                                Please enter parent branch code
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Parent Branch Name" type="text" class="form-control" formControlName="parentBranchName">
+                            <label>Parent Branch Name</label>
+                        </div>
+                        @if((finalSubmitted || branchConfigForm.controls['parentBranchName'].touched) && branchConfigForm.controls['parentBranchName'].invalid){
+                            <div class="text-danger">
+                                Please enter parent branch name
+                            </div>
+                        }
+                    </div>
+                </div>
+                    
+                <h6 class="mt-2">Working Hours</h6>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Start" type="time" class="form-control" formControlName="workingHoursStart">
+                            <label>Start</label>
+                        </div>
+                        @if((finalSubmitted || branchConfigForm.controls['workingHoursStart'].touched) && branchConfigForm.controls['workingHoursStart'].invalid){
+                            <div class="text-danger">
+                                Please enter start time
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="End" type="time" class="form-control" formControlName="workingHoursEnd">
+                            <label>End</label>
+                        </div>
+                        @if((finalSubmitted || branchConfigForm.controls['workingHoursEnd'].touched) && branchConfigForm.controls['workingHoursEnd'].invalid){
+                            <div class="text-danger">
+                                Please enter working hours end
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="loanType">
+                                <option value="" disabled>--Select-- </option>
+                                @for(data of loanAllowedDropDown; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Loan Type <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || branchConfigForm.controls['loanType'].touched) && branchConfigForm.controls['loanType'].invalid){
+                            <div class="text-danger">
+                              Please select loan type
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="productCode">
+                                <option value="">--Select-- </option>
+                                @for(data of ProductDropDown; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Product Code <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || branchConfigForm.controls['productCode'].touched) && branchConfigForm.controls['productCode'].invalid){
+                            <div class="text-danger">
+                              Please enter product code
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <select class="form-control form-select" formControlName="customerCategory">
+                                <option value="" disabled>--Select-- </option>
+                                @for(data of customerCategoryDropDown; track data){
+                                    <option value="{{ data.id }}">{{ data.title }}</option>
+                                }
+                            </select>
+                            <label>Customer Category <span class="required">*</span></label>
+                        </div>
+                        @if((finalSubmitted || branchConfigForm.controls['customerCategory'].touched) && branchConfigForm.controls['customerCategory'].invalid){
+                            <div class="text-danger">
+                              Please select customer category
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input placeholder="Currency" type="text" class="form-control" formControlName="currency">
+                            <label>Currency</label>
+                        </div>
+                        @if((finalSubmitted || branchConfigForm.controls['currency'].touched) && branchConfigForm.controls['currency'].invalid){
+                            <div class="text-danger">
+                              Please enter currency
+                            </div>
+                        }
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

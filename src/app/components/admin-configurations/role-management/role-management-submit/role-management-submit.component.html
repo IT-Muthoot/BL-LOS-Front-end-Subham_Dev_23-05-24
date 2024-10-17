@@ -1,0 +1,116 @@
+<div class="main-content">
+    <div class="d-flex justify-content-between align-items-center">
+        <h5 class="page-name mt-2 mb-2" routerLink="/role-management-list">
+            <i class="bi bi-reply-fill"></i>Role Management
+        </h5>
+        <div class="right-top-buttons">
+            <button type="button" class="btn btn-outline-secondary ml-2">Cancel</button>
+            <button type="button" class="btn btn-primary ml-1" (click)="formSubmit()">Submit</button>
+        </div>
+    </div>
+
+    <mat-tab-group>
+        <mat-tab label="Role Details"> 
+          <div class="below-line">
+          </div>
+          <form [formGroup]="formRoleDetails">
+            <div class="temp-grid-fields">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="input-group">
+                    <input placeholder="Role Name" type="text" class="form-control" formControlName="roleName">
+                    <label>Role Name <span class="required">*</span></label>
+                  </div>
+                  @if((finalSubmit || formRoleDetails.controls['roleName'].touched) && formRoleDetails.controls['roleName'].invalid){
+                    <div class="text-danger">
+                      Please enter correct data
+                    </div>
+                  }
+                </div>
+                <!-- <div class="col-md-3">
+                  <div class="input-group">
+                    <input placeholder="Role ID" type="text" class="form-control" formControlName="roleId">
+                    <label>Role ID <span class="required">*</span></label>
+                  </div>
+                  @if((finalSubmit || formRoleDetails.controls['roleId'].touched) && formRoleDetails.controls['roleId'].invalid){
+                    <div class="text-danger">
+                      Please enter correct data
+                    </div>
+                  }
+                </div> -->
+              </div>
+              <div class="col-md-3">
+                <div class="input-group">
+                  <textarea name="" id="" row="7" col="12" class="form-control" formControlName="roleDescription"></textarea>
+                  <label>Description<span class="required">*</span></label>
+                </div>
+                <span class="float-right">0/200</span>
+                @if((finalSubmit || formRoleDetails.controls['roleDescription'].touched) && formRoleDetails.controls['roleDescription'].invalid){
+                  <div class="text-danger">
+                    Please enter correct data
+                  </div>
+                }
+              </div>
+            </div>
+          </form>
+        </mat-tab>
+
+        <mat-tab label="Functionality Access"> 
+            <div class="below-line">
+            </div>
+            <form [formGroup]="formFuncnalityAccessDetails">
+              <div class="functionality-access">
+                <table class="global-table">
+                  <thead>
+                    <tr>
+                      <th>Functionality</th>
+                      <th>Access Level</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <!-- @for(data of mergedData; track data){ -->
+                      <!-- <tr>
+                        <td>{{ data.title }}</td>
+                        <input type="hidden" [value]="data.id" [name]="'mergedDataId_' + data.id" formControlName="mergedDataId">
+                        <td>
+                          <div class="radio-group">
+                            @for(item of accessLevelOption; track item){
+                              <input type="radio" name="new_customer_loan_app_{{data.id}}" value="{{ item.id}}" formControlName="new_customer_loan_app_{{data.id}}" (change)="onRadioChange(data.id, item.id)">
+                              <label>{{ item.title }}</label>
+                            }
+                          </div>
+                        </td>
+                      </tr> -->
+                      <tr *ngFor="let data of mergedData; trackBy: trackByFn">
+                        <td>{{ data.title }}</td>
+                        <input type="hidden" [value]="data.id" [name]="'mergedDataId_' + data.id" formControlName="mergedDataId">
+                        <td>
+                          <div class="radio-group">
+                            <ng-container *ngFor="let item of accessLevelOption; trackBy: trackByFn">
+                              <input type="radio"
+                                     [name]="'new_customer_loan_app_' + data.id"
+                                     [value]="item.id"
+                                     [formControlName]="'new_customer_loan_app_' + data.id"
+                                     (change)="onRadioChange(data.id, item.id)">
+                              <label>{{ item.title }}</label>
+                            </ng-container>
+                          </div>
+                        </td>
+                      </tr>
+                    <!-- } -->
+                  </tbody>
+                  
+                </table>
+              </div>
+            </form>
+        </mat-tab>
+        <mat-tab disabled></mat-tab>
+        <mat-tab disabled></mat-tab>
+        <mat-tab disabled></mat-tab>
+        <mat-tab disabled></mat-tab>
+        <mat-tab disabled></mat-tab>
+        <mat-tab disabled></mat-tab>
+    </mat-tab-group>
+    
+</div>

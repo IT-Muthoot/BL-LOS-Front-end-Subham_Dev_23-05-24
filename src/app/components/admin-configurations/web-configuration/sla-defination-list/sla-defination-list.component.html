@@ -1,0 +1,137 @@
+<div class="main-content">
+    <h5 class="page-name mt-2 mb-2">SLA Defination</h5>
+    <div class="show-hide-pin">
+        <mat-accordion class="mt-1" (click)="toggleClass()" [class.active]="isActive">
+            <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title><span class="filter-class">Filters</span></mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="below-line"></div>
+                <div class="form">
+                    <form [formGroup]="filterForm">
+                    <div class="form-field">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <select class="form-control form-select" formControlName="customerCategory">
+                                        <option value="">--Select-- </option>
+                                        @for(data of CustomerCategory; track data){
+                                            <option value="{{ data.id }}">{{ data.title }}</option>
+                                        }
+                                    </select>
+                                    <label>Customer Category</label>
+                                </div>
+                            </div>
+                      
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <select class="form-control form-select" formControlName="loanType">
+                                        <option value="" disabled>--Select-- </option>
+                                        @for(data of loanType; track data){
+                                            <option value="{{ data.id }}">{{ data.title }}</option>
+                                        }
+                                    </select>
+                                    <label>Loan Type</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <select class="form-control form-select" formControlName="productId">
+                                        <option value="" disabled>--Select-- </option>
+                                        @for(data of product; track data){
+                                            <option value="{{ data.id }}">{{ data.title}}</option>
+                                        }
+                                    </select>
+                                    <label>Product ID</label>
+                                </div>
+                            </div>
+                  
+
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-primary" (click)="filter()">Search</button>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </form>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>    
+        @if(isActive){
+            <div class="pin-fill"><i class="bi bi-pin-angle-fill"></i></div>
+        }
+    </div>
+    <div class="action mt-1 mb-1">
+        <button class="btn warning">Export <i class="bi bi-download"></i></button>
+        <button class="btn warning"   routerLink="sla-defination-form">Add <i class="bi bi-plus-lg bold-icon"></i></button>
+    </div>
+    <table class="responsive global-table">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Customer Category</th>
+                <th>Customer Type</th>
+                <th>Loan Type</th>
+                <th>Product Id</th>
+                <!-- <th>Workflow</th>
+                <th>Stages</th>
+                <th>Comments</th> -->
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (d of browseList| paginate: { itemsPerPage: itemsPerPage,
+                currentPage: p, totalItems: totalRecords }; track $index) {
+                <tr>
+                    <td style="width:20px">{{ $index+1 }}</td>
+                    <td>{{ d.customerCategory | dropDown :1 :CustomerCategory }}</td>
+                    <td>{{ d.customerType | dropDown :1 :customerType }}</td>
+                    <td>{{ d.loanType | dropDown :1 :loanType }}</td>
+                    <td>{{ d.productId | dropDown :1 :product }}</td>
+                    <!-- <td>{{ d.ProductID }}</td>
+                    <td>{{ d.ProductID }}</td>
+                    <td>{{ d.ProductID }}</td> -->
+                    <td>
+                        @if(d.status === 265){
+                            <button class="button" 
+                            (click)="onStatusChange(d.id, d.status)">Active</button>
+                        } @else {
+                            <button class="button-inactive" (click)="onStatusChange(d.id, d.status)">Inactive</button>
+                        }
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <span class="action-button" type="button" id="actionButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </span>
+                            <!-- Dropdown Menu -->
+                            <ul class="dropdown-menu" aria-labelledby="actionButton">
+                                <li><a class="dropdown-item" routerLink="sla-defination-form/edit/{{d.id}}">View</a></li>
+                                <!-- <li><a class="dropdown-item" href="#">Edit</a></li>
+                                <li><a class="dropdown-item" href="#">Delete</a></li> -->
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            }
+          
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-between mt-2">
+        <div class="mt-2">
+            <pagination-controls (pageChange)="p = $event; getNextPageData($event)"></pagination-controls>
+        </div>
+        <div class="mt-2">
+            <span for="">Results per page: </span>
+            <select id="itemsPerPage" (change)="onChangeItemsPerPage($event)">
+                <option *ngFor="let option of availableItemsPerPage" [value]="option">
+                {{ option }}
+                </option>
+            </select>
+        </div>
+      </div>
+</div>

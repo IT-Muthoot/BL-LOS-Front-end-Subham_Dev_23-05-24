@@ -1,0 +1,204 @@
+/* Button styles */
+.action .btn {
+    border: none;
+    background-color: inherit;
+    padding: 7px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-block;
+  }
+  
+  .action .btn:hover {
+    background: #e8a658;
+    color: #454545;
+  }
+  
+  .success { color: green; }
+  .info { color: dodgerblue; }
+  .warning { color: orange; }
+  .danger { color: red; }
+  .default { color: black; }
+  
+  .form-field {
+    background-color: unset;
+  }
+  
+  /* Accordion styles */
+  .accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+  }
+  
+  .active, .accordion:hover {
+    background-color: #ccc;
+  }
+  
+  .panel {
+    padding: 0 18px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
+  }
+  
+  .btn-primary {
+    margin-top: 6.7% !important;
+  }
+  
+  .pin-fill {
+    display: none;
+  }
+  
+  .mat-accordion.active + .pin-fill {
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-left: 48%;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .mat-accordion .mat-expansion-panel + .pin-fill {
+    display: block;
+  }
+  
+  .below-line {
+    border-bottom: 2px solid #ececec;
+    width: 104%;
+    margin-left: -2%;
+  }
+  
+  .filter-class {
+    font-size: 14px;
+  }
+  
+  /* Scroll to top button */
+  .scroll-to-top {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    opacity: 0;
+    transition: 0.2s;
+  }
+  
+  .scroll-to-top .btn {
+    border-radius: 50% !important;
+    background-color: #ccc;
+    height: 29px;
+    width: 25px;
+  }
+  
+  .scroll-to-top .btn i {
+    margin-left: -8px;
+    font-size: 18px;
+  }
+  
+  .show-scrollTop {
+    opacity: 1;
+    transition: 0.2s;
+  }
+  
+  /* Table styles */
+  .global-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 5px ;
+  }
+  
+  .global-table th, 
+  .global-table td {
+    padding: 5px 5px;
+    border: 1px solid #ccc;
+    white-space: normal; 
+    word-wrap: break-word; 
+  }
+  
+  .global-table th {
+    background-color: #eee;
+  }
+  
+  /* Scrollable table container */
+  .table-scroll-container {
+    max-height: 400px; /* Set the desired maximum height for the table */
+    overflow-y: auto;  /* Add vertical scroll */
+    overflow-x: hidden;  /* Add vertical scroll */
+  }
+  
+  /* Reduce padding and center align for first column (S.No) */
+  .global-table th:nth-child(1), 
+  .global-table td:nth-child(1) {
+    padding: 8px; /* Less padding for S.No column */
+    text-align: center; /* Align the S.No in the center */
+  }
+  
+  .below-line {
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 0px;
+  }
+  .d-flex {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+  }
+  
+
+  
+
+  
+  .btn-primary {
+    margin: 0; 
+  }
+  :host {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .custom-badge {
+    position: relative;
+    top: -10px; 
+    left: 10px; 
+  }
+  
+  .mat-badge-content {
+    background-color: #cdabb5 !important;
+    color: white;
+    font-size: 12px;
+  }
+
+  .d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* In case the screen size is small, it allows wrapping */
+  }
+  
+
+  
+  .item-per-page, .goto-page {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+  }
+  
+  .item-per-page select, .goto-page input {
+    width: 80px; /* Adjust width to fit better */
+    margin-left: 10px;
+  }
+  
+  .ml-3 {
+    margin-left: 20px;
+  }
+  
+  button.btn {
+    margin-left: 20px; /* Adjust spacing for the button */
+  }
+  
+  
